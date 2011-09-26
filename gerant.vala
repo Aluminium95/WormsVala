@@ -2,6 +2,11 @@ using GLib;
 
 namespace Jeu
 {
+	/*
+	 * Pour l'instant je crée 2 ia … et je les nomme !
+	 * Il faut utiliser des tableaux et créer des tableaux de terrain 
+	 * Il faut gérer les déplacements et les changements de terrain ! ( et donc attribution à une zone ).
+	 */
 	public class Gerant : Object
 	{
 		private IA[] e; // Tous les ennemis

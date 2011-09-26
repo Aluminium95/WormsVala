@@ -11,7 +11,7 @@ namespace Jeu
 	}
 	
 	/*
-	 * Stratégie utilisée
+	 * Stratégie utilisée par l'ia
 	 */
 	public enum Strategie
 	{
@@ -19,10 +19,14 @@ namespace Jeu
 	}
 	
 	/*
-	 * Type d'objet ( utile pour les tableaux confondant tout ! )
+	 * Type d'objet ( utile pour les tableaux confondant tout ! ) 
+	 * Euh, vu qu'on a une fonction « typeof » ça devrait être bon
 	 */
 	public enum Type
 	{
 		DECOR, ENNEMI, JOUEUR
 	}
+	
+	/*
+	 * 
 }
