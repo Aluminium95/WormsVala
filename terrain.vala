@@ -1,4 +1,5 @@
 using GLib;
+using Gee;
 
 namespace Jeu
 {
@@ -8,8 +9,8 @@ namespace Jeu
 	public class Terrain : Object
 	{
 		private bool pencheDroite; // penche à droite ? ( pour simplifier les calculs )
-		
-		public Objet[] objets; // Tableau des Objets
+	
+		public ArrayList<Objet> objets; // Tableau des Objets
 		
 		public int i; // Position dans le tableau des terrains
 		
@@ -63,6 +64,7 @@ namespace Jeu
 			/*
 			 * Code de retirage sécurisé
 			 */
+			objets.remove_at (positionTableau);
 		}
 		
 		/*
@@ -73,6 +75,8 @@ namespace Jeu
 			/*
 			 * Code d'ajout sécurisé 
 			 */
+			objets.add (o);
+			// o.i = 
 		}
 	}
 }

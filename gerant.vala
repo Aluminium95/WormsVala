@@ -1,4 +1,5 @@
 using GLib;
+using Gee;
 
 namespace Jeu
 {
@@ -9,7 +10,7 @@ namespace Jeu
 	 */
 	public class Gerant : Object
 	{
-		private Terrain[] listeTerrains; // Terrains
+		private ArrayList<Terrain> listeTerrains; // Terrains
 		
 		delegate void delegateJoueurFrappe (Personnage p);
 		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
@@ -62,7 +63,7 @@ namespace Jeu
 		 */
 		public Gerant ()
 		{
-			listeTerrains = {};
+			listeTerrains = new ArrayList<Terrain> ();
 			
 			creerTerrain ();
 			creerIA ();
@@ -91,7 +92,7 @@ namespace Jeu
 		{
 			for (int i = 0; i < 10; i++)
 			{
-				listeTerrains += new Terrain (50, 20, 20);
+				listeTerrains.add(new Terrain (50, 20, 20));
 			}
 		}
 		
