@@ -76,7 +76,7 @@ namespace Jeu
 			 * Code d'ajout sécurisé 
 			 */
 			objets.add (o);
-			// o.i = 
+			o.i = objets.index_of (o);
 		}
 	}
 }
