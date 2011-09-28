@@ -1,0 +1,8 @@
+###
+	Tout d'un coup j'ai un énorme doute sur le fonctionnement des cast …
+	Est-ce que l'on peut faire :
+		+ création d'une IA
+		+ mette l'IA dans un tableau d'Objet ( classe parente ) avec un cast
+		+ reprendre l'IA du tableau en la « décompressant » ?
+	Sinon il faudra faire des tableaux séparés pour les différents types d'objets
+	avec des fonctions séparés pour chaque type … ce qui serait beaucoup moins fun
