@@ -16,6 +16,8 @@ namespace Jeu
 		
 		/*
 		 * Execute un cycle : fait une action longue
+		 * Le problème est que l'on devrait plutôt faire un truc
+		 * différent !
 		 */
 		public int execute (Objet o) // Joueurs ou autre IA
 		{
@@ -43,6 +45,11 @@ namespace Jeu
 					break;
 			}
 			return depl;
+		}
+		
+		public void execute ()
+		{
+			stdout.printf ("test\n");
 		}
 		
 		/*

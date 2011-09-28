@@ -123,19 +123,7 @@ namespace Jeu
 		{
 			foreach ( var t in listeTerrains )
 			{
-				foreach ( var o in t.objets )
-				{
-					/* 
-					 * Execute 
-					 */
-					 try 
-					 {
-						 IA ia = (IA) o;
-						 
-					 } catch ( Error e) {
-						 
-					 }
-				}
+				t.execute (); // Demande au terrain d'executer 
 			}
 		}
 		

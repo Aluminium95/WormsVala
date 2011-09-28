@@ -52,6 +52,7 @@ namespace Jeu
 		
 		/*
 		 * Signal de changement d'inclinaison ( terrains mouvants, on sait jamais )
+		 * Ceci n'est normalement pas nécessaire !
 		 */
 		public signal void changeInclinaison ();
 		
@@ -77,6 +78,20 @@ namespace Jeu
 			 */
 			objets.add (o);
 			o.i = objets.index_of (o);
+		}
+		
+		/*
+		 * Execute les IA & Objets dans le terrain
+		 */
+		public void execute ()
+		{
+			foreach ( var i in objets )
+			{
+				if (IA ia = (IA) i) // Cast en IA
+				{
+					ia.execute ();
+				}
+			}
 		}
 	}
 }
