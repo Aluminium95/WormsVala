@@ -28,5 +28,5 @@ namespace Jeu
 	}
 	
 	/*
-	 * 
+	 */
 }

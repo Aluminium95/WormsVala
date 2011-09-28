@@ -7,16 +7,21 @@ namespace Jeu
 	 */
 	public class Terrain : Object
 	{
-		private bool pencheDroite;
+		private bool pencheDroite; // penche à droite ? ( pour simplifier les calculs )
 		
-		public int i; // Peut être pas … 
+		public Objet[] objets; // Tableau des Objets
 		
-		public int largeur { get; protected set; default = 0; }
+		public int i; // Position dans le tableau des terrains
 		
-		public int hg { get; protected set; default = 0; }
+		public int largeur { get; protected set; default = 0; } // Largeur du terrain
 		
-		public int hd { get; protected set; default = 0; }
+		public int hg { get; protected set; default = 0; } // Hauteur gauche du terrain
 		
+		public int hd { get; protected set; default = 0; } // Hauteur droite du terrain
+		
+		/*
+		 * Crée le terrain
+		 */
 		public Terrain (int l, int d, int g)
 		{
 			this.largeur = l;
@@ -26,6 +31,9 @@ namespace Jeu
 			this.pencheDroite = ( hg > hd ) ? true : false;
 		}
 		
+		/*
+		 * Retourne la hauteur du sol
+		 */
 		public int getSol ( int x )
 		{
 			if ( pencheDroite )
@@ -34,6 +42,37 @@ namespace Jeu
 			} else {
 				return (int) x * ( hd - hg ) / largeur + hg;
 			}
+		}
+		
+		/*
+		 * Envoie un signal de changement de terrain
+		 */
+		public signal void changeTerrain (bool droite, Objet o);
+		
+		/*
+		 * Signal de changement d'inclinaison ( terrains mouvants, on sait jamais )
+		 */
+		public signal void changeInclinaison ();
+		
+		/*
+		 * Retire un objet du terrain
+		 * !!! FAIRE UN THROW D'ERREUR !!!
+		 */
+		public void rmObjet (int positionTableau)
+		{
+			/*
+			 * Code de retirage sécurisé
+			 */
+		}
+		
+		/*
+		 * Ajoute un objet au terrain
+		 */
+		public void addObjet (Objet o)
+		{
+			/*
+			 * Code d'ajout sécurisé 
+			 */
 		}
 	}
 }

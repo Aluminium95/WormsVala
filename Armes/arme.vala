@@ -22,6 +22,6 @@ namespace Jeu
 		public void utiliser ()
 		{
 		
-		}
+		}*/
 	}
 }

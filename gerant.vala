@@ -9,11 +9,14 @@ namespace Jeu
 	 */
 	public class Gerant : Object
 	{
-		private IA[] e; // Tous les ennemis
-		private Terrain t; // Terrain
+		private Terrain[] listeTerrains; // Terrains
 		
 		delegate void delegateJoueurFrappe (Personnage p);
+		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
 		
+		/*
+		 * Delegate pour qu'un joueur frappe !
+		 */
 		private void joueurFrappe (Personnage p)
 		{
 			foreach ( var pers in e )
@@ -27,6 +30,36 @@ namespace Jeu
 			}
 		}
 		
+		/*
+		 * Assigne l'objet à un terrain
+		 * en fonction des positions de l'objet
+		 */
+		private void assignerTerrain (Terrain t, bool d, Objet o)
+		{
+			if ( d ) // Il faut rajoutter la limite de droite !
+			{
+				listeTerrains[t.i+1].addObjet (o);
+			} else if ( t.i != 0 ) { // On ne va pas plus loin que 0 !
+				listeTerrains[t.i-1].addObjet (o);
+			}
+			t.rmObjet (o.i); // Supression de l'objet dans le premier terrain
+		}
+		
+		/*
+		 * Assigne l'objet au terarin en fonction de la postion 
+		 * de l'objet
+		 */
+		private void assignerTerrainPos (Objet o)
+		{
+			/*
+			 * Teste tous les terrains pour savoir si l'objet rentre 
+			 * dedans !
+			 */
+		}
+		
+		/*
+		 * Crée le gérant 
+		 */
 		public Gerant ()
 		{
 			e = {};
@@ -35,6 +68,9 @@ namespace Jeu
 			creerIA ();
 		}
 		
+		/*
+		 * Créer les IAs du jeu
+		 */
 		private void creerIA ()
 		{
 			for(int i = 0; i < 2;i++)
@@ -55,11 +91,17 @@ namespace Jeu
 			}
 		}
 		
+		/*
+		 * Crée les terrains du jeu
+		 */
 		private void creerTerrain ()
 		{
 			t = new Terrain (100, 10, 50);
 		}
 		
+		/*
+		 * Crée les jouers du jeu
+		 */
 		private void creerJoueur ()
 		{
 			
@@ -74,11 +116,22 @@ namespace Jeu
 		 */
 		public void execute ()
 		{
-			int d;
-			d = e[0].execute (e[1]);
-			e[0].move (d);
-			d = e[1].execute (e[0]);
-			e[1].move (d);
+			foreach ( var t in listeTerrains )
+			{
+				foreach ( var o in t.objets )
+				{
+					/* 
+					 * Execute 
+					 */
+					 try 
+					 {
+						 IA ia = (IA) o;
+						 ia.execute();
+					 } catch ( Error e) {
+						 
+					 }
+				}
+			}
 		}
 		
 		/*

@@ -13,6 +13,8 @@ namespace Jeu
 		
 		public string name; // Oh pourquoi pas !!
 		
+		public int i; // Position dans le tableau des Objets
+		
 		public Type type; // Visiblement … sert à rien … ( déjà implémenté dans une classe par défaut )
 		
 		public signal void dead (); // Quand on meurt
