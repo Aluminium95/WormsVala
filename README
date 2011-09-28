@@ -1,0 +1,17 @@
+### Jeu bidon en Vala pour s'éclater
+	
+	Un écran fixe 
+	Différents terrains ( pentes ) de différentes tailles.
+	Des objets / armes / IA / joueurs qui évoluent dessus
+	
+	Gestion des dégats, des morts etc …
+	
+### Architecture
+	
+	Main -> Gérant -> Terarins[] -> Objets[] 
+	
+	L'éxécution est reportée
+	
+### Note
+	
+	Ce programme fait une utilisation abusive des signaux ! :D
