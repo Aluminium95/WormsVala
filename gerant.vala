@@ -19,7 +19,7 @@ namespace Jeu
 		 */
 		private void joueurFrappe (Personnage p)
 		{
-			foreach ( var pers in e )
+			foreach ( var pers in p.t.objets )
 			{
 				int d = (int)  (pers.x - p.x)^2 + (pers.y - p.y)^2 ;
 				if ( d <= 10)
@@ -62,7 +62,7 @@ namespace Jeu
 		 */
 		public Gerant ()
 		{
-			e = {};
+			listeTerrains = {};
 			
 			creerTerrain ();
 			creerIA ();
@@ -75,19 +75,12 @@ namespace Jeu
 		{
 			for(int i = 0; i < 2;i++)
 			{
-				e += new IA (20+10*i, t, 50,  i.to_string());
-				
-				e[i].dead.connect ( (e) =>
-				{
-					stdout.printf ("L'IA est morte !\n");
-				});
-				stdout.printf ("Instance d'ennemi ! "+ e[i].x.to_string () + "x : " + e[i].y.to_string () + "y\n" );
-				e[i].moved.connect ( (e) =>
-				{
-					stdout.printf ("Ennemi "+e.name+"! "+ e.x.to_string () + "x : " + e.y.to_string () + "y\n" );
-				});
-				
-				e[i].frapper.connect (joueurFrappe);
+				/*
+				 * Créer les positions, valeurs de l'ia, 
+				 * calculer le terrain
+				 * Créer l'ia et l'ajouter au terrain
+				 * Connecter les signaux de l'ia
+				 */
 			}
 		}
 		
@@ -96,7 +89,10 @@ namespace Jeu
 		 */
 		private void creerTerrain ()
 		{
-			t = new Terrain (100, 10, 50);
+			for (int i = 0; i < 10; i++)
+			{
+				listeTerrains += new Terrain (50, 20, 20);
+			}
 		}
 		
 		/*
@@ -126,7 +122,7 @@ namespace Jeu
 					 try 
 					 {
 						 IA ia = (IA) o;
-						 ia.execute();
+						 
 					 } catch ( Error e) {
 						 
 					 }
@@ -139,9 +135,12 @@ namespace Jeu
 		 */
 		public void kill ()
 		{
-			foreach ( var i in e )
+			foreach ( var t in listeTerrains )
 			{
-				i.mourrir ();
+				foreach ( var i in t.objets )
+				{
+					i.mourrir ();
+				}
 			}
 		}
 	}
