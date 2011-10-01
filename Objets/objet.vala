@@ -5,11 +5,12 @@ namespace Jeu
 	/**
 	 * Classe abstraite pour tous les objets 
 	 * du jeu qui sont dessinés
+	 * C'est sûrement la classe la plus importante et la plus grosse !
 	 */
 	public abstract class Objet : Object
 	{
-		public int l;
-		public int h;
+		public int l; // Largeur
+		public int h; // Hauteur
 
 		public TuplePos pos { get; private set; } // Point en bas à gauche ( départ )
 		public TuplePos pos_gh { get; private set; } // Point en haut à gauche
