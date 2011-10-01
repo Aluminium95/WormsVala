@@ -6,3 +6,9 @@
 		+ reprendre l'IA du tableau en la « décompressant » ?
 	Sinon il faudra faire des tableaux séparés pour les différents types d'objets
 	avec des fonctions séparés pour chaque type … ce qui serait beaucoup moins fun
+
+### Fonctionnement des Objets
+	Cela serait un peu moins … OO mais on pourrait, au lieu d'avoir
+une référence du terrain dans chaque objet, faire que ce soit le terrain
+qui s'occupe de dessiner les 3 autres points de l'objet … 
+	Ça simplifirait la classe objet ;)
