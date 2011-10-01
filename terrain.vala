@@ -10,7 +10,7 @@ namespace Jeu
 	{
 		private bool pencheDroite; // penche à droite ? ( pour simplifier les calculs )
 	
-		public ArrayList<Objet> objets; // Tableau des Objets
+		public ArrayList<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
 		
 		public int i; // Position dans le tableau des terrains
 		
