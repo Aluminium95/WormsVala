@@ -35,11 +35,10 @@ namespace Jeu
 		
 		protected int vie;
 		
-		public Objet ( int x, Terrain t, int vie )
+		public Objet ( int x, Terrain t, int vie, int l = 10, int h = 10)
 		{
-			this.x = x;
-			this.y = t.getSol (x);
 			this.t = t;
+			this.pos = new Position (x, t.getSol (x), l, h, t);
 		}
 		
 		public void move ( int x )
