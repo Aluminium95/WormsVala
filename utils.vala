@@ -28,5 +28,11 @@ namespace Jeu
 	}
 	
 	/*
+	 * Gestion des positions ( tuples )
 	 */
+	public struct TuplePos
+	{
+		int x;
+		int y;
+	}
 }

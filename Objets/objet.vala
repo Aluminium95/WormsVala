@@ -9,6 +9,9 @@ namespace Jeu
 	{
 		public int x;
 		public int y;
+		
+		public Position pos;
+		
 		public Terrain t;
 		
 		public string name; // Oh pourquoi pas !!
@@ -31,8 +34,7 @@ namespace Jeu
 		
 		public void move ( int x )
 		{
-			this.x += x;
-			this.y = t.getSol (this.x);
+			this.pos.move (x, this.t.getSol (x));
 			moved ();
 		}
 		
