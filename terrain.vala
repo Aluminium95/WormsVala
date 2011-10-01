@@ -8,7 +8,7 @@ namespace Jeu
 	 */
 	public class Terrain : Object
 	{
-		private bool pencheDroite; // penche à droite ? ( pour simplifier les calculs )
+		public bool pencheDroite { get; private set } // penche à droite ? ( pour simplifier les calculs )
 	
 		public ArrayList<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
 		
@@ -42,6 +42,16 @@ namespace Jeu
 				return (int) x * ( hg - hd ) / largeur + hd;
 			} else {
 				return (int) x * ( hd - hg ) / largeur + hg;
+			}
+		}
+		
+		public int getH ( int x )
+		{
+			if ( pencheDroite )
+			{
+				return (int) ( hg - hd ) * x / largeur; 
+			} else {
+				return (int) ( hd - hg ) * x / largeur; 
 			}
 		}
 		

@@ -7,8 +7,18 @@ namespace Jeu
 	 */
 	public abstract class Objet : Object
 	{
-		public int x;
-		public int y;
+		/*
+		 * Modifier les propriétés de la Position pos 
+		 * en même temps !
+		 */
+		public int l { 
+			get { }
+			set { }
+		}
+		public int h {
+			get { }
+			set { }
+		}
 		
 		public Position pos;
 		
