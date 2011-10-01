@@ -13,5 +13,11 @@ namespace Jeu
 		{
 			base ( 10, t, 10);
 		}
+
+		public int execute ()
+		{
+			stdout.printf ("Éxécute !\n");
+			return 0;
+		}
 	}
 }

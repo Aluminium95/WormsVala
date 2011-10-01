@@ -17,11 +17,18 @@ namespace Jeu
 			this.degats = deg;
 		}
 		
-		/*
-		 * 
-		public void utiliser ()
+		public bool utiliser ()
 		{
-		
-		}*/
+			if ( this.munitions > 0 )
+			{
+				this.munitions --;
+				return true;
+			} else if ( this.munitions == -1 ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 	}
 }

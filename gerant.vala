@@ -22,20 +22,24 @@ namespace Jeu
 		 */
 		private void joueurFrappe (Personnage p)
 		{
-			int t = p.t.i - 1;
-			
-			for (int i = 0; i < 3; i++)
-			{
-				foreach ( var pers in listeTerrains[t].objets )
+			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i;
+
+			try {
+				for (int i = 0; i < 3; i++)
 				{
-					int d = (int)  (pers.x - p.x)^2 + (pers.y - p.y)^2 ;
-					if ( d <= 10)
+					foreach ( var pers in listeTerrains[t].objets )
 					{
-						pers.aie (10);
-						stdout.printf ("AIE ! - 10 pv\n");
+						int d = (int)  (pers.pos.x - pers.dim.x - p.pos.x)^2 + (pers.pos.y - pers.dim.y - p.pos.y)^2 ;
+						if ( d <= 10)
+						{
+							pers.modifierVie (10);
+							stdout.printf ("AIE ! - 10 pv\n");
+						}
 					}
+					t++;
 				}
-				t++;
+			} catch ( Error e ) {
+				stderr.printf ("Une erreur dans la gestion des terrains … \n");
 			}
 		}
 		

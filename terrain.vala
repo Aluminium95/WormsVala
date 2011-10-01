@@ -8,7 +8,7 @@ namespace Jeu
 	 */
 	public class Terrain : Object
 	{
-		public bool pencheDroite { get; private set } // penche à droite ? ( pour simplifier les calculs )
+		public bool pencheDroite { get; private set; } // penche à droite ? ( pour simplifier les calculs )
 	
 		public ArrayList<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
 		
@@ -97,9 +97,10 @@ namespace Jeu
 		{
 			foreach ( var i in objets )
 			{
-				if (IA ia = (IA) i) // Cast en IA
+				var ia = i as IA;
+				if (ia != null) // Cast en IA
 				{
-					ia.execute ();
+					ia.execute (ia);
 				}
 			}
 		}

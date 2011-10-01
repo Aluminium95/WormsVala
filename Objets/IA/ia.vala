@@ -22,13 +22,13 @@ namespace Jeu
 		public int execute (Objet o) // Joueurs ou autre IA
 		{
 			int depl = 0;
-			int d = (int)  (o.x - this.x)^2 + (o.y - this.y)^2 ;
+			int d = (int)  (o.pos.x - this.pos.x)^2 + (o.pos.y - this.pos.y)^2 ;
 			switch (this.s)
 			{
 				case Strategie.CAC: // Corps à Corps
 					if ( d > 10)
 					{
-						depl = (o.x - this.x > 0 ) ? 1 : -1;
+						depl = (o.pos.x - this.pos.x > 0 ) ? 1 : -1;
 					} else {
 						frapper ();
 					}
@@ -45,11 +45,6 @@ namespace Jeu
 					break;
 			}
 			return depl;
-		}
-		
-		public void execute ()
-		{
-			stdout.printf ("test\n");
 		}
 		
 		/*
