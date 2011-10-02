@@ -3,7 +3,7 @@ using Gee;
 
 namespace Jeu
 {
-	/*
+	/**
 	 * Pour l'instant je crée 2 ia … et je les nomme !
 	 * Il faut utiliser des tableaux et créer des tableaux de terrain 
 	 * Il faut gérer les déplacements et les changements de terrain ! ( et donc attribution à une zone ).
@@ -21,7 +21,7 @@ namespace Jeu
 		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
 		delegate void delegateJoueurTire (Personnage p, TuplePos t);
 		
-		/*
+		/**
 		 * Delegate pour qu'un joueur frappe !
 		 * Regarde dans tous les terrains autour de celui du
 		 * personnage
@@ -49,7 +49,7 @@ namespace Jeu
 			}
 		}
 		
-		/*
+		/**
 		 * Assigne l'objet à un terrain
 		 * en fonction des positions de l'objet
 		 * Il faut qu'il y ai un terrain après ou avant !
@@ -65,11 +65,10 @@ namespace Jeu
 			t.rmObjet (o.i); // Supression de l'objet dans le premier terrain
 		}
 		
-		/*
-		 * Assigne l'objet au terarin en fonction de la postion 
-		 * de l'objet
+		/**
+		 * Retourne le terrain auquel appartien cette position
 		 */
-		private void assignerTerrainPos (Objet o)
+		private Terrain getTerrainPos (int x)
 		{
 			int startTerrain = 0; // Le premier terrain commence à 0
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
@@ -77,10 +76,9 @@ namespace Jeu
 				/*
 				 * Si l'objet rentre dans le terrain !
 				 */
-				if ( o.pos.x >= startTerrain && o.pos.x <= startTerrain + t.largeur )
+				if ( x >= startTerrain && x <= startTerrain + t.largeur )
 				{
-					t.addObjet (o); // On ajoute l'objet au terrain
-					break;
+					return t;
 				}
 				
 				/*
@@ -89,9 +87,11 @@ namespace Jeu
 				 */
 				startTerrain += t.largeur;
 			}
+
+			return listeTerrains[0];
 		}
 		
-		/*
+		/**
 		 * Crée le gérant 
 		 */
 		public Gerant ()
@@ -102,7 +102,7 @@ namespace Jeu
 			creerIA (2);
 		}
 		
-		/*
+		/**
 		 * Créer les IAs du jeu
 		 */
 		private void creerIA (int nbr)
@@ -117,23 +117,37 @@ namespace Jeu
 				 */
 				int x = GLib.Random.int_range (0, tailleTotaleTerrain); // Création d'un point de départ
 
-				
+				var ia = new IA (x, getTerrainPos (x), 10, "Une IA");
+
+				ia.dead.connect ( (o) =>
+				                  {
+										o.t.rmObjet (o.i);
+								  });
+				ia.moved.connect ( (o) => 
+				                   {
+									   stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); \n");
+								   });
+				ia.frapper.connect (joueurFrappe);
+										
 			}
 		}
 		
-		/*
+		/**
 		 * Crée les terrains du jeu
 		 */
 		private void creerTerrain (int nbr)
 		{
 			for (int i = 0; i < nbr; i++)
 			{
-				listeTerrains.add(new Terrain (50, 20, 20));
+				var t = new Terrain (50, 20, 20);
+				t.i = i;
+				t.changeTerrain.connect (assignerTerrain); // Gère les changements de terrain
+				listeTerrains.add(t);
 				tailleTotaleTerrain += 50;
 			}
 		}
 		
-		/*
+		/**
 		 * Crée les jouers du jeu
 		 */
 		private void creerJoueur ()
@@ -141,7 +155,7 @@ namespace Jeu
 			
 		}
 		
-		/*
+		/**
 		 * Fait éxecuter un cycle aux IA :
 		 * 		- Les fait choisir une action 
 		 * 		- Les fait bouger :
@@ -156,7 +170,7 @@ namespace Jeu
 			}
 		}
 		
-		/*
+		/**
 		 * Tue toutes les IA 
 		 */
 		public void kill ()

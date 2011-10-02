@@ -5,6 +5,7 @@ namespace Jeu
 {
 	/*
 	 * Terrain du jeu 
+	 * 		Implémente la gestion des collisions !!!!!!!!!
 	 */
 	public class Terrain : Object
 	{
@@ -35,6 +36,7 @@ namespace Jeu
 		/*
 		 * Retourne la hauteur du sol
 		 * 		Prendre en compte la « superposition d'objets » !!!!
+		 * 		Faire une gestion des collisions !
 		 */
 		public int getSol ( int x )
 		{

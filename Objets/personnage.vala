@@ -17,13 +17,21 @@ namespace Jeu
 		protected Arme armeSecondaire; // Arme secondaire de l'IA
 
 		protected TuplePos vecteurRegard; // Vecteur du regard
-		
+
+		/**
+		 * Très mauvais … mais bon c'est pour tester !
+		 */
 		public Personnage (int x, Terrain t, int vie = 50)
 		{
 			base (x,t,vie);
+
+			this.armePrincipale = new Arme (20);
+			this.armeSecondaire = new Arme (10);
+
+			this.armeActuelle = armePrincipale;
 		}
 		
-		/*
+		/**
 		 * Change l'arme
 		 */
 		protected void changerArme ()
@@ -31,7 +39,7 @@ namespace Jeu
 			this.armeActuelle = ( this.armeActuelle == this.armePrincipale ) ? this.armeSecondaire : this.armePrincipale;
 		}
 		
-		/*
+		/**
 		 * Échange l'arme actuelle avec une autre proposée 
 		 */
 		public void echangerArme (Arme a)
@@ -44,14 +52,14 @@ namespace Jeu
 			}
 		}
 		
-		/*
+		/**
 		 * Frappe !
 		 */
 		public signal void frapper ();
 		
 		public signal void tirer (TuplePos vecteurInitial); // Tire un PROJECTILE avec le vecteur initial
 		
-		/*
+		/**
 		 * Utilise l'arme pour envoyer un projectile 
 		 * dans la direction de l'objet
 		 */
