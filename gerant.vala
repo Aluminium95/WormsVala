@@ -12,6 +12,8 @@ namespace Jeu
 	{
 		private ArrayList<Terrain> listeTerrains; // Terrains
 
+		private int tailleTotaleTerrain = 0;
+
 		/**
 		 * Délégates pour connecter aux signaux 
 		 */
@@ -96,16 +98,16 @@ namespace Jeu
 		{
 			listeTerrains = new ArrayList<Terrain> ();
 			
-			creerTerrain ();
-			creerIA ();
+			creerTerrain (2);
+			creerIA (2);
 		}
 		
 		/*
 		 * Créer les IAs du jeu
 		 */
-		private void creerIA ()
+		private void creerIA (int nbr)
 		{
-			for(int i = 0; i < 2;i++)
+			for(int i = 0; i < nbr; i++)
 			{
 				/*
 				 * Créer les positions, valeurs de l'ia, 
@@ -113,17 +115,21 @@ namespace Jeu
 				 * Créer l'ia et l'ajouter au terrain
 				 * Connecter les signaux de l'ia
 				 */
+				int x = GLib.Random.int_range (0, tailleTotaleTerrain); // Création d'un point de départ
+
+				
 			}
 		}
 		
 		/*
 		 * Crée les terrains du jeu
 		 */
-		private void creerTerrain ()
+		private void creerTerrain (int nbr)
 		{
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < nbr; i++)
 			{
 				listeTerrains.add(new Terrain (50, 20, 20));
+				tailleTotaleTerrain += 50;
 			}
 		}
 		
