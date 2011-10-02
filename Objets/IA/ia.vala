@@ -39,7 +39,7 @@ namespace Jeu
 					{
 						depl = -1;
 					} else {
-						attaquerDistance (o);
+						attaquerDistance ();
 					}
 					break;
 				default:

@@ -49,7 +49,7 @@ namespace Jeu
 		 */
 		public signal void frapper ();
 		
-		public signal void tirer (tuplePos vecteurInitial); // Tire un PROJECTILE avec le vecteur initial
+		public signal void tirer (TuplePos vecteurInitial); // Tire un PROJECTILE avec le vecteur initial
 		
 		/*
 		 * Utilise l'arme pour envoyer un projectile 

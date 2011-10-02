@@ -4,7 +4,7 @@ using Gee;
 namespace Jeu
 {
 	/*
-	 * Terrain du jeu
+	 * Terrain du jeu 
 	 */
 	public class Terrain : Object
 	{

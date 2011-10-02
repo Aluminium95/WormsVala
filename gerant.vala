@@ -17,7 +17,7 @@ namespace Jeu
 		 */
 		delegate void delegateJoueurFrappe (Personnage p);
 		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
-		delegate void delegateJoueurTire (Personnage p, tuplePos t);
+		delegate void delegateJoueurTire (Personnage p, TuplePos t);
 		
 		/*
 		 * Delegate pour qu'un joueur frappe !
@@ -50,13 +50,14 @@ namespace Jeu
 		/*
 		 * Assigne l'objet à un terrain
 		 * en fonction des positions de l'objet
+		 * Il faut qu'il y ai un terrain après ou avant !
 		 */
 		private void assignerTerrain (Terrain t, bool d, Objet o)
 		{
-			if ( d ) // Il faut rajoutter la limite de droite !
+			if ( d )
 			{
 				listeTerrains[t.i+1].addObjet (o);
-			} else if ( t.i != 0 ) { // On ne va pas plus loin que 0 !
+			} else {
 				listeTerrains[t.i-1].addObjet (o);
 			}
 			t.rmObjet (o.i); // Supression de l'objet dans le premier terrain
@@ -68,10 +69,24 @@ namespace Jeu
 		 */
 		private void assignerTerrainPos (Objet o)
 		{
-			/*
-			 * Teste tous les terrains pour savoir si l'objet rentre 
-			 * dedans !
-			 */
+			int startTerrain = 0; // Le premier terrain commence à 0
+			foreach ( var t in listeTerrains ) // Pour chaque terrain
+			{
+				/*
+				 * Si l'objet rentre dans le terrain !
+				 */
+				if ( o.pos.x >= startTerrain && o.pos.x <= startTerrain + t.largeur )
+				{
+					t.addObjet (o); // On ajoute l'objet au terrain
+					break;
+				}
+				
+				/*
+				 * On ajoute la largeur du terrain pour trouver le 
+				 * début du terrain suivant 
+				 */
+				startTerrain += t.largeur;
+			}
 		}
 		
 		/*
