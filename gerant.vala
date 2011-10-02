@@ -123,7 +123,7 @@ namespace Jeu
 				
 				getTerrainPos (x).addObjet (ia);
 				
-				stdout.printf ("New IA : " + x.to_string () + "\n");
+				stdout.printf ("New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n");
 
 				ia.dead.connect ( (o) =>
 				{

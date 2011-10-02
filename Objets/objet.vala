@@ -7,15 +7,15 @@ namespace Jeu
 	 * du jeu qui sont dessinés
 	 * C'est sûrement la classe la plus importante et la plus grosse !
 	 */
-	public abstract class Objet : Object
+	public class Objet : Object
 	{
 		public int l; // Largeur
 		public int h; // Hauteur
 
-		public TuplePos pos { get; private set; } // Point en bas à gauche ( départ )
-		public TuplePos pos_gh { get; private set; } // Point en haut à gauche
-		public TuplePos pos_db { get; private set; } // Point en bas à droite
-		public TuplePos pos_dh { get; private set; } // Point en haut à droite
+		public TuplePos pos; // Point en bas à gauche ( départ )
+		public TuplePos pos_gh; // Point en haut à gauche
+		public TuplePos pos_db; // Point en bas à droite
+		public TuplePos pos_dh; // Point en haut à droite
 
 		public TuplePos dim; // Dimensions de l'objet
 		
@@ -32,7 +32,7 @@ namespace Jeu
 		
 		protected int vie;
 		
-		public Objet ( int x, Terrain t, int vie = 10, int l = 10, int h = 10)
+		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
 			this.t = t;
 			
@@ -52,7 +52,7 @@ namespace Jeu
 		 */
 		public void move ( int x )
 		{
-			this.pos.x = x;
+			this.pos.x += x;
 			this.pos.y = this.t.getSol (x);
 			
 			this.calc_rect ();

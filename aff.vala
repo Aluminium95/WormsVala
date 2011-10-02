@@ -9,7 +9,7 @@ namespace Jeu
 		private static const int SCREEN_WIDTH = 400;
 		private static const int SCREEN_HEIGHT = 500;
 		private static const int SCREEN_BPP = 32;
-		private static const int DELAY = 10;
+		private static const int DELAY = 103;
 
 		private static unowned SDL.Screen screen;
 		private static GLib.Rand rand;
@@ -61,8 +61,7 @@ namespace Jeu
 		
 		public static void draw_objet (Objet o)
 		{
-			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 500, 65432);
-			stdout.printf ("Draw Rectangle !");
+			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 65432);
 			screen.flip (); 
 		}
 		

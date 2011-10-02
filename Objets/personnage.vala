@@ -5,7 +5,7 @@ namespace Jeu
 	/*
 	 * Un personnage !
 	 */
-	public abstract class Personnage : Objet
+	public class Personnage : Objet
 	{
 		
 		protected Mouvement m; // Mouvement effectué
