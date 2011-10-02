@@ -11,7 +11,10 @@ namespace Jeu
 	public class Gerant : Object
 	{
 		private ArrayList<Terrain> listeTerrains; // Terrains
-		
+
+		/**
+		 * Délégates pour connecter aux signaux 
+		 */
 		delegate void delegateJoueurFrappe (Personnage p);
 		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
 		delegate void delegateJoueurTire (Personnage p, tuplePos t);

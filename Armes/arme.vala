@@ -11,6 +11,8 @@ namespace Jeu
 		public int munitions { get; protected set; default = -1; } // Pour les armes Cac c'est l'usure
 		
 		public bool distance; // Distance ou Cac
+
+		public int gravite { get; protected set; default = 0; } // Force de la courbe … A(x-a)²+b
 		
 		public Arme (int deg)
 		{

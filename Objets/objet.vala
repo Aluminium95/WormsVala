@@ -28,7 +28,7 @@ namespace Jeu
 		public Type type; // Visiblement … sert à rien … ( déjà implémenté dans une classe par défaut )
 		
 		public signal void dead (); // Quand on meurt
-		public signal void moved (); // Quand on frappe
+		public signal void moved (); // Quand on bouge
 		
 		protected int vie;
 		

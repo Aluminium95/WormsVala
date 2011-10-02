@@ -2,7 +2,7 @@ using GLib;
 
 namespace Jeu
 {
-	/*
+	/**
 	 * IA Simple
 	 */
 	public class IA : Personnage
@@ -14,7 +14,7 @@ namespace Jeu
 			this.name = name;
 		}
 		
-		/*
+		/**
 		 * Execute un cycle : fait une action longue
 		 * Le problème est que l'on devrait plutôt faire un truc
 		 * différent !
@@ -34,6 +34,7 @@ namespace Jeu
 					}
 					break;
 				case Strategie.DISTANCE: // Distance
+					ajusteVisee (o);
 					if ( d < 10 )
 					{
 						depl = -1;
@@ -47,7 +48,7 @@ namespace Jeu
 			return depl;
 		}
 		
-		/*
+		/**
 		 * Échange l'arme actuelle avec une autre proposée 
 		 */
 		public new void echangerArme (Arme a)
@@ -62,7 +63,7 @@ namespace Jeu
 			checkStrategie (); // Vérifie que la stratégie correspond à l'arme
 		}
 		
-		/*
+		/**
 		 * Change l'arme
 		 */
 		protected new void changerArme ()
@@ -71,7 +72,7 @@ namespace Jeu
 			checkStrategie (); // Vérifie que la stratégie correspond à l'arme
 		}
 		
-		/*
+		/**
 		 * Change de strategie
 		 */
 		public void reviseStrategie ()
@@ -79,7 +80,7 @@ namespace Jeu
 			this.s = (this.s == Strategie.DISTANCE) ? Strategie.CAC : Strategie.DISTANCE;
 		}
 		
-		/*
+		/**
 		 * Vérifie si la strategie correspond bien
 		 * au style de l'arme
 		 */
@@ -91,6 +92,20 @@ namespace Jeu
 			} else {
 				this.s = Strategie.CAC;
 			}
+		}
+
+		/**
+		 * Ajuste le tir / la vision en fonction de l'objet !
+		 */
+		protected void ajusteVisee (Objet o)
+		{
+			/**
+			 * Code d'ajustement de la visée
+			 * en fonction de :
+			 * 		- la force de l'arme
+			 * 		- la gravité de l'arme // Arrgh courbe !
+			 * 		- la position du personnage
+			 */
 		}
 	}
 }

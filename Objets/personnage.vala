@@ -55,7 +55,7 @@ namespace Jeu
 		 * Utilise l'arme pour envoyer un projectile 
 		 * dans la direction de l'objet
 		 */
-		protected void attaquerDistance (Objet o)
+		protected void attaquerDistance ()
 		{
 			if ( armeActuelle.utiliser () == true )
 			{
