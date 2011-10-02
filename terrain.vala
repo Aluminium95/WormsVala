@@ -34,6 +34,7 @@ namespace Jeu
 		
 		/*
 		 * Retourne la hauteur du sol
+		 * 		Prendre en compte la « superposition d'objets » !!!!
 		 */
 		public int getSol ( int x )
 		{
