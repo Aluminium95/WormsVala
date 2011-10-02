@@ -68,10 +68,11 @@ namespace Jeu
 			if ( this.vie == 0)
 			{
 				mourrir ();
-			} else if ( vie != 1 )
+			} else if ( vie != -1 )
 			{
 				this.vie -= v;
 			}
+			Jeu.Son.play (Jeu.note.A);
 		}
 
 		/**

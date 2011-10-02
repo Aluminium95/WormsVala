@@ -31,6 +31,8 @@ namespace Jeu
 			this.hg = g;
 			
 			this.pencheDroite = ( hg > hd ) ? true : false;
+
+			this.objets = new ArrayList<Objet> (); // initialisation du tableau
 		}
 		
 		/*
@@ -103,7 +105,7 @@ namespace Jeu
 				var ia = i as IA;
 				if (ia != null) // Cast en IA
 				{
-					ia.execute (ia);
+					ia.execute (ia); // Aaaargh
 				}
 			}
 		}

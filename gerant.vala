@@ -28,6 +28,8 @@ namespace Jeu
 		 */
 		private void joueurFrappe (Personnage p)
 		{
+			Jeu.Son.play (Jeu.note.B);
+			
 			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i;
 
 			try {
@@ -127,8 +129,7 @@ namespace Jeu
 				                   {
 									   stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); \n");
 								   });
-				ia.frapper.connect (joueurFrappe);
-										
+				ia.frapper.connect (joueurFrappe);										
 			}
 		}
 		
@@ -166,7 +167,7 @@ namespace Jeu
 		{
 			foreach ( var t in listeTerrains )
 			{
-				t.execute (); // Demande au terrain d'executer 
+				t.execute (); // Demande au terrain d'executer
 			}
 		}
 		
