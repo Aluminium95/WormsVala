@@ -102,11 +102,7 @@ namespace Jeu
 		{
 			foreach ( var i in objets )
 			{
-				var ia = i as IA;
-				if (ia != null) // Cast en IA
-				{
-					ia.execute (ia); // Aaaargh
-				}
+				Jeu.Aff.draw_objet (i);
 			}
 		}
 	}

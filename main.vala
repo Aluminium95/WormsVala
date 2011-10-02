@@ -1,19 +1,14 @@
 using GLib;
+using SDL;
+using SDLGraphics;
 
 void main (string[] args)
 {
 	Gst.init (ref args);
+	SDL.init (InitFlag.VIDEO);
 	
-	var g = new Jeu.Gerant ();
-	
-	for ( int i = 0; i < 20;i++)
-	{
-		g.execute ();
-	}
-	
-	g.kill ();
-	
-	Jeu.Son.play (Jeu.note.A);
-	
-	new MainLoop ().run ();
+	Jeu.Aff.init ();
+	Jeu.Aff.run ();
+
+	SDL.quit ();
 }

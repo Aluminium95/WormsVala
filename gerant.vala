@@ -100,8 +100,8 @@ namespace Jeu
 		{
 			listeTerrains = new ArrayList<Terrain> ();
 			
-			creerTerrain (2);
-			creerIA (2);
+			creerTerrain (3);
+			creerIA (5);
 		}
 		
 		/**
@@ -122,14 +122,14 @@ namespace Jeu
 				var ia = new IA (x, getTerrainPos (x), 10, "Une IA");
 
 				ia.dead.connect ( (o) =>
-				                  {
-										o.t.rmObjet (o.i);
-								  });
+				{
+					o.t.rmObjet (o.i);
+				});
 				ia.moved.connect ( (o) => 
-				                   {
-									   stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); \n");
-								   });
-				ia.frapper.connect (joueurFrappe);										
+				{
+					stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); \n");
+				});
+				ia.frapper.connect(joueurFrappe);
 			}
 		}
 		
@@ -140,7 +140,7 @@ namespace Jeu
 		{
 			for (int i = 0; i < nbr; i++)
 			{
-				var t = new Terrain (50, 20, 20);
+				var t = new Terrain (100, 20, 20 * i);
 				t.i = i;
 				t.changeTerrain.connect (assignerTerrain); // Gère les changements de terrain
 				listeTerrains.add(t);
@@ -165,9 +165,17 @@ namespace Jeu
 		 */
 		public void execute ()
 		{
+			int pos = 0;
 			foreach ( var t in listeTerrains )
 			{
-				t.execute (); // Demande au terrain d'executer
+				Jeu.Aff.draw_line (pos, t.hg, pos + t.largeur, t.hd);
+				
+				for ( int i = 0; i < t.objets.length; i++)
+				{
+					Jeu.Aff.draw_objet (t.objets[i]);
+				}
+				
+				pos += t.largeur;
 			}
 		}
 		
