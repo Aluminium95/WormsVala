@@ -13,6 +13,8 @@ namespace Jeu
 		public bool distance; // Distance ou Cac
 
 		public int gravite { get; protected set; default = 0; } // Force de la courbe … A(x-a)²+b
+
+		public int r {get; protected set; default = 10; }
 		
 		public Arme (int deg)
 		{

@@ -34,7 +34,7 @@ namespace Jeu
 					foreach ( var pers in listeTerrains[t].objets )
 					{
 						int d = (int)  (pers.pos.x - pers.dim.x - p.pos.x)^2 + (pers.pos.y - pers.dim.y - p.pos.y)^2 ;
-						if ( d <= 10)
+						if ( d <= p.armeActuelle.r )
 						{
 							pers.modifierVie (10);
 							stdout.printf ("AIE ! - 10 pv\n");
