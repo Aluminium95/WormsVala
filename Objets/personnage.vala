@@ -15,6 +15,8 @@ namespace Jeu
 		
 		protected Arme armePrincipale; // Arme principale de l'IA
 		protected Arme armeSecondaire; // Arme secondaire de l'IA
+
+		protected TuplePos vecteurRegard; // Vecteur du regard
 		
 		public Personnage (int x, Terrain t, int vie = 50)
 		{
@@ -47,7 +49,7 @@ namespace Jeu
 		 */
 		public signal void frapper ();
 		
-		public signal void tirer (); // Tire un PROJECTILE !!
+		public signal void tirer (tuplePos vecteurInitial); // Tire un PROJECTILE avec le vecteur initial
 		
 		/*
 		 * Utilise l'arme pour envoyer un projectile 
@@ -55,7 +57,13 @@ namespace Jeu
 		 */
 		protected void attaquerDistance (Objet o)
 		{
-			
+			if ( armeActuelle.utiliser () == true )
+			{
+				/*
+				 * Calcul du vecteur initial en fonction du tuplePos regard 
+				 */
+				tirer (vecteurRegard);
+			}
 		}
 	}
 }

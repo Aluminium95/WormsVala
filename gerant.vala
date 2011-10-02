@@ -14,6 +14,7 @@ namespace Jeu
 		
 		delegate void delegateJoueurFrappe (Personnage p);
 		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
+		delegate void delegateJoueurTire (Personnage p, tuplePos t);
 		
 		/*
 		 * Delegate pour qu'un joueur frappe !
