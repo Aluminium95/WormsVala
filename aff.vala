@@ -15,7 +15,7 @@ namespace Jeu
 		private static GLib.Rand rand;
 		private static bool done;
 		
-		private static Gerant g;
+		public static Gerant g;
 
 		public static void init () {
 			rand = new GLib.Rand ();

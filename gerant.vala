@@ -120,6 +120,10 @@ namespace Jeu
 				int x = GLib.Random.int_range (0, tailleTotaleTerrain); // Création d'un point de départ
 
 				var ia = new IA (x, getTerrainPos (x), 10, "Une IA");
+				
+				getTerrainPos (x).addObjet (ia);
+				
+				stdout.printf ("New IA : " + x.to_string () + "\n");
 
 				ia.dead.connect ( (o) =>
 				{
@@ -166,14 +170,11 @@ namespace Jeu
 		public void execute ()
 		{
 			int pos = 0;
-			foreach ( var t in listeTerrains )
+			foreach ( Terrain t in listeTerrains )
 			{
 				Jeu.Aff.draw_line (pos, t.hg, pos + t.largeur, t.hd);
 				
-				for ( int i = 0; i < t.objets.length; i++)
-				{
-					Jeu.Aff.draw_objet (t.objets[i]);
-				}
+				t.execute ();
 				
 				pos += t.largeur;
 			}

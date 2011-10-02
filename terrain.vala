@@ -100,9 +100,10 @@ namespace Jeu
 		 */
 		public void execute ()
 		{
-			foreach ( var i in objets )
+			stdout.printf ("exec !\n");
+			foreach ( var o in objets )
 			{
-				Jeu.Aff.draw_objet (i);
+				Jeu.Aff.draw_objet (o);
 			}
 		}
 	}
