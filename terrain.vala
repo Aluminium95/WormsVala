@@ -11,9 +11,11 @@ namespace Jeu
 	{
 		public bool pencheDroite { get; private set; } // penche à droite ? ( pour simplifier les calculs )
 	
-		public ArrayList<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
+		public HashSet<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
 		
 		public int i; // Position dans le tableau des terrains
+		
+		public int start; // Position de départ du terrain 
 		
 		public int largeur { get; protected set; default = 0; } // Largeur du terrain
 		
@@ -32,7 +34,7 @@ namespace Jeu
 			
 			this.pencheDroite = ( hg > hd ) ? true : false;
 
-			this.objets = new ArrayList<Objet> (); // initialisation du tableau
+			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}
 		
 		/*
@@ -75,12 +77,12 @@ namespace Jeu
 		 * Retire un objet du terrain
 		 * !!! FAIRE UN THROW D'ERREUR !!!
 		 */
-		public void rmObjet (int positionTableau)
+		public void rmObjet (Objet o)
 		{
 			/*
 			 * Code de retirage sécurisé
 			 */
-			objets.remove_at (positionTableau);
+			objets.remove (o);
 		}
 		
 		/*
@@ -92,7 +94,6 @@ namespace Jeu
 			 * Code d'ajout sécurisé 
 			 */
 			objets.add (o);
-			o.i = objets.index_of (o);
 		}
 		
 		/*
@@ -104,6 +105,11 @@ namespace Jeu
 			{
 				Jeu.Aff.draw_objet (o);
 				o.move (1);
+				if ( o.pos.x < this.start ) {
+					changeTerrain (true, o);
+				} else if ( o.pos.x > this.start + this.largeur ) {
+					changeTerrain (false, o);
+				}
 			}
 		}
 	}

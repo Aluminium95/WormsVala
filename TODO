@@ -12,3 +12,8 @@
 une référence du terrain dans chaque objet, faire que ce soit le terrain
 qui s'occupe de dessiner les 3 autres points de l'objet … 
 	Ça simplifirait la classe objet ;)
+
+### AAAAarrrrg
+	Quand on fait un changement de terrain : il faut detruire
+	l'objet à la fin de la boucle ! Sinon la boucle du terrain foire
+	parce que le nombre d'objet change au milieu de l'itération !

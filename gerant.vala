@@ -58,13 +58,14 @@ namespace Jeu
 		 */
 		private void assignerTerrain (Terrain t, bool d, Objet o)
 		{
-			if ( d )
+			if ( d && t.i < listeTerrains.size )
 			{
-				listeTerrains[t.i+1].addObjet (o);
-			} else {
+				// listeTerrains[t.i+1].addObjet (o);
+				t.rmObjet (o); // Supression de l'objet dans le premier terrain
+			} else if ( !d && t.i > 0 )  {
 				listeTerrains[t.i-1].addObjet (o);
+				t.rmObjet (o); // Supression de l'objet dans le premier terrain
 			}
-			t.rmObjet (o.i); // Supression de l'objet dans le premier terrain
 		}
 		
 		/**
@@ -72,22 +73,15 @@ namespace Jeu
 		 */
 		private Terrain getTerrainPos (int x)
 		{
-			int startTerrain = 0; // Le premier terrain commence à 0
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
 			{
 				/*
 				 * Si l'objet rentre dans le terrain !
 				 */
-				if ( x >= startTerrain && x <= startTerrain + t.largeur )
+				if ( x >= t.start && x <= t.start + t.largeur )
 				{
 					return t;
 				}
-				
-				/*
-				 * On ajoute la largeur du terrain pour trouver le 
-				 * début du terrain suivant 
-				 */
-				startTerrain += t.largeur;
 			}
 
 			return listeTerrains[0];
@@ -100,8 +94,8 @@ namespace Jeu
 		{
 			listeTerrains = new ArrayList<Terrain> ();
 			
-			creerTerrain (3);
-			creerIA (5);
+			creerTerrain (5);
+			creerIA (1);
 		}
 		
 		/**
@@ -127,7 +121,7 @@ namespace Jeu
 
 				ia.dead.connect ( (o) =>
 				{
-					o.t.rmObjet (o.i);
+					o.t.rmObjet (o);
 				});
 				ia.moved.connect ( (o) => 
 				{
@@ -142,14 +136,19 @@ namespace Jeu
 		 */
 		private void creerTerrain (int nbr)
 		{
+			int pos = 0;
 			for (int i = 0; i < nbr; i++)
 			{
-				var t = new Terrain (100, 20, 20 * i);
+				var largeurTerrain = GLib.Random.int_range (40, 120);
+				var t = new Terrain (largeurTerrain, 20, 20 * i);
+				t.start = pos;
 				t.i = i;
 				t.changeTerrain.connect (assignerTerrain); // Gère les changements de terrain
-				listeTerrains.add(t);
-				tailleTotaleTerrain += 50;
+				listeTerrains.add (t);
+				
+				pos += largeurTerrain;
 			}
+			tailleTotaleTerrain = pos;
 		}
 		
 		/**
@@ -169,14 +168,11 @@ namespace Jeu
 		 */
 		public void execute ()
 		{
-			int pos = 0;
 			foreach ( Terrain t in listeTerrains )
 			{
-				Jeu.Aff.draw_line (pos, t.hg, pos + t.largeur, t.hd);
+				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
 				
 				t.execute ();
-				
-				pos += t.largeur;
 			}
 		}
 		
