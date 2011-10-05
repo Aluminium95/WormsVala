@@ -102,7 +102,7 @@ namespace Jeu
 			/*
 			 * Appel des fonctions créatrices 
 			 */
-			creerTerrain (4);
+			creerTerrain (30);
 			creerIA (1);
 		}
 		
@@ -148,6 +148,9 @@ namespace Jeu
 		private void creerTerrain (int nbr)
 		{
 			int pos = 0;
+			int prevHeight = (int) Jeu.Aff.SCREEN_HEIGHT / 2;
+			int width = (int) Jeu.Aff.SCREEN_WIDTH / nbr;
+			
 			for (int i = 0; i < nbr; i++)
 			{
 				int largeurTerrain;
@@ -155,31 +158,14 @@ namespace Jeu
 				{
 					largeurTerrain = Jeu.Aff.SCREEN_WIDTH - pos; // Il prend la place restante
 				} else { // Sinon il prend une place aléatoire dans celle qui reste
-					largeurTerrain = GLib.Random.int_range (0, Jeu.Aff.SCREEN_WIDTH - pos);
+					largeurTerrain = width;
 				}
 				
-				int hg = 0; // Hauteur gauche
-				int hd = 0; // Hauteur droite
-				switch (i) // Config perso pour la démo
-				{
-					case 0:
-						hg = 10;
-						hd = 20;
-						break;
-					case 1:
-						hg = 20;
-						hd = 150;
-						break;
-					case 2:
-						hg = 150;
-						hd = 50;
-						break;
-					case 3:
-						hg = 50;
-						hd = 0;
-						break;
-				}
-				var t = new Terrain (largeurTerrain, hg, hd);
+				int h = GLib.Random.int_range (prevHeight - 150, prevHeight + 150);
+				h = ( h < 0 ) ? 0 : h;
+				h = ( h > Jeu.Aff.SCREEN_HEIGHT ) ? Jeu.Aff.SCREEN_HEIGHT : h;
+				
+				var t = new Terrain (largeurTerrain, prevHeight, h);
 				t.start = pos; // Définition du début du terrain
 				t.i = i; // Définition de l'indice du terrain dans le tableau
 				listeTerrains.add (t); // Ajout du terrain
@@ -189,6 +175,7 @@ namespace Jeu
 				 * le début du prochain terrain
 				 */
 				pos += largeurTerrain;
+				prevHeight = h;
 			}
 			tailleTotaleTerrain = pos; // Définiton de la taille totale du jeu
 		}
@@ -210,11 +197,7 @@ namespace Jeu
 		 */
 		public void execute ()
 		{
-			foreach ( Terrain t in listeTerrains )
-			{
-				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
-				Jeu.Aff.draw_terrain (t);
-			}
+			
 			
 			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
 			{
@@ -240,6 +223,12 @@ namespace Jeu
 				} else {
 					o.move (mvmt);
 				}
+			}
+			
+			foreach ( Terrain t in listeTerrains )
+			{
+				Jeu.Aff.draw_terrain (t);
+				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
 			}
 		}
 		

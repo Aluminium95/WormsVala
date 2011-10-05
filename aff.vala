@@ -10,10 +10,12 @@ namespace Jeu
 	 */
 	public class Aff : Object {
 
-		public static const int SCREEN_WIDTH = 400;
-		public static const int SCREEN_HEIGHT = 500;
+		public static const int SCREEN_WIDTH = 600;
+		public static const int SCREEN_HEIGHT = 400;
 		private static const int SCREEN_BPP = 32;
 		public static const int DELAY = 30;
+		
+		private static bool[] keysHeld = new bool[323]; // Entrées clavier
 
 		private static unowned SDL.Screen screen;
 		private static GLib.Rand rand;
@@ -30,10 +32,10 @@ namespace Jeu
 			init_video ();
 
 			while (!done) {
-				screen.fill (null,0);
+				screen.fill (null,5468);
 				g.execute ();
-				screen.flip (); 
 				process_events ();
+				screen.flip ();
 				SDL.Timer.delay (DELAY);
 			}
 		}
@@ -60,48 +62,52 @@ namespace Jeu
 
 			Circle.fill_color (screen, x, y, radius, color);
 			Circle.outline_color_aa (screen, x, y, radius, color);
-
-			screen.flip ();
 		}
 		
 		public static void draw_objet (Objet o)
 		{
-			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 65432);
-			
+			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 0x004AFF);
+			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 0xFFFFFFF);
 		}
 		
 		public static void draw_terrain (Terrain t)
 		{
 			int16[] vx = {
-					0, 0, (int16) t.largeur, (int16) t.largeur
+					(int16) t.start , (int16) t.start, (int16) (t.start + t.largeur), (int16) (t.start + t.largeur)
 				};
 			int16[] vy = {
-					0, (int16) t.hg, 0, (int16) t.hd
+					(int16) SCREEN_HEIGHT, (int16) (SCREEN_HEIGHT - t.hg) , (int16) (SCREEN_HEIGHT - t.hd), (int16) SCREEN_HEIGHT
 				};
-			Polygon.fill_color (screen, vx, vy, 0, 65432);
+			Polygon.fill_rgba (screen, vx, vy, 4, 'C', 'C', 'C', 255);
 		}
 		
 		public static void draw_line (int x1, int y1, int x2, int y2)
 		{
-			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 65432);
+			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 0xFFFFFFF);
 		}
 
 		private static void process_events () {
 			Event event = Event ();
 			while (Event.poll (event) == 1) {
-				switch (event.type) {
-					case EventType.QUIT:
-						Jeu.Aff.done = true;
-						break;
-					case EventType.KEYDOWN:
-						on_keyboard_event (event.key);
-						break;
-				}
-			}
+		        switch (event.type) {
+		        case EventType.QUIT:
+		            Aff.done = true;
+		            break;
+		        case EventType.KEYDOWN:
+					keysHeld[event.key.keysym.sym] = true;
+		            break;
+		        case EventType.KEYUP:
+					keysHeld[event.key.keysym.sym] = false;
+		            break;
+		        }
+        	}
+        	
 		}
 
-		private static void on_keyboard_event (KeyboardEvent event) {
-			Jeu.Aff.done = true;
+		private static void gerer_clavier () {
+			if ( keysHeld[113] ) { // Q
+				Aff.done = true;
+			}
 		}
 	}
 }
