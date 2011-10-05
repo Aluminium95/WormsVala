@@ -99,14 +99,8 @@ namespace Jeu
 		 */
 		protected void calc_db ()
 		{
-			if ( t.pencheDroite )
-			{
-				pos_db.x = (int) ( t.largeur * dim.x ) / (int) t.largeur * t.largeur + t.getH (this.pos.x) * t.getH (this.pos.x);
-			} else {
-				pos_db.x = 3;
-			}
-			
-			pos_db.y = t.getSol (pos_db.x);
+
+			pos_db.x = (int) ( t.largeur * dim.x ) / (int) t.largeur * t.largeur + t.getH (this.pos.x) * t.getH (this.pos.x);
 		}
 
 		/**

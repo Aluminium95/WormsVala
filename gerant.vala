@@ -102,7 +102,7 @@ namespace Jeu
 			/*
 			 * Appel des fonctions créatrices 
 			 */
-			creerTerrain (3);
+			creerTerrain (4);
 			creerIA (1);
 		}
 		
@@ -151,14 +151,15 @@ namespace Jeu
 			for (int i = 0; i < nbr; i++)
 			{
 				int largeurTerrain;
-				if ( i == nbr - 1 )
+				if ( i == nbr - 1 ) // Si c'est le dernier terrain
 				{
-					largeurTerrain = Jeu.Aff.SCREEN_WIDTH - pos;
-				} else {
+					largeurTerrain = Jeu.Aff.SCREEN_WIDTH - pos; // Il prend la place restante
+				} else { // Sinon il prend une place aléatoire dans celle qui reste
 					largeurTerrain = GLib.Random.int_range (0, Jeu.Aff.SCREEN_WIDTH - pos);
 				}
-				int hg = 0;
-				int hd = 0;
+				
+				int hg = 0; // Hauteur gauche
+				int hd = 0; // Hauteur droite
 				switch (i) // Config perso pour la démo
 				{
 					case 0:
@@ -170,12 +171,12 @@ namespace Jeu
 						hd = 150;
 						break;
 					case 2:
-						hg = 30;
+						hg = 150;
 						hd = 50;
 						break;
 					case 3:
-						hg = 0;
-						hd = 50;
+						hg = 50;
+						hd = 0;
 						break;
 				}
 				var t = new Terrain (largeurTerrain, hg, hd);

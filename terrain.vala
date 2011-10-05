@@ -9,8 +9,6 @@ namespace Jeu
 	 */
 	public class Terrain : Object
 	{
-		public bool pencheDroite { get; protected set; } // penche à droite ? ( pour simplifier les calculs )
-	
 		public HashSet<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
 		
 		public int i; // Position dans le tableau des terrains
@@ -32,9 +30,6 @@ namespace Jeu
 			this.hd = d;
 			this.hg = g;
 			
-			this.pencheDroite = ( hg > hd ) ? true : false;
-			stdout.printf (pencheDroite.to_string ());
-
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}
 		
@@ -45,23 +40,12 @@ namespace Jeu
 		 */
 		public int getSol ( int x )
 		{
-			if ( pencheDroite )
-			{
-				// return (int) x * ( hg - hd ) / largeur + hd;
-				return (int) (x * ( hg - hd ) / largeur + hg);
-			} else {
-				return (int) (x * ( hd - hg ) / largeur + hg);
-			}
+			return (int) (x - this.start) * ( hd - hg ) / largeur + hg;
 		}
 		
 		public int getH ( int x )
 		{
-			if ( pencheDroite )
-			{
-				return (int) ( hg - hd ) * x / largeur; 
-			} else {
-				return (int) ( hd - hg ) * x / largeur; 
-			}
+			return (int) ( hd - hg ) * x / largeur; 
 		}
 		
 		/**
