@@ -9,7 +9,7 @@ namespace Jeu
 		private static const int SCREEN_WIDTH = 400;
 		private static const int SCREEN_HEIGHT = 500;
 		private static const int SCREEN_BPP = 32;
-		private static const int DELAY = 10;
+		private static const int DELAY = 30;
 
 		private static unowned SDL.Screen screen;
 		private static GLib.Rand rand;
@@ -28,6 +28,7 @@ namespace Jeu
 			while (!done) {
 				screen.fill (null,0);
 				g.execute ();
+				screen.flip (); 
 				process_events ();
 				SDL.Timer.delay (DELAY);
 			}
@@ -62,7 +63,7 @@ namespace Jeu
 		public static void draw_objet (Objet o)
 		{
 			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 65432);
-			screen.flip (); 
+			
 		}
 		
 		public static void draw_terrain (Terrain t)
@@ -74,13 +75,11 @@ namespace Jeu
 					0, (int16) t.hg, 0, (int16) t.hd
 				};
 			Polygon.fill_color (screen, vx, vy, 0, 65432);
-			screen.flip (); 
 		}
 		
 		public static void draw_line (int x1, int y1, int x2, int y2)
 		{
 			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 65432);
-			screen.flip ();
 		}
 
 		private static void process_events () {

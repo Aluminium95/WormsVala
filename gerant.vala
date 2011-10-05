@@ -31,24 +31,20 @@ namespace Jeu
 		{
 			Jeu.Son.play (Jeu.note.B);
 			
-			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i;
-
-			try {
-				for (int i = 0; i < 3; i++)
+			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i; // On regarde dans les terrains alentours
+			for (int i = 0; i < 3; i++) // On fait trois fois 
+			{
+				foreach ( var pers in listeTerrains[t].objets ) // pour chaque objet du terrain
 				{
-					foreach ( var pers in listeTerrains[t].objets )
+					// Calcul de la distance de frappe
+					int d = (int)  (pers.pos.x - pers.dim.x - p.pos.x)^2 + (pers.pos.y - pers.dim.y - p.pos.y)^2 ;
+					if ( d <= p.armeActuelle.r ) // Si c'est dedans
 					{
-						int d = (int)  (pers.pos.x - pers.dim.x - p.pos.x)^2 + (pers.pos.y - pers.dim.y - p.pos.y)^2 ;
-						if ( d <= p.armeActuelle.r )
-						{
-							pers.modifierVie (10);
-							stdout.printf ("AIE ! - 10 pv\n");
-						}
+						pers.modifierVie (10); // On enlève 10 pv
+						stdout.printf ("AIE ! - 10 pv\n");
 					}
-					t++;
 				}
-			} catch ( Error e ) {
-				stderr.printf ("Une erreur dans la gestion des terrains … \n");
+				t++; // Indice du prochain terrain
 			}
 		}
 		
@@ -60,17 +56,16 @@ namespace Jeu
 		 */
 		private bool changeTerrain (bool d, Objet o)
 		{
-			if (  d & o.t.i < listeTerrains.size - 1  )
+			if (  d & o.t.i < listeTerrains.size - 1  ) // Si c'est pas le dernier terrain
 			{
-				stdout.printf ("Droite !\n");
 				listeTerrains[o.t.i+1].addObjet (o);
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				return true;
 			} else if ( !d && o.t.i > 0 )  {
 				listeTerrains[o.t.i-1].addObjet (o);
-				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
+				o.t.rmObjet (o);
 				return true;
-			} else { return false; }
+			} else { return false; } // Si on peut pas changer de terrain
 		}
 		
 		/**
@@ -78,7 +73,7 @@ namespace Jeu
 		 */
 		private Terrain getTerrainPos (int x)
 		{
-			Terrain ret = listeTerrains[0];
+			Terrain ret = listeTerrains[0]; // Terrain par défaut
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
 			{
 				/*
@@ -86,10 +81,10 @@ namespace Jeu
 				 */
 				if ( x >= t.start && x <= t.start + t.largeur )
 				{
-					ret = t;
+					ret = t; // On modifie la référence
 				}
 			}
-			return ret;
+			return ret; // On retourne le terrain 
 		}
 		
 		/**
@@ -97,9 +92,16 @@ namespace Jeu
 		 */
 		public Gerant ()
 		{
+			/*
+			 * Initialisation des tableaux contenants les terrains
+			 * et les objets du jeu
+			 */
 			listeTerrains = new ArrayList<Terrain> ();
 			objets = new HashSet<Objet> ();
 			
+			/*
+			 * Appel des fonctions créatrices 
+			 */
 			creerTerrain (3);
 			creerIA (1);
 		}
@@ -124,7 +126,10 @@ namespace Jeu
 				addObjet (ia); // Ajoute l'objet au gérant
 				
 				stdout.printf ("New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n");
-
+				
+				/*
+				 * Connection des signaux 
+				 */
 				ia.dead.connect ( (o) =>
 				{
 					rmObjet (o); // Supprime l'objet du gérant
@@ -168,13 +173,17 @@ namespace Jeu
 						break;
 				}
 				var t = new Terrain (largeurTerrain, hg, hd);
-				t.start = pos;
-				t.i = i;
-				listeTerrains.add (t);
+				t.start = pos; // Définition du début du terrain
+				t.i = i; // Définition de l'indice du terrain dans le tableau
+				listeTerrains.add (t); // Ajout du terrain
 				
+				/*
+				 * Ajout de la largeur du terrain à pos pour trouver
+				 * le début du prochain terrain
+				 */
 				pos += largeurTerrain;
 			}
-			tailleTotaleTerrain = pos;
+			tailleTotaleTerrain = pos; // Définiton de la taille totale du jeu
 		}
 		
 		/**
@@ -202,8 +211,8 @@ namespace Jeu
 			
 			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
 			{
-				Jeu.Aff.draw_objet (o);
-				int mvmt = 1; // Mouvement
+				Jeu.Aff.draw_objet (o); // Affiche l'objet
+				int mvmt = 1; // Mouvement à effectuer
 				
 				if ( o.pos.x + mvmt < o.t.start ) {
 					bool v = changeTerrain (false, o);
