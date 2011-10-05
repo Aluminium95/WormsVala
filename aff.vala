@@ -9,11 +9,11 @@ namespace Jeu
 		private static const int SCREEN_WIDTH = 400;
 		private static const int SCREEN_HEIGHT = 500;
 		private static const int SCREEN_BPP = 32;
-		private static const int DELAY = 103;
+		private static const int DELAY = 10;
 
 		private static unowned SDL.Screen screen;
 		private static GLib.Rand rand;
-		private static bool done;
+		public static bool done;
 		
 		public static Gerant g;
 
@@ -26,7 +26,7 @@ namespace Jeu
 			init_video ();
 
 			while (!done) {
-				// draw ();
+				screen.fill (null,0);
 				g.execute ();
 				process_events ();
 				SDL.Timer.delay (DELAY);
@@ -88,7 +88,7 @@ namespace Jeu
 			while (Event.poll (event) == 1) {
 				switch (event.type) {
 					case EventType.QUIT:
-						done = true;
+						Jeu.Aff.done = true;
 						break;
 					case EventType.KEYDOWN:
 						on_keyboard_event (event.key);
@@ -98,13 +98,7 @@ namespace Jeu
 		}
 
 		private static void on_keyboard_event (KeyboardEvent event) {
-			done = true;
-		}
-
-		private static bool is_alt_enter (Key key) {
-			return ((key.mod & KeyModifier.LALT)!=0)
-					&& (key.sym == KeySymbol.RETURN
-					|| key.sym == KeySymbol.KP_ENTER);
+			Jeu.Aff.done = true;
 		}
 	}
 }

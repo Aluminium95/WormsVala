@@ -9,7 +9,7 @@ namespace Jeu
 	 */
 	public class Terrain : Object
 	{
-		public bool pencheDroite { get; private set; } // penche à droite ? ( pour simplifier les calculs )
+		public bool pencheDroite { get; protected set; } // penche à droite ? ( pour simplifier les calculs )
 	
 		public HashSet<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
 		
@@ -26,13 +26,14 @@ namespace Jeu
 		/*
 		 * Crée le terrain
 		 */
-		public Terrain (int l, int d, int g)
+		public Terrain (int l, int g, int d)
 		{
 			this.largeur = l;
 			this.hd = d;
 			this.hg = g;
 			
 			this.pencheDroite = ( hg > hd ) ? true : false;
+			stdout.printf (pencheDroite.to_string ());
 
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}
@@ -46,9 +47,10 @@ namespace Jeu
 		{
 			if ( pencheDroite )
 			{
-				return (int) x * ( hg - hd ) / largeur + hd;
+				// return (int) x * ( hg - hd ) / largeur + hd;
+				return (int) (x * ( hg - hd ) / largeur + hg);
 			} else {
-				return (int) x * ( hd - hg ) / largeur + hg;
+				return (int) (x * ( hd - hg ) / largeur + hg);
 			}
 		}
 		
@@ -61,11 +63,6 @@ namespace Jeu
 				return (int) ( hd - hg ) * x / largeur; 
 			}
 		}
-		
-		/*
-		 * Envoie un signal de changement de terrain
-		 */
-		public signal void changeTerrain (bool droite, Objet o);
 		
 		/*
 		 * Signal de changement d'inclinaison ( terrains mouvants, on sait jamais )
@@ -94,23 +91,7 @@ namespace Jeu
 			 * Code d'ajout sécurisé 
 			 */
 			objets.add (o);
-		}
-		
-		/*
-		 * Execute les IA & Objets dans le terrain
-		 */
-		public void execute ()
-		{
-			foreach ( var o in objets )
-			{
-				Jeu.Aff.draw_objet (o);
-				o.move (1);
-				if ( o.pos.x < this.start ) {
-					changeTerrain (true, o);
-				} else if ( o.pos.x > this.start + this.largeur ) {
-					changeTerrain (false, o);
-				}
-			}
+			o.t = this;
 		}
 	}
 }

@@ -35,7 +35,7 @@ namespace Jeu
 			this.t = t;
 			
 			this.pos.x = x;
-			this.pos.y = t.getSol (x);
+			this.pos.y = t.getSol (this.pos.x);
 			
 			this.vie = vie;
 			
@@ -51,9 +51,9 @@ namespace Jeu
 		public void move ( int x )
 		{
 			this.pos.x += x;
-			this.pos.y = this.t.getSol (x);
+			this.pos.y = this.t.getSol (this.pos.x);
 			
-			this.calc_rect ();
+			// this.calc_rect (); Inutile ça marche pas !
 			
 			moved ();
 		}

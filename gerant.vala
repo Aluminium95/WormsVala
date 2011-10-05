@@ -11,6 +11,7 @@ namespace Jeu
 	public class Gerant : Object
 	{
 		private ArrayList<Terrain> listeTerrains; // Terrains
+		private HashSet<Objet> objets; // Set des objets du jeu
 
 		private int tailleTotaleTerrain = 0;
 
@@ -55,17 +56,21 @@ namespace Jeu
 		 * Assigne l'objet à un terrain
 		 * en fonction des positions de l'objet
 		 * Il faut qu'il y ai un terrain après ou avant !
+		 * Si c'est pas possible renvoie false
 		 */
-		private void assignerTerrain (Terrain t, bool d, Objet o)
+		private bool changeTerrain (bool d, Objet o)
 		{
-			if ( d && t.i < listeTerrains.size )
+			if (  d & o.t.i < listeTerrains.size - 1  )
 			{
-				// listeTerrains[t.i+1].addObjet (o);
-				t.rmObjet (o); // Supression de l'objet dans le premier terrain
-			} else if ( !d && t.i > 0 )  {
-				listeTerrains[t.i-1].addObjet (o);
-				t.rmObjet (o); // Supression de l'objet dans le premier terrain
-			}
+				stdout.printf ("Droite !\n");
+				listeTerrains[o.t.i+1].addObjet (o);
+				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
+				return true;
+			} else if ( !d && o.t.i > 0 )  {
+				listeTerrains[o.t.i-1].addObjet (o);
+				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
+				return true;
+			} else { return false; }
 		}
 		
 		/**
@@ -73,6 +78,7 @@ namespace Jeu
 		 */
 		private Terrain getTerrainPos (int x)
 		{
+			Terrain ret = listeTerrains[0];
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
 			{
 				/*
@@ -80,11 +86,10 @@ namespace Jeu
 				 */
 				if ( x >= t.start && x <= t.start + t.largeur )
 				{
-					return t;
+					ret = t;
 				}
 			}
-
-			return listeTerrains[0];
+			return ret;
 		}
 		
 		/**
@@ -93,8 +98,9 @@ namespace Jeu
 		public Gerant ()
 		{
 			listeTerrains = new ArrayList<Terrain> ();
+			objets = new HashSet<Objet> ();
 			
-			creerTerrain (5);
+			creerTerrain (3);
 			creerIA (1);
 		}
 		
@@ -115,13 +121,13 @@ namespace Jeu
 
 				var ia = new IA (x, getTerrainPos (x), 10, "Une IA");
 				
-				getTerrainPos (x).addObjet (ia);
+				addObjet (ia); // Ajoute l'objet au gérant
 				
 				stdout.printf ("New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n");
 
 				ia.dead.connect ( (o) =>
 				{
-					o.t.rmObjet (o);
+					rmObjet (o); // Supprime l'objet du gérant
 				});
 				ia.moved.connect ( (o) => 
 				{
@@ -140,10 +146,30 @@ namespace Jeu
 			for (int i = 0; i < nbr; i++)
 			{
 				var largeurTerrain = GLib.Random.int_range (40, 120);
-				var t = new Terrain (largeurTerrain, 20, 20 * i);
+				int hg = 0;
+				int hd = 0;
+				switch (i)
+				{
+					case 0:
+						hg = 10;
+						hd = 20;
+						break;
+					case 1:
+						hg = 20;
+						hd = 150;
+						break;
+					case 2:
+						hg = 30;
+						hd = 50;
+						break;
+					case 3:
+						hg = 0;
+						hd = 50;
+						break;
+				}
+				var t = new Terrain (largeurTerrain, hg, hd);
 				t.start = pos;
 				t.i = i;
-				t.changeTerrain.connect (assignerTerrain); // Gère les changements de terrain
 				listeTerrains.add (t);
 				
 				pos += largeurTerrain;
@@ -171,8 +197,33 @@ namespace Jeu
 			foreach ( Terrain t in listeTerrains )
 			{
 				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
+				Jeu.Aff.draw_terrain (t);
+			}
+			
+			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
+			{
+				Jeu.Aff.draw_objet (o);
+				int mvmt = 1; // Mouvement
 				
-				t.execute ();
+				if ( o.pos.x + mvmt < o.t.start ) {
+					bool v = changeTerrain (false, o);
+					if ( v )
+					{
+						o.move (mvmt);
+					} else {
+						Jeu.Aff.done = true;
+					}
+				} else if ( o.pos.x + mvmt > o.t.start + o.t.largeur ) {
+					bool v = changeTerrain (true, o);
+					if ( v )
+					{
+						o.move (mvmt);
+					} else {
+						Jeu.Aff.done = true;
+					}
+				} else {
+					o.move (mvmt);
+				}
 			}
 		}
 		
@@ -181,13 +232,30 @@ namespace Jeu
 		 */
 		public void kill ()
 		{
-			foreach ( var t in listeTerrains )
+			foreach ( var o in objets )
 			{
-				foreach ( var i in t.objets )
-				{
-					i.mourrir ();
-				}
+				o.mourrir ();
 			}
+		}
+		
+		/**
+		 * Ajoute un objet !
+		 * Et l'ajoute à un terrain
+		 */
+		public void addObjet (Objet o)
+		{
+			getTerrainPos (o.pos.x).addObjet (o);
+			objets.add (o);
+		}
+		
+		/**
+		 * Supprime un objet !
+		 * Et le supprime du terrain où il est
+		 */
+		public void rmObjet (Objet o)
+		{
+			o.t.rmObjet (o);
+			objets.remove (o);
 		}
 	}
 }
