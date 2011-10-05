@@ -4,12 +4,16 @@ using SDLGraphics;
 
 namespace Jeu
 {
+	/**
+	 * Gestion de l'affichage du jeu
+	 * Classe statique !
+	 */
 	public class Aff : Object {
 
-		private static const int SCREEN_WIDTH = 400;
-		private static const int SCREEN_HEIGHT = 500;
+		public static const int SCREEN_WIDTH = 400;
+		public static const int SCREEN_HEIGHT = 500;
 		private static const int SCREEN_BPP = 32;
-		private static const int DELAY = 30;
+		public static const int DELAY = 30;
 
 		private static unowned SDL.Screen screen;
 		private static GLib.Rand rand;

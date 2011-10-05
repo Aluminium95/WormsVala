@@ -150,7 +150,13 @@ namespace Jeu
 			int pos = 0;
 			for (int i = 0; i < nbr; i++)
 			{
-				var largeurTerrain = GLib.Random.int_range (40, 120);
+				int largeurTerrain;
+				if ( i == nbr - 1 )
+				{
+					largeurTerrain = Jeu.Aff.SCREEN_WIDTH - pos;
+				} else {
+					largeurTerrain = GLib.Random.int_range (0, Jeu.Aff.SCREEN_WIDTH - pos);
+				}
 				int hg = 0;
 				int hd = 0;
 				switch (i) // Config perso pour la démo
