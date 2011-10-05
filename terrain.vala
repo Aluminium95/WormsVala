@@ -3,7 +3,7 @@ using Gee;
 
 namespace Jeu
 {
-	/*
+	/**
 	 * Terrain du jeu 
 	 * 		Implémente la gestion des collisions !!!!!!!!!
 	 */
@@ -23,7 +23,7 @@ namespace Jeu
 		
 		public int hd { get; protected set; default = 0; } // Hauteur droite du terrain
 		
-		/*
+		/**
 		 * Crée le terrain
 		 */
 		public Terrain (int l, int g, int d)
@@ -38,7 +38,7 @@ namespace Jeu
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}
 		
-		/*
+		/**
 		 * Retourne la hauteur du sol
 		 * 		Prendre en compte la « superposition d'objets » !!!!
 		 * 		Faire une gestion des collisions !
@@ -64,34 +64,34 @@ namespace Jeu
 			}
 		}
 		
-		/*
+		/**
 		 * Signal de changement d'inclinaison ( terrains mouvants, on sait jamais )
 		 * Ceci n'est normalement pas nécessaire !
 		 */
 		public signal void changeInclinaison ();
 		
-		/*
+		/**
 		 * Retire un objet du terrain
 		 * !!! FAIRE UN THROW D'ERREUR !!!
 		 */
 		public void rmObjet (Objet o)
 		{
-			/*
+			/**
 			 * Code de retirage sécurisé
 			 */
 			objets.remove (o);
 		}
 		
-		/*
+		/**
 		 * Ajoute un objet au terrain
 		 */
 		public void addObjet (Objet o)
 		{
-			/*
+			/**
 			 * Code d'ajout sécurisé 
 			 */
 			objets.add (o);
-			o.t = this;
+			o.t = this; // On change la référence du terrain dans l'objet
 		}
 	}
 }

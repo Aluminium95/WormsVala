@@ -148,7 +148,7 @@ namespace Jeu
 				var largeurTerrain = GLib.Random.int_range (40, 120);
 				int hg = 0;
 				int hd = 0;
-				switch (i)
+				switch (i) // Config perso pour la démo
 				{
 					case 0:
 						hg = 10;
@@ -228,7 +228,7 @@ namespace Jeu
 		}
 		
 		/**
-		 * Tue toutes les IA 
+		 * Tue tous les objets du jeu
 		 */
 		public void kill ()
 		{
@@ -240,7 +240,7 @@ namespace Jeu
 		
 		/**
 		 * Ajoute un objet !
-		 * Et l'ajoute à un terrain
+		 * Et l'ajoute à un terrain du jeu
 		 */
 		public void addObjet (Objet o)
 		{
