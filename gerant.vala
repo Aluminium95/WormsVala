@@ -32,6 +32,8 @@ namespace Jeu
 			Jeu.Son.play (Jeu.note.B);
 			
 			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i; // On regarde dans les terrains alentours
+			t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
+			
 			for (int i = 0; i < 3; i++) // On fait trois fois 
 			{
 				foreach ( var pers in listeTerrains[t].objets ) // pour chaque objet du terrain
@@ -204,6 +206,9 @@ namespace Jeu
 				Jeu.Aff.draw_objet (o); // Affiche l'objet
 				int mvmt = 1; // Mouvement à effectuer
 				
+				/*
+				 * Conditions de sortie du terrain
+				 */
 				if ( o.pos.x + mvmt < o.t.start ) {
 					bool v = changeTerrain (false, o);
 					if ( v )
@@ -223,6 +228,23 @@ namespace Jeu
 				} else {
 					o.move (mvmt);
 				}
+				/*
+				 * Gestion des collisions 
+				 */
+				int t = ( o.t.i != 0 ) ? o.t.i - 1 : o.t.i;
+				t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
+				
+				for ( t; t < t + 3; t++)
+				{
+					foreach ( var ia in listeTerrains[i].objets )
+					{
+						/*
+						 * Gestion des collisions de cercles 
+						 */
+						if ( 
+					}
+				}
+				
 			}
 			
 			foreach ( Terrain t in listeTerrains )
