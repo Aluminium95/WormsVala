@@ -206,27 +206,18 @@ namespace Jeu
 				Jeu.Aff.draw_objet (o); // Affiche l'objet
 				int mvmt = 1; // Mouvement à effectuer
 				
+				bool sortDuJeu;
 				/*
 				 * Conditions de sortie du terrain
 				 */
 				if ( o.pos.x + mvmt < o.t.start ) {
 					bool v = changeTerrain (false, o);
-					if ( v )
-					{
-						o.move (mvmt);
-					} else {
-						Jeu.Aff.done = true;
-					}
+					sortDuJeu = !v;
 				} else if ( o.pos.x + mvmt > o.t.start + o.t.largeur ) {
 					bool v = changeTerrain (true, o);
-					if ( v )
-					{
-						o.move (mvmt);
-					} else {
-						Jeu.Aff.done = true;
-					}
+					sortDuJeu = !v;
 				} else {
-					o.move (mvmt);
+					sortDuJeu = false;
 				}
 				/*
 				 * Gestion des collisions 
@@ -245,6 +236,10 @@ namespace Jeu
 					}
 				}
 				
+				if ( sortDuJeu )
+				{
+					Jeu.Aff.done = true;
+				}
 			}
 			
 			foreach ( Terrain t in listeTerrains )
