@@ -7,8 +7,6 @@ namespace Jeu
 	 */
 	public class Personnage : Objet
 	{
-		
-		protected Mouvement m; // Mouvement effectué
 		protected Strategie s; // Stratégie
 		
 		public Arme armeActuelle { get; protected set; } // Arme en main

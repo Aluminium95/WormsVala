@@ -12,6 +12,14 @@ namespace Jeu
 	{
 		private ArrayList<Terrain> listeTerrains; // Terrains
 		private HashSet<Objet> objets; // Set des objets du jeu
+		
+		/*
+		 * Variables environnement 
+		 */
+		public float gravity;
+		public float air_res;
+		public float wind;
+		public float friction;
 
 		private int tailleTotaleTerrain = 0;
 
@@ -101,10 +109,15 @@ namespace Jeu
 			listeTerrains = new ArrayList<Terrain> ();
 			objets = new HashSet<Objet> ();
 			
+			this.gravity = 9.8f;
+			this.air_res = 0.05f;
+			this.wind = 0.2f;
+			this.friction = 0.03f;
+			
 			/*
 			 * Appel des fonctions créatrices 
 			 */
-			creerTerrain (30);
+			creerTerrain (10);
 			creerIA (1);
 		}
 		
@@ -150,7 +163,7 @@ namespace Jeu
 		private void creerTerrain (int nbr)
 		{
 			int pos = 0;
-			int prevHeight = (int) Jeu.Aff.SCREEN_HEIGHT / 2;
+			int prevHeight = (int) Jeu.Aff.SCREEN_HEIGHT / 4;
 			int width = (int) Jeu.Aff.SCREEN_WIDTH / nbr;
 			
 			for (int i = 0; i < nbr; i++)
@@ -204,29 +217,30 @@ namespace Jeu
 			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
 			{
 				Jeu.Aff.draw_objet (o); // Affiche l'objet
-				int mvmt = 1; // Mouvement à effectuer
-				int mvmty = 0; // Mouvement Y ( si saute )
+				
+				o.calcVel (this.air_res);
 				
 				bool sortDuJeu;
 				/*
 				 * Conditions de sortie du terrain
 				 */
-				if ( o.pos.x + mvmt < o.t.start ) {
+				if ( o.pos.x + o.velx < o.t.start ) {
 					bool v = changeTerrain (false, o);
 					sortDuJeu = !v;
-				} else if ( o.pos.x + mvmt > o.t.start + o.t.largeur ) {
+				} else if ( o.pos.x + o.velx > o.t.start + o.t.largeur ) {
 					bool v = changeTerrain (true, o);
 					sortDuJeu = !v;
 				} else {
 					sortDuJeu = false;
 				}
+				
 				/*
 				 * Gestion des collisions 
 				 */
 				int t = ( o.t.i != 0 ) ? o.t.i - 1 : o.t.i;
-				t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
+				t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
 				
-				for ( t; t < t + 3; t++)
+				for (int i = 0; i <  3; i++)
 				{
 					foreach ( var ia in listeTerrains[i].objets )
 					{
@@ -236,9 +250,18 @@ namespace Jeu
 						 * 		faire rebondir + break !
 						 */
 					}
+					t++;
 				}
 				
-				if ( sortDuJeu )
+				if ( sortDuJeu ) // Si on sort du jeu
+				{
+					// Jeu.Aff.done = true;
+					o.rebondirx ();
+				} else {
+					o.move ((int)o.velx); // Pas de y !!!
+				}
+				
+				if ( o.velx < 1 && o.velx > -1)
 				{
 					Jeu.Aff.done = true;
 				}

@@ -7,7 +7,7 @@ namespace Jeu
 	 */
 	public enum Mouvement
 	{
-		SAUT, CHUTE, MARCHE, VOLE
+		SAUT, MARCHE, VOLE
 	}
 	
 	/*

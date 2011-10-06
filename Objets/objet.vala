@@ -11,6 +11,11 @@ namespace Jeu
 	{
 		public int l; // Largeur
 		public int h; // Hauteur
+		
+		public float velx;
+		public float vely;
+		public float accelx;
+		public float accely;
 
 		public TuplePos pos; // Point en bas à gauche ( départ )
 		public TuplePos pos_gh; // Point en haut à gauche
@@ -19,9 +24,11 @@ namespace Jeu
 
 		public TuplePos dim; // Dimensions de l'objet
 		
-		public Terrain t; // Mmmh, on pourrait pas plutôt faire que le terrain fasse ça lui même !?
+		public unowned Terrain t; // Mmmh, on pourrait pas plutôt faire que le terrain fasse ça lui même !?
 		
 		public string name; // Oh pourquoi pas !!
+		
+		public Mouvement m; // Mouvement 
 		
 		public Type type; // Visiblement … sert à rien … ( déjà implémenté dans une classe par défaut )
 		
@@ -37,6 +44,12 @@ namespace Jeu
 			this.pos.x = x;
 			this.pos.y = t.getSol (this.pos.x);
 			
+			this.velx = 5;
+			this.vely = 5;
+			
+			this.accelx = 0.2f;
+			this.accely = 0.2f;
+			
 			this.vie = vie;
 			
 			this.dim.x = l;
@@ -51,6 +64,17 @@ namespace Jeu
 		public void move ( int x )
 		{
 			this.pos.x += x;
+			
+			if ( this.m == Mouvement.SAUT)
+			{
+				if ( this.pos.x + (int) this.vely >= this.t.getSol (this.pos.x) )
+				{
+					this.pos.y += (int) this.vely;
+				} else {
+					this.pos.y = this.t.getSol (this.pos.x);
+					this.m = Mouvement.MARCHE;
+				}
+			}
 			this.pos.y = this.t.getSol (this.pos.x);
 			
 			// this.calc_rect (); Inutile ça marche pas !
@@ -117,6 +141,38 @@ namespace Jeu
 		protected void calc_dh ()
 		{
 			
+		}
+		
+		/**
+		 * Rebondit en Y
+		 */
+		public void rebondiry ()
+		{
+			this.vely *= -1 * 2;
+			this.accely *= -10;
+		}
+		
+		/**
+		 * Rebondit en X
+		 */
+		public void rebondirx ()
+		{
+			this.velx *= -1 * 2;
+			this.accelx *= -10;
+		}
+		
+		/**
+		 * Calcule de la vélocité 
+		 */
+		public void calcVel (float res)
+		{
+			this.velx += this.accelx;
+			this.velx += ( this.velx < 0 ) ? res : -res;
+			this.vely += this.accely;
+			this.vely += ( this.vely < 0 ) ? res : -res;
+			
+			this.accely -= ( this.accely > 0 ) ? 0.01f : 0;
+			this.accelx -= ( this.accelx > 0 ) ? 0.01f : 0;
 		}
 	}
 }
