@@ -205,6 +205,7 @@ namespace Jeu
 			{
 				Jeu.Aff.draw_objet (o); // Affiche l'objet
 				int mvmt = 1; // Mouvement à effectuer
+				int mvmty = 0; // Mouvement Y ( si saute )
 				
 				bool sortDuJeu;
 				/*
@@ -231,8 +232,9 @@ namespace Jeu
 					{
 						/*
 						 * Gestion des collisions de cercles 
+						 * if ( … )
+						 * 		faire rebondir + break !
 						 */
-						if ( 
 					}
 				}
 				
