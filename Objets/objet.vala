@@ -19,6 +19,8 @@ namespace Jeu
 		public float accelx;
 		public float accely;
 		
+		public int32 col;
+		
 		public int i; // Id ( très moche !!! )
 
 		public TuplePos pos; // Point en bas à gauche ( départ )

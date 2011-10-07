@@ -66,7 +66,7 @@ namespace Jeu
 		
 		public static void draw_objet (Objet o)
 		{
-			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0x004AFF);
+			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, o.col);
 			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0xFFFFFFF);
 		}
 		

@@ -144,6 +144,13 @@ namespace Jeu
 				
 				ia.i = i;
 				
+				if ( i % 2 == 0)
+				{
+					ia.col = 0x000FFFF * (i + 60) * 5;
+				} else {
+					ia.col = 0xFFF0000 * (i + 60) * 5;
+				}
+				
 				stdout.printf ("New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n");
 				
 				if ( i % 2 == 0 )
@@ -160,7 +167,8 @@ namespace Jeu
 				});
 				ia.moved.connect ( (o) => 
 				{
-					stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); \n");
+					stdout.printf (
+					o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); :: " + o.t.i.to_string () + "\n");
 				});
 				ia.frapper.connect(joueurFrappe);
 			}
@@ -230,6 +238,9 @@ namespace Jeu
 				o.calcVel (this.air_res);
 				
 				bool sortDuJeu;
+				
+				collision (o);
+				
 				/*
 				 * Conditions de sortie du terrain
 				 */
@@ -242,8 +253,6 @@ namespace Jeu
 				} else {
 					sortDuJeu = false;
 				}
-				
-				collision (o);
 				
 				if ( sortDuJeu ) // Si on sort du jeu
 				{
@@ -300,15 +309,22 @@ namespace Jeu
 			/*
 			 * Gestion des collisions 
 			 */
-			int t = ( o.t.i != 0 ) ? o.t.i - 1 : o.t.i;
-			t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
-			
-			for (int i = 0; i <  3; i++)
+			int t;
+			if ( o.t.i == 0 ) // Si c'est le premier terrain
 			{
-				bool b = false;
-				foreach ( var ia in listeTerrains[i].objets )
+				t = o.t.i;
+			} else if ( o.t.i == listeTerrains.size -1 ) {
+				// Si c'est le dernier terrain 
+				t = o.t.i - 2;
+			} else {
+				t = o.t.i - 1; // si c'est un terrain normal
+			}
+			
+			for (int i = 0; i < 3; i++)
+			{
+				foreach ( var ia in listeTerrains[t].objets )
 				{
-					if ( o.i != ia.i )
+					if ( o.i != ia.i ) // Pas lui même !
 					{
 						int x = o.pos.x - ia.pos.x;
 						int y = o.pos.y - ia.pos.y;
@@ -316,16 +332,10 @@ namespace Jeu
 						stdout.printf (d.to_string () + "\n");
 						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 						{
-							stdout.printf ("Collision !\n");
-							ia.velx = 0;
-							o.velx = 0;
-							//o.rebondirx (); // Mauvais Manque des conditions
-							//ia.rebondirx ();
+							o.rebondirx (); // Mauvais Manque des conditions
+							
 							// o.rebondiry (); // pour gérer les différentes réacs
-							b = true;
-							break;
 						}
-						if (b) { break; }
 					}
 				}
 				t++;
