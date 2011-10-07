@@ -12,10 +12,14 @@ namespace Jeu
 		public int l; // Largeur
 		public int h; // Hauteur
 		
+		public int r; // Rayon ( temporaire … avant d'utiliser des rectangles ! )
+		
 		public float velx;
 		public float vely;
 		public float accelx;
 		public float accely;
+		
+		public int i; // Id ( très moche !!! )
 
 		public TuplePos pos; // Point en bas à gauche ( départ )
 		public TuplePos pos_gh; // Point en haut à gauche
@@ -44,11 +48,11 @@ namespace Jeu
 			this.pos.x = x;
 			this.pos.y = t.getSol (this.pos.x);
 			
-			this.velx = 5;
-			this.vely = 5;
+			this.velx = 4;
+			this.vely = 4;
 			
-			this.accelx = 0.2f;
-			this.accely = 0.2f;
+			this.accelx = 0f;
+			this.accely = 0f;
 			
 			this.vie = vie;
 			
@@ -148,8 +152,7 @@ namespace Jeu
 		 */
 		public void rebondiry ()
 		{
-			this.vely *= -1 * 2;
-			this.accely *= -10;
+			this.vely *= -1;
 		}
 		
 		/**
@@ -157,8 +160,8 @@ namespace Jeu
 		 */
 		public void rebondirx ()
 		{
-			this.velx *= -1 * 2;
-			this.accelx *= -10;
+			this.velx += ( this.velx < 0 ) ? -1 : 1;
+			this.velx *= -1;
 		}
 		
 		/**
@@ -170,9 +173,6 @@ namespace Jeu
 			this.velx += ( this.velx < 0 ) ? res : -res;
 			this.vely += this.accely;
 			this.vely += ( this.vely < 0 ) ? res : -res;
-			
-			this.accely -= ( this.accely > 0 ) ? 0.01f : 0;
-			this.accelx -= ( this.accelx > 0 ) ? 0.01f : 0;
 		}
 	}
 }

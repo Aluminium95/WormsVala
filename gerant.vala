@@ -118,7 +118,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (1);
+			creerIA (2);
 		}
 		
 		/**
@@ -140,7 +140,16 @@ namespace Jeu
 				
 				addObjet (ia); // Ajoute l'objet au gérant
 				
+				ia.r = 10;
+				
+				ia.i = i;
+				
 				stdout.printf ("New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n");
+				
+				if ( i % 2 == 0 )
+				{
+					ia.rebondirx ();
+				}
 				
 				/*
 				 * Connection des signaux 
@@ -234,24 +243,7 @@ namespace Jeu
 					sortDuJeu = false;
 				}
 				
-				/*
-				 * Gestion des collisions 
-				 */
-				int t = ( o.t.i != 0 ) ? o.t.i - 1 : o.t.i;
-				t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
-				
-				for (int i = 0; i <  3; i++)
-				{
-					foreach ( var ia in listeTerrains[i].objets )
-					{
-						/*
-						 * Gestion des collisions de cercles 
-						 * if ( … )
-						 * 		faire rebondir + break !
-						 */
-					}
-					t++;
-				}
+				collision (o);
 				
 				if ( sortDuJeu ) // Si on sort du jeu
 				{
@@ -259,11 +251,6 @@ namespace Jeu
 					o.rebondirx ();
 				} else {
 					o.move ((int)o.velx); // Pas de y !!!
-				}
-				
-				if ( o.velx < 1 && o.velx > -1)
-				{
-					Jeu.Aff.done = true;
 				}
 			}
 			
@@ -303,6 +290,46 @@ namespace Jeu
 		{
 			o.t.rmObjet (o);
 			objets.remove (o);
+		}
+		
+		/**
+		 * Get les collisions de l'objet o 
+		 */
+		public void collision (Objet o)
+		{
+			/*
+			 * Gestion des collisions 
+			 */
+			int t = ( o.t.i != 0 ) ? o.t.i - 1 : o.t.i;
+			t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
+			
+			for (int i = 0; i <  3; i++)
+			{
+				bool b = false;
+				foreach ( var ia in listeTerrains[i].objets )
+				{
+					if ( o.i != ia.i )
+					{
+						int x = o.pos.x - ia.pos.x;
+						int y = o.pos.y - ia.pos.y;
+						int d = x*x + y*y;
+						stdout.printf (d.to_string () + "\n");
+						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
+						{
+							stdout.printf ("Collision !\n");
+							ia.velx = 0;
+							o.velx = 0;
+							//o.rebondirx (); // Mauvais Manque des conditions
+							//ia.rebondirx ();
+							// o.rebondiry (); // pour gérer les différentes réacs
+							b = true;
+							break;
+						}
+						if (b) { break; }
+					}
+				}
+				t++;
+			}
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Jeu
 		public static const int SCREEN_WIDTH = 600;
 		public static const int SCREEN_HEIGHT = 400;
 		private static const int SCREEN_BPP = 32;
-		public static const int DELAY = 30;
+		public static const int DELAY = 100;
 		
 		private static bool[] keysHeld = new bool[323]; // Entrées clavier
 
@@ -66,8 +66,8 @@ namespace Jeu
 		
 		public static void draw_objet (Objet o)
 		{
-			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 0x004AFF);
-			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), 10, 0xFFFFFFF);
+			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0x004AFF);
+			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0xFFFFFFF);
 		}
 		
 		public static void draw_terrain (Terrain t)
