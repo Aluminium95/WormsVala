@@ -37,8 +37,6 @@ namespace Jeu
 		 */
 		private void joueurFrappe (Personnage p)
 		{
-			Jeu.Son.play (Jeu.note.B);
-			
 			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i; // On regarde dans les terrains alentours
 			t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
 			
@@ -68,12 +66,12 @@ namespace Jeu
 		{
 			if (  d & o.t.i < listeTerrains.size - 1  ) // Si c'est pas le dernier terrain
 			{
-				listeTerrains[o.t.i+1].addObjet (o);
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
+				listeTerrains[o.t.i+1].addObjet (o);
 				return true;
 			} else if ( !d && o.t.i > 0 )  {
+				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i-1].addObjet (o);
-				o.t.rmObjet (o);
 				return true;
 			} else { return false; } // Si on peut pas changer de terrain
 		}
@@ -118,7 +116,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (2);
+			creerIA (1);
 		}
 		
 		/**
@@ -167,8 +165,7 @@ namespace Jeu
 				});
 				ia.moved.connect ( (o) => 
 				{
-					stdout.printf (
-					o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); :: " + o.t.i.to_string () + "\n");
+					// stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); :: " + o.t.i.to_string () + "\n");
 				});
 				ia.frapper.connect(joueurFrappe);
 			}
@@ -229,7 +226,12 @@ namespace Jeu
 		 */
 		public void execute ()
 		{
-			
+			Jeu.Aff.draw ();
+			foreach ( Terrain t in listeTerrains )
+			{
+				Jeu.Aff.draw_terrain (t);
+				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
+			}
 			
 			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
 			{
@@ -256,17 +258,13 @@ namespace Jeu
 				
 				if ( sortDuJeu ) // Si on sort du jeu
 				{
-					// Jeu.Aff.done = true;
+					//Jeu.Aff.done = true;
 					o.rebondirx ();
 				} else {
 					o.move ((int)o.velx); // Pas de y !!!
 				}
-			}
-			
-			foreach ( Terrain t in listeTerrains )
-			{
-				Jeu.Aff.draw_terrain (t);
-				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
+
+				if ( o.velx  < 0.01 && o.velx > -0.01 ) { Jeu.Aff.done = true; } // Temporaire
 			}
 		}
 		
@@ -329,8 +327,7 @@ namespace Jeu
 						int x = o.pos.x - ia.pos.x;
 						int y = o.pos.y - ia.pos.y;
 						int d = x*x + y*y;
-						stdout.printf (d.to_string () + "\n");
-						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
+						if ( GLib.Math.sqrt (d) <= o.r+ia.r )
 						{
 							o.rebondirx (); // Mauvais Manque des conditions
 							
