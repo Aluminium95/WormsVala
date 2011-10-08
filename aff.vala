@@ -13,7 +13,7 @@ namespace Jeu
 		public static const int SCREEN_WIDTH = 800;
 		public static const int SCREEN_HEIGHT = 400;
 		private static const int SCREEN_BPP = 32;
-		public static const int DELAY = 20;
+		public static const int DELAY = 60;
 
 		private static unowned SDL.Screen screen;
 		

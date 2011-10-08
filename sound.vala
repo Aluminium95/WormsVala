@@ -17,7 +17,7 @@ namespace Jeu
 			chans = {};
 			sons = {};
 			
-			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.mp3");
+			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.ogg");
 			music.volume (50);
 		}
 		
@@ -40,6 +40,16 @@ namespace Jeu
 			sons += new Chunk.WAV (src);
 			// sons[-1].volume (vol); FAIT BUGGER L'ÉXÉCUTION 
 			return sons.length - 1;
+		}
+		
+		public void setChannelVolume (int chan, int vol)
+		{
+			chans[chan].volume (vol);
+		}
+		
+		public void setSonVolume (int son, int vol)
+		{
+			sons[son].volume (vol);
 		}
 	}
 }

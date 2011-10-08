@@ -68,10 +68,12 @@ namespace Jeu
 			{
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i+1].addObjet (o);
+				Jeu.Aff.son.play (2,2);
 				return true;
 			} else if ( !d && o.t.i > 0 )  {
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i-1].addObjet (o);
+				Jeu.Aff.son.play (2,2);
 				return true;
 			} else { return false; } // Si on peut pas changer de terrain
 		}
@@ -116,7 +118,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (1);
+			creerIA (2);
 			
 			creerCannaux (3);
 			creerSons ();
@@ -263,7 +265,7 @@ namespace Jeu
 				{
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
-					Jeu.Aff.son.play (0,0);
+					Jeu.Aff.son.play (1,1);
 				} else {
 					o.move ((int)o.velx); // Pas de y !!!
 				}
@@ -355,8 +357,8 @@ namespace Jeu
 		private void creerSons ()
 		{
 			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/hit.ogg");
-			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/bordure.ogg");
 			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/terrain.ogg");
+			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/bordure.ogg");
 		}
 		
 		private void creerCannaux (int nbr)
@@ -365,6 +367,9 @@ namespace Jeu
 			{
 				Jeu.Aff.son.addChannel ();
 			}
+			Jeu.Aff.son.setChannelVolume (0, 25);
+			Jeu.Aff.son.setChannelVolume (2, 50);
+			Jeu.Aff.son.setChannelVolume (3, 120);
 		}
 	}
 }
