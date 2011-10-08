@@ -21,6 +21,10 @@ namespace Jeu
 		
 		public int hd { get; protected set; default = 0; } // Hauteur droite du terrain
 		
+		public float accelx { get; protected set; }
+		
+		public float accely { get; protected set; }
+		
 		/**
 		 * Crée le terrain
 		 */
@@ -29,6 +33,9 @@ namespace Jeu
 			this.largeur = l;
 			this.hd = d;
 			this.hg = g;
+			
+			this.accelx = ( hg - hd ) / (largeur+2);
+			this.accely = 0;
 			
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}

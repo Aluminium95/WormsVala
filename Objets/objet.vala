@@ -50,8 +50,8 @@ namespace Jeu
 			this.pos.x = x;
 			this.pos.y = t.getSol (this.pos.x);
 			
-			this.velx = 4;
-			this.vely = 4;
+			this.velx = 10;
+			this.vely = 5;
 			
 			this.accelx = 0f;
 			this.accely = 0f;
@@ -100,7 +100,6 @@ namespace Jeu
 			{
 				this.vie -= v;
 			}
-			Jeu.Son.play (Jeu.note.A);
 		}
 
 		/**
@@ -162,8 +161,14 @@ namespace Jeu
 		 */
 		public void rebondirx ()
 		{
-			this.velx += ( this.velx < 0 ) ? -1 : 1;
-			this.velx *= -1;
+			/* Si on a pas de vitesse, on en ajoute un peu */
+			if ( this.velx < 0 )
+			{
+				this.velx += ( this.velx > -1 ) ? -1 : 0;
+			} else {
+				this.velx += ( this.velx < 1 ) ? 1 : 0;
+			}
+			this.velx *= -1; // on multiplie par -1
 		}
 		
 		/**
@@ -171,9 +176,9 @@ namespace Jeu
 		 */
 		public void calcVel (float res)
 		{
-			this.velx += this.accelx;
-			this.velx += ( this.velx < 0 ) ? res : -res;
-			this.vely += this.accely;
+			this.velx += this.t.accelx;
+			//this.velx += ( this.velx < 0 ) ? res : -res;
+			this.vely += this.t.accely;
 			this.vely += ( this.vely < 0 ) ? res : -res;
 		}
 	}
