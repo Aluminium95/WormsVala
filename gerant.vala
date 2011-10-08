@@ -116,7 +116,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (1);
+			creerIA (3);
 		}
 		
 		/**
@@ -327,10 +327,18 @@ namespace Jeu
 						int x = o.pos.x - ia.pos.x;
 						int y = o.pos.y - ia.pos.y;
 						int d = x*x + y*y;
+						
 						if ( GLib.Math.sqrt (d) <= o.r+ia.r )
 						{
 							o.rebondirx (); // Mauvais Manque des conditions
-							
+							if ( GLib.Math.fabsf (ia.velx) > GLib.Math.fabsf (o.velx) )
+							{
+								o.velx += ( o.velx < 0 ) ? - GLib.Math.fabsf (ia.velx / 2) : GLib.Math.fabsf (ia.velx / 2);
+								ia.velx /= 2;
+							} else {
+								ia.velx += ( ia.velx < 0 ) ? - GLib.Math.fabsf (o.velx / 2) : GLib.Math.fabsf (o.velx / 2);
+								o.velx /= 2;
+							}
 							// o.rebondiry (); // pour gérer les différentes réacs
 						}
 					}

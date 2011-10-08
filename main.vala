@@ -5,7 +5,7 @@ using SDLMixer;
 
 void main (string[] args)
 {
-	SDL.init (InitFlag.VIDEO);
+	SDL.init (InitFlag.VIDEO | InitFlag.AUDIO);
 	SDLMixer.open (44100, 0, 2, 1024);
 	SDLMixer.Channel.allocate (1);
 	

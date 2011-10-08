@@ -14,7 +14,7 @@ namespace Jeu
 		public static const int SCREEN_WIDTH = 800;
 		public static const int SCREEN_HEIGHT = 400;
 		private static const int SCREEN_BPP = 32;
-		public static const int DELAY = 10;
+		public static const int DELAY = 20;
 
 		private static unowned SDL.Screen screen;
 		
@@ -23,6 +23,8 @@ namespace Jeu
 		private static Music music;
 		
 		private static Channel chan;
+		
+		private static Chunk c;
 		
 		private static GLib.Rand rand;
 		
@@ -33,22 +35,23 @@ namespace Jeu
 		public static void init () {
 			rand = new GLib.Rand ();
 			g = new Gerant ();
-			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.ogg");
-			chan.volume (100);
+			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.wav");
+			// chan.volume (100);
+			SDL.RWops hit = new SDL.RWops.from_file ("mus.wav", "music");
+			c = new Chunk.WAV (hit);
 		}
 
 		public static void run () {
 			init_video ();
 			music.play (-1);
+			
 			while (!done) {
+				// chan.play (c,1);
 				screen.fill (null,5468);
 				g.execute ();
 				process_events ();
 				screen.flip ();
 				SDL.Timer.delay (DELAY);
-				SDL.RWops hit = new SDL.RWops.from_file ("mus.ogg", "ogg");
-				Chunk c = new Chunk.WAV (hit);
-				chan.play (c,1);
 			}
 		}
 

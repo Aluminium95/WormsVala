@@ -34,7 +34,7 @@ namespace Jeu
 			this.hd = d;
 			this.hg = g;
 			
-			this.accelx = ( hg - hd ) / largeur;
+			this.accelx = ( hg - hd ) / largeur * 2;
 			this.accely = 0;
 			
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
