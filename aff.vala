@@ -1,7 +1,6 @@
 using GLib;
 using SDL; // Écran
 using SDLGraphics; // Géométrie
-using SDLMixer; // Son
 
 namespace Jeu
 {
@@ -20,33 +19,28 @@ namespace Jeu
 		
 		private static SDL.Surface surf;
 		
-		private static Music music;
-		
-		private static Channel chan;
-		
-		private static Chunk c;
-		
 		private static GLib.Rand rand;
+		
+		public static Son son;
 		
 		public static bool done;
 		
 		public static Gerant g;
 
 		public static void init () {
-			rand = new GLib.Rand ();
+			son = new Son ();
+			rand = new GLib.Rand ();			
 			g = new Gerant ();
-			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.wav");
-			// chan.volume (100);
-			SDL.RWops hit = new SDL.RWops.from_file ("mus.wav", "music");
-			c = new Chunk.WAV (hit);
 		}
 
 		public static void run () {
 			init_video ();
-			music.play (-1);
+			
+			son.music.volume (25);
+			son.music.play (-1);
 			
 			while (!done) {
-				// chan.play (c,1);
+				
 				screen.fill (null,5468);
 				g.execute ();
 				process_events ();
@@ -66,7 +60,7 @@ namespace Jeu
 				stderr.printf ("Could not set video mode.\n");
 			}
 
-			SDL.WindowManager.set_caption ("Un super jeu en SDL", "");
+			SDL.WindowManager.set_caption ("MégaWorm", "");
 		
 			surf = new SDL.Surface.RGB (video_flags, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, 0,0,0,0);
 		}

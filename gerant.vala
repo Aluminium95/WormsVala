@@ -116,7 +116,10 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (3);
+			creerIA (1);
+			
+			creerCannaux (3);
+			creerSons ();
 		}
 		
 		/**
@@ -260,6 +263,7 @@ namespace Jeu
 				{
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
+					Jeu.Aff.son.play (0,0);
 				} else {
 					o.move ((int)o.velx); // Pas de y !!!
 				}
@@ -330,6 +334,7 @@ namespace Jeu
 						
 						if ( GLib.Math.sqrt (d) <= o.r+ia.r )
 						{
+							Jeu.Aff.son.play (0,0);
 							o.rebondirx (); // Mauvais Manque des conditions
 							if ( GLib.Math.fabsf (ia.velx) > GLib.Math.fabsf (o.velx) )
 							{
@@ -344,6 +349,21 @@ namespace Jeu
 					}
 				}
 				t++;
+			}
+		}
+		
+		private void creerSons ()
+		{
+			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/hit.ogg");
+			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/bordure.ogg");
+			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/terrain.ogg");
+		}
+		
+		private void creerCannaux (int nbr)
+		{
+			for ( int i = 0; i < nbr; i++ )
+			{
+				Jeu.Aff.son.addChannel ();
 			}
 		}
 	}
