@@ -22,7 +22,7 @@ namespace Jeu
 		
 		private static Music music;
 		
-		private static Channel channel;
+		private static Channel chan;
 		
 		private static GLib.Rand rand;
 		
@@ -34,7 +34,7 @@ namespace Jeu
 			rand = new GLib.Rand ();
 			g = new Gerant ();
 			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.ogg");
-			
+			chan.volume (100);
 		}
 
 		public static void run () {
@@ -46,11 +46,9 @@ namespace Jeu
 				process_events ();
 				screen.flip ();
 				SDL.Timer.delay (DELAY);
-				SDL.RWops hit = new SDL.RWops.from_file ("hit.ogg", "rw");
+				SDL.RWops hit = new SDL.RWops.from_file ("mus.ogg", "ogg");
 				Chunk c = new Chunk.WAV (hit);
-				c.volume (100);
-				channel.volume (100);
-				channel.play (c, 1);
+				chan.play (c,1);
 			}
 		}
 

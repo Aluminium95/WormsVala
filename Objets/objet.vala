@@ -162,12 +162,12 @@ namespace Jeu
 		public void rebondirx ()
 		{
 			/* Si on a pas de vitesse, on en ajoute un peu */
-			if ( this.velx < 0 )
+			/*if ( this.velx < 0 )
 			{
 				this.velx += ( this.velx > -1 ) ? -1 : 0;
 			} else {
 				this.velx += ( this.velx < 1 ) ? 1 : 0;
-			}
+			}*/
 			this.velx *= -1; // on multiplie par -1
 		}
 		
