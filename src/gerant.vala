@@ -118,7 +118,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (2);
+			creerIA (1);
 			
 			creerCannaux (3);
 			creerSons ();
@@ -334,7 +334,7 @@ namespace Jeu
 						int y = o.pos.y - ia.pos.y;
 						int d = x*x + y*y;
 						
-						if ( GLib.Math.sqrt (d) <= o.r+ia.r )
+						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 						{
 							Jeu.Aff.son.play (0,0);
 							o.rebondirx (); // Mauvais Manque des conditions
@@ -356,9 +356,9 @@ namespace Jeu
 		
 		private void creerSons ()
 		{
-			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/hit.ogg");
-			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/terrain.ogg");
-			Jeu.Aff.son.addSon ("/home/aluminium95/Code/Vala/jeu/bordure.ogg");
+			Jeu.Aff.son.addSon ("/home/aluminium95/code/Vala/WormsVala/hit.ogg");
+			Jeu.Aff.son.addSon ("/home/aluminium95/code/Vala/WormsVala/terrain.ogg");
+			Jeu.Aff.son.addSon ("/home/aluminium95/code/Vala/WormsVala/bordure.ogg");
 		}
 		
 		private void creerCannaux (int nbr)

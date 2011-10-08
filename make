@@ -1,3 +1,30 @@
 #! /bin/bash
 
-valac *.vala Armes/*.vala Objets/*.vala Objets/IA/*.vala -o bin --pkg gee-1.0  --pkg sdl --pkg sdl-gfx --pkg sdl-mixer -X -lSDL_gfx -X -lSDL_mixer
+src="src src/Objets src/Objets/IA src/Armes"
+		
+packages="gee-1.0 sdl sdl-gfx sdl-mixer" # Paquets à utiliser
+ccargs="lSDL_gfx lSDL_mixer" # Arguments passés au compilo C
+
+
+### --- COMPUTING --- ###
+listedirs=''
+for dir in $src
+do
+	listedirs="${listedirs}$dir/*.vala "
+done
+
+listeccargs=''
+for arg in $ccargs
+do 
+	listeccargs="${listeccargs}-X -$arg "
+done
+
+listepaquets=''
+for pkg in $packages
+do
+	listepaquets="${listepaquets}--pkg ${pkg} "
+done
+
+### --- EXECUTING --- ###
+CMD="valac $listedirs -o bin $listepaquets $listeccargs"
+$CMD
