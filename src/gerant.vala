@@ -356,9 +356,9 @@ namespace Jeu
 		
 		private void creerSons ()
 		{
-			Jeu.Aff.son.addSon ("/home/aluminium95/code/Vala/WormsVala/hit.ogg");
-			Jeu.Aff.son.addSon ("/home/aluminium95/code/Vala/WormsVala/terrain.ogg");
-			Jeu.Aff.son.addSon ("/home/aluminium95/code/Vala/WormsVala/bordure.ogg");
+			Jeu.Aff.son.addSon (Config.MUSIQUE + "/hit.ogg");
+			Jeu.Aff.son.addSon (Config.MUSIQUE + "/terrain.ogg");
+			Jeu.Aff.son.addSon (Config.MUSIQUE + "/bordure.ogg");
 		}
 		
 		private void creerCannaux (int nbr)

@@ -17,7 +17,7 @@ namespace Jeu
 			chans = {};
 			sons = {};
 			
-			music = new Music ("/home/aluminium95/Code/Vala/jeu/mus.ogg");
+			music = new Music (Config.MUSIQUE + "/mus.ogg");
 			music.volume (50);
 		}
 		
