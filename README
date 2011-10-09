@@ -6,12 +6,11 @@
 	
 	Gestion des dégats, des morts etc …
 	
-### Architecture
+### Bugs à corriger !
+	Le jeu met du temps à démarrer & à s'arrêter !
+	Parfois il bug simplement, comme si la vitesse était nulle, alors qu'elle ne l'est pas…
 	
-	Main -> Gérant -> Terarins[] -> Objets[] 
-	
-	L'éxécution est reportée
-	
+		
 ### Note
 	
 	Ce programme fait une utilisation abusive des signaux ! :D

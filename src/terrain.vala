@@ -25,6 +25,8 @@ namespace Jeu
 		
 		public float accely { get; protected set; }
 		
+		public float collage { get; protected set; }
+		
 		/**
 		 * Crée le terrain
 		 */
@@ -34,8 +36,11 @@ namespace Jeu
 			this.hd = d;
 			this.hg = g;
 			
-			this.accelx = ( hg - hd ) / largeur * 2;
+			this.accelx = ( hg - hd ) / largeur;
+			this.accelx *= 2;
 			this.accely = 0;
+			
+			this.collage = GLib.Math.fabsf (this.accelx) + 0.1f;
 			
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}

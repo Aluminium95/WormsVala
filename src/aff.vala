@@ -47,6 +47,8 @@ namespace Jeu
 				screen.flip ();
 				SDL.Timer.delay (DELAY);
 			}
+			
+			son.quit ();
 		}
 
 		private static void init_video () {

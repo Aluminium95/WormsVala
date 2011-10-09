@@ -51,5 +51,10 @@ namespace Jeu
 		{
 			sons[son].volume (vol);
 		}
+		
+		public void quit () // Détruit tous les sons …
+		{
+			
+		}
 	}
 }

@@ -75,7 +75,9 @@ namespace Jeu
 				listeTerrains[o.t.i-1].addObjet (o);
 				Jeu.Aff.son.play (2,2);
 				return true;
-			} else { return false; } // Si on peut pas changer de terrain
+			} else { // Si on peut pas changer de terrain
+				return false; 
+			} 
 		}
 		
 		/**
@@ -110,7 +112,7 @@ namespace Jeu
 			objets = new HashSet<Objet> ();
 			
 			this.gravity = 9.8f;
-			this.air_res = 0.05f;
+			this.air_res = 0.06f;
 			this.wind = 0.2f;
 			this.friction = 0.03f;
 			
@@ -118,7 +120,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
-			creerIA (1);
+			creerIA (2);
 			
 			creerCannaux (3);
 			creerSons ();
@@ -263,6 +265,20 @@ namespace Jeu
 				
 				if ( sortDuJeu ) // Si on sort du jeu
 				{
+					int B = 1;
+					
+					if ( o.velx > 0 ) // on va vers la droite
+					{
+						B = Jeu.Aff.SCREEN_WIDTH - 5;
+					}
+					int mv = B - o.pos.x;
+					if (mv > 0)
+					{
+						o.move ((int) (mv - o.r/2));
+					} else {
+						o.move ((int) (mv + o.r/2));
+					}
+					o.move ((int) (B - o.pos.x - o.r/2));
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
 					Jeu.Aff.son.play (1,1);
@@ -270,7 +286,6 @@ namespace Jeu
 					o.move ((int)o.velx); // Pas de y !!!
 				}
 
-				if ( o.velx  < 0.001 && o.velx > -0.001 ) { Jeu.Aff.done = true; } // Temporaire
 			}
 		}
 		
@@ -337,6 +352,8 @@ namespace Jeu
 						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 						{
 							Jeu.Aff.son.play (0,0);
+							
+							o.move (ia.pos.x - o.pos.x - o.r/2 - ia.r/2);
 							o.rebondirx (); // Mauvais Manque des conditions
 							if ( GLib.Math.fabsf (ia.velx) > GLib.Math.fabsf (o.velx) )
 							{
@@ -347,7 +364,6 @@ namespace Jeu
 								o.velx /= 2;
 							}
 							// o.rebondiry (); // pour gérer les différentes réacs
-							break;
 						}
 					}
 				}

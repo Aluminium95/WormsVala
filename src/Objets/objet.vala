@@ -50,7 +50,7 @@ namespace Jeu
 			this.pos.x = x;
 			this.pos.y = t.getSol (this.pos.x);
 			
-			this.velx = 10;
+			this.velx = 50;
 			this.vely = 5;
 			
 			this.accelx = 0f;
@@ -177,9 +177,23 @@ namespace Jeu
 		public void calcVel (float res)
 		{
 			this.velx += this.t.accelx;
-			//this.velx += ( this.velx < 0 ) ? res : -res;
+			
+			if ( velx > 0 )
+			{
+				velx -= res;
+				/* Si on change de signe, on met à 0 */
+				velx = (velx - t.collage < 0) ? 0 : velx - t.collage;
+			} else {
+				velx += res;
+				/* Si on change de signe, on met à 0 */
+				velx = (velx + t.collage > 0) ? 0 : velx + t.collage;
+			}
+			
 			this.vely += this.t.accely;
 			this.vely += ( this.vely < 0 ) ? res : -res;
+			
+			/* plus il va vite, moins il est gros */
+			this.r = 25 - (int) GLib.Math.fabsf (this.velx);
 		}
 	}
 }
