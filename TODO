@@ -17,4 +17,10 @@ qui s'occupe de dessiner les 3 autres points de l'objet …
 	À très grande vitesse le jeu bug … 
 
 ### Problème de segfault
- 	De temps en temps le programme ne démarre pas et fait un segfault ( core dumped … )  -> trouver l'erreur de programme !
+ 	De temps en temps le programme ne démarre pas et fait un segfault ( core dumped … )
+		--> Le problème vient de SDL_mixer … et visiblement rien n'y fait … 
+		
+### Transition vers float
+	Transition de tous les int de position, vélocité, etc vers des float
+	pour plus de fluidité dans le mouvement et plus de réalité ( mouvements
+	invisibles etc … )

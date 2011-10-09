@@ -6,10 +6,36 @@
 	
 	Gestion des dégats, des morts etc …
 	
-### Bugs à corriger !
-	Le jeu met du temps à démarrer & à s'arrêter !
-	Parfois il bug simplement, comme si la vitesse était nulle, alors qu'elle ne l'est pas…
+### Pour l'instant 
 	
+	- Affichage via une classe statique aff
+	- Gestion via une classe gestion
+	- Sons via une classe son 
+	- IA / Objets / Joueurs via des classes
+	
+	+ Le jeu tourne assez bien, il gère la vitesse, la vélocité
+		l'accélération, l'adhérence du terrain.
+	+ Le jeu gère ( très mal ) les collisions entre objets 
+	+ Le jeu gère à peu près le déplacement d'un joueur 
+	
+### Fonctions à venir
+	- Gestion de la gravité en fonction de la masse de l'objet
+		+ Sauts
+		+ JetPack
+		+ Projectiles
+	- Gestion améliorée des collisions avec transmission des vélocités
+		+ Projectiles
+	- Gestion des dégats de chute, de collision etc …
+	- Gestion des joueurs multiples 
+	
+### Code moche
+	- Une grande partie du code pour les joueurs est bancale !
+	
+	- L'affichage se fait via une classe statique !!!!! Arrf
+	
+	- Les collisons sont bancales
+	
+	- La gestion des sons est approximative ( pas bien OO … )
 		
 ### Note
 	
