@@ -21,11 +21,11 @@ namespace Jeu
 		
 		public int hd { get; protected set; default = 0; } // Hauteur droite du terrain
 		
-		public float accelx { get; protected set; }
+		public float accelx { get; protected set; } // Acceleration X du terrain
 		
 		public float accely { get; protected set; }
 		
-		public float collage { get; protected set; }
+		public float collage { get; protected set; } // Adhérence du terrain
 		
 		/**
 		 * Crée le terrain
@@ -55,6 +55,9 @@ namespace Jeu
 			return (int) (x - this.start) * ( hd - hg ) / largeur + hg;
 		}
 		
+		/**
+		 * Retourne la hauteur dans le triangle du terrain
+		 */
 		public int getH ( int x )
 		{
 			return (int) ( hd - hg ) * x / largeur; 

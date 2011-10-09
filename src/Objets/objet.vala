@@ -7,26 +7,30 @@ namespace Jeu
 	 * du jeu qui sont dessinés
 	 * C'est sûrement la classe la plus importante et la plus grosse !
 	 */
-	public class Objet : Object
+	public abstract class Objet : Object
 	{
 		public int l; // Largeur
 		public int h; // Hauteur
 		
 		public int r; // Rayon ( temporaire … avant d'utiliser des rectangles ! )
 		
-		public float velx;
-		public float vely;
-		public float accelx;
-		public float accely;
+		public float velx; // Vélocité X
+		public float vely; // Vélocité Y
+		public float accelx; // Accélération X
+		public float accely; // Accélération Y
 		
-		public int32 col;
+		public float masse { get; protected set; } // Masse de l'objet
+		
+		public int32 col; // Couleur
 		
 		public int i; // Id ( très moche !!! )
 
 		public TuplePos pos; // Point en bas à gauche ( départ )
+		
+		/* Ceci sera utile quand ils seront rectangulaires ! 
 		public TuplePos pos_gh; // Point en haut à gauche
 		public TuplePos pos_db; // Point en bas à droite
-		public TuplePos pos_dh; // Point en haut à droite
+		public TuplePos pos_dh; // Point en haut à droite */
 
 		public TuplePos dim; // Dimensions de l'objet
 		
@@ -41,7 +45,7 @@ namespace Jeu
 		public signal void dead (); // Quand on meurt
 		public signal void moved (); // Quand on bouge
 		
-		protected int vie;
+		protected int vie; // Vie de l'objet
 		
 		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
@@ -61,7 +65,7 @@ namespace Jeu
 			this.dim.x = l;
 			this.dim.y = h;
 			
-			this.calc_rect ();
+			// this.calc_rect ();
 			
 			this.r = 10;
 		}
@@ -87,7 +91,7 @@ namespace Jeu
 			
 			// this.calc_rect (); Inutile ça marche pas !
 			
-			moved ();
+			moved (); // Envoie le signal de déplacement
 		}
 
 		/**
@@ -116,39 +120,39 @@ namespace Jeu
 		 * Calcule les points qui ne sont pas définis: 
 		 * 	- db ; gh; dh 
 		 */
-		protected void calc_rect ()
+		/*protected void calc_rect ()
 		{
 			calc_db ();
 			calc_gh ();
 			calc_dh ();
-		}
+		}*/
 
 		/**
 		 * Calcule la position du point en bas à droite 
 		 * Très très moche et pas fonctionnel !
 		 * Méthode à revoir !!!!!
 		 */
-		protected void calc_db ()
+		/*protected void calc_db ()
 		{
 
 			pos_db.x = (int) ( t.largeur * dim.x ) / (int) t.largeur * t.largeur + t.getH (this.pos.x) * t.getH (this.pos.x);
-		}
+		}*/
 
 		/**
 		 * Calcule la position du point en haut à gauche
 		 */
-		protected void calc_gh ()
+		/*protected void calc_gh ()
 		{
 			
-		}
-
+		}*/
+		
 		/**
 		 * Calucle la position du point en haut à droite
 		 */
-		protected void calc_dh ()
+		/*protected void calc_dh ()
 		{
 			
-		}
+		}*/
 		
 		/**
 		 * Rebondit en Y

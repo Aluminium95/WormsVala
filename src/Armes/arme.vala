@@ -8,6 +8,7 @@ namespace Jeu
 	public class Arme : Object
 	{
 		public int degats { get; protected set; default = 0; }
+		
 		public int munitions { get; protected set; default = -1; } // Pour les armes Cac c'est l'usure
 		
 		public bool distance; // Distance ou Cac

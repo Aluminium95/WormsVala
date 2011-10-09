@@ -9,9 +9,13 @@ namespace Jeu
 	 */
 	public class Projectile : Objet
 	{
-		public Projectile (Terrain t)
+		public int degats { get; protected set; } // Dégats de contact
+		
+		public Projectile (Terrain t, int deg)
 		{
 			base ( 10, t, 10);
+			
+			this.degats = deg;
 		}
 
 		public int execute ()

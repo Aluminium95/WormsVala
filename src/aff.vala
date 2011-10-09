@@ -10,29 +10,39 @@ namespace Jeu
 	 */
 	public class Aff : Object {
 
-		public static const int SCREEN_WIDTH = 800;
-		public static const int SCREEN_HEIGHT = 400;
+		public static const int SCREEN_WIDTH = 800; // Largeur de l'écran
+		public static const int SCREEN_HEIGHT = 400; // Hauteur de l'écran
+		
 		private static const int SCREEN_BPP = 32;
-		public static const int DELAY = 20;
+		public static const int DELAY = 20; // Délai entre chaque tour de boucle
 
-		private static unowned SDL.Screen screen;
+		private static unowned SDL.Screen screen; // L'écran 
 		
-		private static SDL.Surface surf;
+		private static SDL.Surface surf; // La surface de fond
 		
-		private static GLib.Rand rand;
+		private static GLib.Rand rand; // Le générateur de nombre aléatoires
 		
-		public static Son son;
+		public static Son son; // Le gestionnaire de son
 		
-		public static bool done;
+		public static bool done; // 
 		
-		public static Gerant g;
-
+		public static Gerant g; // Le gestionnaire du jeu !
+		
+		/**
+		 * Initialise les objets 
+		 */
 		public static void init () {
+			#if DEBUG
+				print ("Aff : Initialisation \n", CouleurConsole.BLEU);
+			#endif
 			son = new Son ();
 			rand = new GLib.Rand ();			
 			g = new Gerant ();
 		}
-
+		
+		/**
+		 * Fait tourner la boucle principale
+		 */
 		public static void run () {
 			init_video ();
 			
@@ -40,18 +50,31 @@ namespace Jeu
 			son.music.play (-1);
 			
 			while (!done) {
-				
 				screen.fill (null,5468);
 				g.execute ();
 				process_events ();
+				/*
+				 * Quitte sans attendre le delai ni rafaichir l'écran
+				 * si durant l'éxécution done = true
+				 */
+				if (done) { break; }
+				
 				screen.flip ();
 				SDL.Timer.delay (DELAY);
 			}
-			
+			#if DEBUG
+				print ("Aff : Boucle principale finie", CouleurConsole.BLEU);
+			#endif
 			son.quit ();
 		}
-
+		
+		/**
+		 * Initialise la vidéo
+		 */
 		private static void init_video () {
+			#if DEBUG
+				print ("Aff : Initialisation de la vidéo\n", CouleurConsole.BLEU);
+			#endif 
 			uint32 video_flags = SurfaceFlag.DOUBLEBUF
 								| SurfaceFlag.HWACCEL
 								| SurfaceFlag.HWSURFACE;
@@ -66,7 +89,10 @@ namespace Jeu
 		
 			surf = new SDL.Surface.RGB (video_flags, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, 0,0,0,0);
 		}
-
+		
+		/**
+		 * Dessine le fond 
+		 */
 		public static void draw () {
 			int16 x = (int16) rand.int_range (0, screen.w);
 			int16 y = (int16) rand.int_range (0, screen.h);
@@ -79,12 +105,18 @@ namespace Jeu
 			surf.blit (null, screen, null);
 		}
 		
+		/**
+		 * Dessine un objet
+		 */
 		public static void draw_objet (Objet o)
 		{
 			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, o.col);
 			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0xFFFFFFF);
 		}
 		
+		/**
+		 * Dessine un terrain
+		 */
 		public static void draw_terrain (Terrain t)
 		{
 			
@@ -104,12 +136,19 @@ namespace Jeu
 			Line.color (screen, (int16) (t.start + t.largeur), 0, (int16) (t.start + t.largeur), (int16) SCREEN_HEIGHT, 0xFFFFFFF);
 		}
 		
+		/**
+		 * Dessine une ligne 
+		 */
 		public static void draw_line (int x1, int y1, int x2, int y2)
 		{
 			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 0xFFFFFFF);
 		}
 
+		/**
+		 * Fait la boucle événementielle
+		 */
 		private static void process_events () {
+			
 			Event event = Event ();
 			while (Event.poll (event) == 1) {
 		        switch (event.type) {
@@ -123,8 +162,15 @@ namespace Jeu
         	}
         	
 		}
-
+		
+		/**
+		 * Récupère la touche appuyée et fait les actions 
+		 * nécessaires en fonction
+		 */
 		private static void on_keyboard_event (KeyboardEvent event) {
+			#if DEBUG
+				print ("Aff : entrée clavier !\n", CouleurConsole.BLEU);
+			#endif
 			if(event.keysym.sym==KeySymbol.q)
 			{
 				Jeu.Aff.done = true;
@@ -135,8 +181,15 @@ namespace Jeu
 			}
 		}
 		
+		/**
+		 * Gère les mouvements des joueurs en fonction 
+		 * des touches utilisées
+		 */
 		private static void clavier_joueur (KeySymbol k)
 		{
+			#if DEBUG
+				print ("Aff : entrée clavier joueur !\n", CouleurConsole.BLEU);
+			#endif
 			switch (k)
 			{
 				case KeySymbol.t:

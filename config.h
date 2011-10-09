@@ -17,5 +17,3 @@
 #ifndef SPRITES 
 #define SPRITES "./Images/Sprites"
 #endif
-
-

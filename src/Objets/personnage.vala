@@ -2,10 +2,10 @@ using GLib;
 
 namespace Jeu
 {
-	/*
-	 * Un personnage !
+	/**
+	 * Un personnage ! ( Abstrait )
 	 */
-	public class Personnage : Objet
+	public abstract class Personnage : Objet
 	{
 		
 		public Arme armeActuelle { get; protected set; } // Arme en main

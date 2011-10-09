@@ -17,14 +17,14 @@ namespace Jeu
 		/*
 		 * Variables environnement 
 		 */
-		public float gravity;
-		public float air_res;
-		public float wind;
-		public float friction;
+		public float gravity; // Gravité : Inutilisé !
+		public float air_res; // Résistance de l'air
+		public float wind; // Vent : Inutilisé !
+		public float friction; // Friction : inutilisé !
 		
-		private int idmax;
+		private int idmax; // Identifiant unique maximum
 
-		private int tailleTotaleTerrain = 0;
+		private int tailleTotaleTerrain = 0; // Taille de tous les terrains réunis
 
 		/**
 		 * Délégates pour connecter aux signaux 
@@ -107,6 +107,10 @@ namespace Jeu
 		 */
 		public Gerant ()
 		{
+			#if DEBUG 
+				print ("\t Gerant : Création !\n", CouleurConsole.VERT);
+			#endif
+			
 			/*
 			 * Initialisation des tableaux contenants les terrains
 			 * et les objets du jeu
@@ -139,6 +143,10 @@ namespace Jeu
 		 */
 		private void creerIA (int nbr)
 		{
+			#if DEBUG
+				print ("\t Gerant : Création des IAs \n", CouleurConsole.VERT);
+			#endif
+			
 			for(int i = 0; i < nbr; i++)
 			{
 				/*
@@ -162,7 +170,9 @@ namespace Jeu
 					ia.col = 0xFFF0000 * (i + 60) * 5;
 				}
 				
-				stdout.printf ("New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n");
+				#if DEBUG 
+					print ("\t Gerant : New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n", CouleurConsole.VERT);
+				#endif 
 				
 				if ( i % 2 == 0 )
 				{
@@ -191,6 +201,9 @@ namespace Jeu
 		 */
 		private void creerTerrain (int nbr)
 		{
+			#if DEBUG 
+				print ("\t Gerant : Création des Terrains \n", CouleurConsole.VERT);
+			#endif
 			int pos = 0;
 			int prevHeight = (int) Jeu.Aff.SCREEN_HEIGHT / 4;
 			int width = (int) Jeu.Aff.SCREEN_WIDTH / nbr;
@@ -229,6 +242,9 @@ namespace Jeu
 		 */
 		private void creerJoueur (int nbr)
 		{
+			#if DEBUG
+				print ("\t Gerant : Création des Players \n", CouleurConsole.VERT);
+			#endif
 			for ( int i = 0; i < nbr; i++ )
 			{
 				int x = i * 20;
@@ -253,6 +269,7 @@ namespace Jeu
 		public void execute ()
 		{
 			Jeu.Aff.draw ();
+			
 			foreach ( Terrain t in listeTerrains )
 			{
 				Jeu.Aff.draw_terrain (t);
@@ -411,6 +428,10 @@ namespace Jeu
 						{
 							Jeu.Aff.son.play (0,0);
 							
+							#if DEBUG 
+								print ("\t Gerant : Collision !\n", CouleurConsole.VERT);
+							#endif
+							
 							o.move (o.pos.x - ia.pos.x - o.r);
 							o.rebondirx (); // Mauvais Manque des conditions
 							o.velx += ia.velx;
@@ -423,6 +444,12 @@ namespace Jeu
 			}
 		}
 		
+		/**
+		 * Crée les sons : 
+		 * 		@hit : 0
+		 * 		@terrain : 1
+		 * 		@bordure : 2
+		 */
 		private void creerSons ()
 		{
 			Jeu.Aff.son.addSon (Config.MUSIQUE + "/hit.ogg");
@@ -430,6 +457,13 @@ namespace Jeu
 			Jeu.Aff.son.addSon (Config.MUSIQUE + "/bordure.ogg");
 		}
 		
+		/**
+		 * Crée les cannaux et met les volumes des 
+		 * trois premiers cannaux comme ceci :
+		 * 		@0 = 25
+		 * 		@1 = 25
+		 * 		@2 = 120
+		 */
 		private void creerCannaux (int nbr)
 		{
 			for ( int i = 0; i < nbr; i++ )
@@ -441,8 +475,14 @@ namespace Jeu
 			Jeu.Aff.son.setChannelVolume (3, 120);
 		}
 		
+		/**
+		 * Fait bouger le joueur numéro @p avec une force de @x
+		 */
 		public void movePlayer (int p, int x)
 		{
+			#if DEBUG
+				print ("\t Gérant : bouge Player \n", CouleurConsole.VERT);
+			#endif
 			players[p-1].velx = 5 * x;
 		}
 	}

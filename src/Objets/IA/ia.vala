@@ -11,7 +11,7 @@ namespace Jeu
 		
 		public IA (int x, Terrain t, int vie, string name)
 		{
-			base ( x, t, vie);
+			base ( x, t, vie); // Chaine vers personnage
 			
 			this.s = Strategie.CAC;
 			this.name = name;
@@ -106,7 +106,7 @@ namespace Jeu
 			 * Code d'ajustement de la visée
 			 * en fonction de :
 			 * 		- la force de l'arme
-			 * 		- la gravité de l'arme // Arrgh courbe !
+			 * 		- la gravité du terrain & masse du projectile !
 			 * 		- la position du personnage
 			 */
 		}
