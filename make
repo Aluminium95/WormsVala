@@ -35,5 +35,4 @@ done
 
 ### --- EXECUTING --- ###
 CMD="valac -g --save-temps $listedirs -o WormsVala -X -I\"`pwd`/config.h\" --vapidir vapi/ $listepaquets $listeccargs $listevars "
-echo $CMD
 $CMD
