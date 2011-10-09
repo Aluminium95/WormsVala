@@ -270,7 +270,7 @@ namespace Jeu
 					o.move ((int)o.velx); // Pas de y !!!
 				}
 
-				if ( o.velx  < 0.01 && o.velx > -0.01 ) { Jeu.Aff.done = true; } // Temporaire
+				if ( o.velx  < 0.001 && o.velx > -0.001 ) { Jeu.Aff.done = true; } // Temporaire
 			}
 		}
 		
@@ -347,6 +347,7 @@ namespace Jeu
 								o.velx /= 2;
 							}
 							// o.rebondiry (); // pour gérer les différentes réacs
+							break;
 						}
 					}
 				}
