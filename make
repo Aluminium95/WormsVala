@@ -34,6 +34,6 @@ do
 done
 
 ### --- EXECUTING --- ###
-CMD="valac $listedirs -o bin -X -I\"`pwd`/config.h\" --vapidir vapi/ $listepaquets $listeccargs $listevars "
+CMD="valac -g --save-temps $listedirs -o bin -X -I\"`pwd`/config.h\" --vapidir vapi/ $listepaquets $listeccargs $listevars "
 echo $CMD
 $CMD
