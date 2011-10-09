@@ -4,7 +4,7 @@ src="src src/Objets src/Objets/IA src/Armes"
 
 for dir in $src
 do 
-	trash-put ${dir}/*.c
+	rm ${dir}/*.c
 done
 
 echo "Cleared !"
