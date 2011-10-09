@@ -434,7 +434,7 @@ namespace Jeu
 							
 							o.move (o.pos.x - ia.pos.x - o.r);
 							o.rebondirx (); // Mauvais Manque des conditions
-							o.velx += ia.velx;
+							ia.velx += o.velx;
 							o.velx /= 2;
 							// o.rebondiry (); // pour gérer les différentes réacs
 						}
