@@ -128,6 +128,25 @@ namespace Jeu
 			if(event.keysym.sym==KeySymbol.q)
 			{
 				Jeu.Aff.done = true;
+			} else if ( event.keysym.sym == KeySymbol.m )  {
+				/* Afficher menu */
+			} else {
+				clavier_joueur (event.keysym.sym);
+			}
+		}
+		
+		private static void clavier_joueur (KeySymbol k)
+		{
+			switch (k)
+			{
+				case KeySymbol.t:
+					/* demande le déplacement du personnage 1 de 1 */
+					g.movePlayer (1,1);
+					break;
+				case KeySymbol.e:
+					/* demande le déplacement du personnage -1 de 1 */
+					g.movePlayer (1,-1);
+					break;
 			}
 		}
 	}

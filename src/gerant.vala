@@ -12,6 +12,7 @@ namespace Jeu
 	{
 		private ArrayList<Terrain> listeTerrains; // Terrains
 		private HashSet<Objet> objets; // Set des objets du jeu
+		private ArrayList<Player> players; // Joueurs
 		
 		/*
 		 * Variables environnement 
@@ -20,6 +21,8 @@ namespace Jeu
 		public float air_res;
 		public float wind;
 		public float friction;
+		
+		private int idmax;
 
 		private int tailleTotaleTerrain = 0;
 
@@ -110,20 +113,25 @@ namespace Jeu
 			 */
 			listeTerrains = new ArrayList<Terrain> ();
 			objets = new HashSet<Objet> ();
+			players = new ArrayList<Player> ();
+			
+			this.idmax = 0;
 			
 			this.gravity = 9.8f;
 			this.air_res = 0.06f;
 			this.wind = 0.2f;
 			this.friction = 0.03f;
 			
+			
+			creerCannaux (3);
+			creerSons ();
+			
 			/*
 			 * Appel des fonctions créatrices 
 			 */
 			creerTerrain (10);
 			creerIA (2);
-			
-			creerCannaux (3);
-			creerSons ();
+			creerJoueur (1);
 		}
 		
 		/**
@@ -145,9 +153,7 @@ namespace Jeu
 				
 				addObjet (ia); // Ajoute l'objet au gérant
 				
-				ia.r = 10;
-				
-				ia.i = i;
+				ia.i = idmax;
 				
 				if ( i % 2 == 0)
 				{
@@ -175,6 +181,8 @@ namespace Jeu
 					// stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); :: " + o.t.i.to_string () + "\n");
 				});
 				ia.frapper.connect(joueurFrappe);
+				
+				idmax++;
 			}
 		}
 		
@@ -219,9 +227,20 @@ namespace Jeu
 		/**
 		 * Crée les jouers du jeu
 		 */
-		private void creerJoueur ()
+		private void creerJoueur (int nbr)
 		{
-			
+			for ( int i = 0; i < nbr; i++ )
+			{
+				int x = i * 20;
+				var p = new Player (x, getTerrainPos(x), 50, "Joueur "+(i+1).to_string ());
+				p.i = idmax;
+				
+				p.col = 0xCCCCCCC * (i + 60) * 5;
+				
+				addPlayer (p);
+				
+				idmax++;
+			}
 		}
 		
 		/**
@@ -271,21 +290,51 @@ namespace Jeu
 					{
 						B = Jeu.Aff.SCREEN_WIDTH - 5;
 					}
-					int mv = B - o.pos.x;
-					if (mv > 0)
-					{
-						o.move ((int) (mv - o.r/2));
-					} else {
-						o.move ((int) (mv + o.r/2));
-					}
-					o.move ((int) (B - o.pos.x - o.r/2));
+					o.move ((int) (B - o.pos.x));
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
+					o.velx = o.velx/2;
 					Jeu.Aff.son.play (1,1);
 				} else {
 					o.move ((int)o.velx); // Pas de y !!!
 				}
 
+			}
+			
+			foreach ( var p in players )
+			{
+				Jeu.Aff.draw_objet (p); // Affiche l'objet
+				
+				p.calcVel (this.air_res);
+				
+				bool sortDuJeu;
+				
+				/*
+				 * Conditions de sortie du terrain
+				 */
+				if ( p.pos.x + p.velx < p.t.start ) {
+					bool v = changeTerrain (false, p);
+					sortDuJeu = !v;
+				} else if ( p.pos.x + p.velx > p.t.start + p.t.largeur ) {
+					bool v = changeTerrain (true, p);
+					sortDuJeu = !v;
+				} else {
+					sortDuJeu = false;
+				}
+				
+				if ( sortDuJeu ) // Si on sort du jeu
+				{
+					int B = 1;
+					
+					if ( p.velx > 0 ) // on va vers la droite
+					{
+						B = Jeu.Aff.SCREEN_WIDTH - 5;
+					}
+					p.move ((int) (B - p.pos.x - p.r));
+					Jeu.Aff.son.play (1,1);
+				} else {
+					p.move ((int)p.velx); // Pas de y !!!
+				}
 			}
 		}
 		
@@ -308,6 +357,15 @@ namespace Jeu
 		{
 			getTerrainPos (o.pos.x).addObjet (o);
 			objets.add (o);
+		}
+		
+		/**
+		 * Ajoute le joueur et l'ajoute à un terrain
+		 */
+		public void addPlayer (Player p)
+		{
+			getTerrainPos (p.pos.x).addObjet (p);
+			players.add (p);
 		}
 		
 		/**
@@ -353,16 +411,10 @@ namespace Jeu
 						{
 							Jeu.Aff.son.play (0,0);
 							
-							o.move (ia.pos.x - o.pos.x - o.r/2 - ia.r/2);
+							o.move (o.pos.x - ia.pos.x - o.r);
 							o.rebondirx (); // Mauvais Manque des conditions
-							if ( GLib.Math.fabsf (ia.velx) > GLib.Math.fabsf (o.velx) )
-							{
-								o.velx += ( o.velx < 0 ) ? - GLib.Math.fabsf (ia.velx / 2) : GLib.Math.fabsf (ia.velx / 2);
-								ia.velx /= 2;
-							} else {
-								ia.velx += ( ia.velx < 0 ) ? - GLib.Math.fabsf (o.velx / 2) : GLib.Math.fabsf (o.velx / 2);
-								o.velx /= 2;
-							}
+							o.velx += ia.velx;
+							o.velx /= 2;
 							// o.rebondiry (); // pour gérer les différentes réacs
 						}
 					}
@@ -387,6 +439,11 @@ namespace Jeu
 			Jeu.Aff.son.setChannelVolume (0, 25);
 			Jeu.Aff.son.setChannelVolume (2, 50);
 			Jeu.Aff.son.setChannelVolume (3, 120);
+		}
+		
+		public void movePlayer (int p, int x)
+		{
+			players[p-1].velx = 5 * x;
 		}
 	}
 }

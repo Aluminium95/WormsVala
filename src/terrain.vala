@@ -40,7 +40,7 @@ namespace Jeu
 			this.accelx *= 2;
 			this.accely = 0;
 			
-			this.collage = GLib.Math.fabsf (this.accelx) + 0.1f;
+			this.collage = 0.5f;
 			
 			this.objets = new HashSet<Objet> (); // initialisation du tableau
 		}

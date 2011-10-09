@@ -13,3 +13,9 @@
 #ifndef LOCALE
 #define LOCALE "."
 #endif
+
+#ifndef SPRITES 
+#define SPRITES "./Images/Sprites"
+#endif
+
+
