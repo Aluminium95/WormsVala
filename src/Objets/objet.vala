@@ -32,7 +32,7 @@ namespace Jeu
 		
 		public unowned Terrain t; // Mmmh, on pourrait pas plutôt faire que le terrain fasse ça lui même !?
 		
-		public string name; // Oh pourquoi pas !!
+		public string name {get; protected set; } // Oh pourquoi pas !!
 		
 		public Mouvement m; // Mouvement 
 		
@@ -50,8 +50,8 @@ namespace Jeu
 			this.pos.x = x;
 			this.pos.y = t.getSol (this.pos.x);
 			
-			this.velx = 50;
-			this.vely = 5;
+			this.velx = 0;
+			this.vely = 0;
 			
 			this.accelx = 0f;
 			this.accely = 0f;
@@ -62,6 +62,8 @@ namespace Jeu
 			this.dim.y = h;
 			
 			this.calc_rect ();
+			
+			this.r = 10;
 		}
 
 		/**
@@ -183,7 +185,7 @@ namespace Jeu
 				velx -= res;
 				/* Si on change de signe, on met à 0 */
 				velx = (velx - t.collage < 0) ? 0 : velx - t.collage;
-			} else {
+			} else if ( velx < 0 ) {
 				velx += res;
 				/* Si on change de signe, on met à 0 */
 				velx = (velx + t.collage > 0) ? 0 : velx + t.collage;
@@ -192,8 +194,6 @@ namespace Jeu
 			this.vely += this.t.accely;
 			this.vely += ( this.vely < 0 ) ? res : -res;
 			
-			/* plus il va vite, moins il est gros */
-			this.r = 25 - (int) GLib.Math.fabsf (this.velx);
 		}
 	}
 }

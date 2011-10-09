@@ -7,12 +7,11 @@ namespace Jeu
 	 */
 	public class IA : Personnage
 	{
+		protected Strategie s; // Stratégie
+		
 		public IA (int x, Terrain t, int vie, string name)
 		{
 			base ( x, t, vie);
-			
-			this.pos.x = x;
-			this.pos.y = t.getSol (x);
 			
 			this.s = Strategie.CAC;
 			this.name = name;
