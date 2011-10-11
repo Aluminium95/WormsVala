@@ -1,6 +1,6 @@
 namespace Config {
 	// Configurer ça !!!!! 
-	[CCode(cname="MUSIQUE", cheader_filename="/home/aluminium95/code/Vala/WormsVala/config.h")]
+	[CCode(cname="MUSIQUE", cheader_filename="/home/aluminium95/Code/Vala/WormsVala/config.h")]
 	public extern const string MUSIQUE;
 	[CCode(cname="FOND", cheader_filename="/home/aluminium95/Code/Vala/WormsVala/config.h")]
 	public extern const string FOND;

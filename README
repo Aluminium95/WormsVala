@@ -40,3 +40,7 @@
 ### Note
 	
 	Ce programme fait une utilisation abusive des signaux ! :D
+
+
+### Problème 
+	Si quelqu'un pouvait me dire comment fonctionne le binding de SDL_mixer en vala … parce que c'est pour le moins étrange … j'irais même jusqu'à dire plus compliqué qu'en C.
