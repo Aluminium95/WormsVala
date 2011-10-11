@@ -1,13 +1,11 @@
 ### Jeu bidon en Vala pour s'éclater
-	
 	Un écran fixe 
 	Différents terrains ( pentes ) de différentes tailles.
 	Des objets / armes / IA / joueurs qui évoluent dessus
 	
 	Gestion des dégats, des morts etc …
 	
-### Pour l'instant 
-	
+### Pour l'instant 	
 	- Affichage via une classe statique aff
 	- Gestion via une classe gestion
 	- Sons via une classe son 
@@ -38,7 +36,6 @@
 	- La gestion des sons est approximative ( pas bien OO … )
 		
 ### Note
-	
 	Ce programme fait une utilisation abusive des signaux ! :D
 
 
