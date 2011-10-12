@@ -8,6 +8,7 @@ void main (string[] args)
 	#if DEBUG 
 		Jeu.print ("WORMSVALA !\n", Jeu.CouleurConsole.JAUNE);
 	#endif
+	
 	SDL.init (InitFlag.VIDEO | InitFlag.AUDIO);
 	SDLMixer.open (44100, 0, 2, 1024);
 	SDLMixer.Channel.allocate (2);

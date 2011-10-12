@@ -4,6 +4,7 @@ namespace Jeu
 {
 	/**
 	 * Mouvement en train d'être effectué
+	 * par un objet
 	 */
 	public enum Mouvement
 	{
@@ -15,22 +16,23 @@ namespace Jeu
 	 */
 	public enum Strategie
 	{
-		DISTANCE, CAC
+		DISTANCE, CAC // CAC = Corps À Corps
 	}
 	
 	/**
 	 * Type d'objet ( utile pour les tableaux confondant tout ! ) 
 	 * Euh, vu qu'on a une fonction « typeof » ça devrait être bon
 	 */
-	public enum Type
+	/*public enum Type
 	{
 		DECOR, ENNEMI, JOUEUR
-	}
+	} Peut servir mais pour l'instant inutile */
 	
 	/**
 	 * Gestion des positions ( tuples )
+	 * Mais aussi de tous les trucs qui ont 2 coordonnées !
 	 */
-	public struct TuplePos
+	public struct TuplePos 
 	{
 		float x;
 		float y;
@@ -38,6 +40,7 @@ namespace Jeu
 	
 	/**
 	 * Pour définir les couleurs de la console 
+	 * et que ce soit bien User-Friendly :D
 	 */
 	public enum CouleurConsole
 	{
@@ -51,9 +54,11 @@ namespace Jeu
 	public void print (string text, CouleurConsole color)
 	{
 		#if DEBUG 
+			/* Définit la couleur ( commande spéciale console *nix ) */
 			stderr.printf ("\033[%dm",color);
 			stderr.printf (text);
-			stderr.printf ("\033[0m");
+			/* Reset la couleur à défault ( commande spéciale *nix ) */
+			stderr.printf ("\033[0m"); 
 		#else
 			stdout.printf ("\033[%dm",color);
 			stdout.printf (text);

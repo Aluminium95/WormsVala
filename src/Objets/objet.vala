@@ -14,10 +14,9 @@ namespace Jeu
 		
 		public int r; // Rayon ( temporaire … avant d'utiliser des rectangles ! )
 		
+		/* Il faudrait passer à un TuplePos vel { x; y; } */
 		public float velx; // Vélocité X
 		public float vely; // Vélocité Y
-		public float accelx; // Accélération X
-		public float accely; // Accélération Y
 		
 		public float masse { get; protected set; } // Masse de l'objet
 		
@@ -30,20 +29,21 @@ namespace Jeu
 		/* Ceci sera utile quand ils seront rectangulaires ! 
 		public TuplePos pos_gh; // Point en haut à gauche
 		public TuplePos pos_db; // Point en bas à droite
-		public TuplePos pos_dh; // Point en haut à droite */
+		public TuplePos pos_dh; // Point en haut à droite 
 
-		public TuplePos dim; // Dimensions de l'objet
+		public TuplePos dim; // Dimensions de l'objet */
 		
-		public unowned Terrain t; // Mmmh, on pourrait pas plutôt faire que le terrain fasse ça lui même !?
+		// Contient une référence faible vers le terrain 
+		public unowned Terrain t; 
 		
 		public string name {get; protected set; } // Oh pourquoi pas !!
 		
-		public Mouvement m; // Mouvement 
+		public Mouvement m; // Mouvement entrain d'être effectué
 		
-		public Type type; // Visiblement … sert à rien … ( déjà implémenté dans une classe par défaut )
+		/*public Type type; Peut servir, mais pour l'instant inutile ! */
 		
-		public signal void dead (); // Quand on meurt
-		public signal void moved (); // Quand on bouge
+		public signal void dead (); // Signal quand on meurt
+		public signal void moved (); // Signal quand on bouge
 		
 		protected int vie; // Vie de l'objet
 		
@@ -57,13 +57,10 @@ namespace Jeu
 			this.velx = 0;
 			this.vely = 0;
 			
-			this.accelx = 0f;
-			this.accely = 0f;
-			
 			this.vie = vie;
 			
-			this.dim.x = l;
-			this.dim.y = h;
+			/*this.dim.x = l;
+			this.dim.y = h;*/
 			
 			// this.calc_rect ();
 			
