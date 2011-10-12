@@ -33,7 +33,7 @@ namespace Jeu
 		 */
 		public static void init () {
 			#if DEBUG
-				print ("Aff : Initialisation \n", CouleurConsole.BLEU);
+				print ("\tAff : Initialisation \n", CouleurConsole.BLEU);
 			#endif
 			son = new Son ();
 			rand = new GLib.Rand ();			
@@ -63,9 +63,12 @@ namespace Jeu
 				SDL.Timer.delay (DELAY);
 			}
 			#if DEBUG
-				print ("Aff : Boucle principale finie", CouleurConsole.BLEU);
+				print ("\tAff : Boucle principale finie\n", CouleurConsole.BLEU);
 			#endif
 			son.quit ();
+			#if DEBUG 
+				print ("\tAff : Son quitté\n", CouleurConsole.BLEU);
+			#endif
 		}
 		
 		/**
@@ -73,7 +76,7 @@ namespace Jeu
 		 */
 		private static void init_video () {
 			#if DEBUG
-				print ("Aff : Initialisation de la vidéo\n", CouleurConsole.BLEU);
+				print ("\tAff : Initialisation de la vidéo\n", CouleurConsole.BLEU);
 			#endif 
 			uint32 video_flags = SurfaceFlag.DOUBLEBUF
 								| SurfaceFlag.HWACCEL
@@ -169,7 +172,7 @@ namespace Jeu
 		 */
 		private static void on_keyboard_event (KeyboardEvent event) {
 			#if DEBUG
-				print ("Aff : entrée clavier !\n", CouleurConsole.BLEU);
+				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
 			#endif
 			if(event.keysym.sym==KeySymbol.q)
 			{
@@ -188,7 +191,7 @@ namespace Jeu
 		private static void clavier_joueur (KeySymbol k)
 		{
 			#if DEBUG
-				print ("Aff : entrée clavier joueur !\n", CouleurConsole.BLEU);
+				print ("\tAff : entrée clavier joueur !\n", CouleurConsole.BLEU);
 			#endif
 			switch (k)
 			{

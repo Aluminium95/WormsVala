@@ -20,7 +20,7 @@ namespace Jeu
 		public Son ()
 		{
 			#if DEBUG 
-				print ("\t Son : Création !\n", CouleurConsole.ROUGE);
+				print ("\t\t Son : Création !\n", CouleurConsole.ROUGE);
 			#endif 
 			
 			chans = {};
@@ -36,7 +36,7 @@ namespace Jeu
 		public void play (int chan, int son, int repeat = 1)
 		{
 			#if DEBUG == 3
-				print ("\t Son : Joue un son \n", CouleurConsole.ROUGE);
+				print ("\t\t Son : Joue un son \n", CouleurConsole.ROUGE);
 			#endif
 			chans[chan].play (sons[son], repeat - 1);
 		}
@@ -47,7 +47,7 @@ namespace Jeu
 		public int addChannel (int vol = 100)
 		{
 			#if DEBUG
-				print ("\t Son : Ajout d'un canal !\n", CouleurConsole.ROUGE);
+				print ("\t\t Son : Ajout d'un canal !\n", CouleurConsole.ROUGE);
 			#endif
 			
 			Channel c = 0;
@@ -63,7 +63,7 @@ namespace Jeu
 		public int addSon (string file, int vol = 100)
 		{
 			#if DEBUG
-				print ("\t Son : Ajout d'un son ! \n", CouleurConsole.ROUGE);
+				print ("\t\t Son : Ajout d'un son ! \n", CouleurConsole.ROUGE);
 			#endif
 			var src = new SDL.RWops.from_file (file, "r");
 			sons += new Chunk.WAV (src);
@@ -77,7 +77,7 @@ namespace Jeu
 		public void setChannelVolume (int chan, int vol)
 		{
 			#if DEBUG
-				print ("\t Son : Modification du volume d'un cannal \n", CouleurConsole.ROUGE);
+				print ("\t\t Son : Modification du volume d'un cannal \n", CouleurConsole.ROUGE);
 			#endif
 			chans[chan].volume (vol);
 		}
@@ -88,7 +88,7 @@ namespace Jeu
 		public void setSonVolume (int son, int vol)
 		{
 			#if DEBUG
-				print ("\t Son : Modification du volume d'un son \n", CouleurConsole.ROUGE);
+				print ("\t\t Son : Modification du volume d'un son \n", CouleurConsole.ROUGE);
 			#endif
 			sons[son].volume (vol);
 		}

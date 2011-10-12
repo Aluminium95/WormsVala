@@ -24,7 +24,7 @@ namespace Jeu
 						Jeu.Aff.son.play (0,0);
 						
 						#if DEBUG 
-							print ("\t Gerant : Collision !\n", CouleurConsole.VERT);
+							print ("\t\t\t Physique : Collision !\n", CouleurConsole.CYAN);
 						#endif
 						
 						o.move (o.pos.x - ia.pos.x - o.r);

@@ -108,7 +108,7 @@ namespace Jeu
 		public Gerant ()
 		{
 			#if DEBUG 
-				print ("\t Gerant : Création !\n", CouleurConsole.VERT);
+				print ("\t\t Gerant : Création !\n", CouleurConsole.VERT);
 			#endif
 			
 			/*
@@ -144,7 +144,7 @@ namespace Jeu
 		private void creerIA (int nbr)
 		{
 			#if DEBUG
-				print ("\t Gerant : Création des IAs \n", CouleurConsole.VERT);
+				print ("\t\t Gerant : Création des IAs \n", CouleurConsole.VERT);
 			#endif
 			
 			for(int i = 0; i < nbr; i++)
@@ -171,7 +171,7 @@ namespace Jeu
 				}
 				
 				#if DEBUG 
-					print ("\t Gerant : New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n", CouleurConsole.VERT);
+					print ("\t\t Gerant : New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n", CouleurConsole.VERT);
 				#endif 
 				
 				if ( i % 2 == 0 )
@@ -202,7 +202,7 @@ namespace Jeu
 		private void creerTerrain (int nbr)
 		{
 			#if DEBUG 
-				print ("\t Gerant : Création des Terrains \n", CouleurConsole.VERT);
+				print ("\t\t Gerant : Création des Terrains \n", CouleurConsole.VERT);
 			#endif
 			int pos = 0;
 			int prevHeight = (int) Jeu.Aff.SCREEN_HEIGHT / 4;
@@ -243,7 +243,7 @@ namespace Jeu
 		private void creerJoueur (int nbr)
 		{
 			#if DEBUG
-				print ("\t Gerant : Création des Players \n", CouleurConsole.VERT);
+				print ("\t\t Gerant : Création des Players \n", CouleurConsole.VERT);
 			#endif
 			for ( int i = 0; i < nbr; i++ )
 			{
@@ -450,7 +450,7 @@ namespace Jeu
 		public void movePlayer (int p, int x)
 		{
 			#if DEBUG
-				print ("\t Gérant : bouge Player \n", CouleurConsole.VERT);
+				print ("\t\t Gérant : bouge Player \n", CouleurConsole.VERT);
 			#endif
 			players[p-1].velx += 2 * x;
 		}
