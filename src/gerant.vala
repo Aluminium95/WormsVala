@@ -284,7 +284,7 @@ namespace Jeu
 				
 				bool sortDuJeu;
 				
-				collision (o);
+				gererCollisions (o);
 				
 				/*
 				 * Conditions de sortie du terrain
@@ -398,11 +398,8 @@ namespace Jeu
 		/**
 		 * Get les collisions de l'objet o 
 		 */
-		public void collision (Objet o)
+		public void gererCollisions (Objet o)
 		{
-			/*
-			 * Gestion des collisions 
-			 */
 			int t;
 			if ( o.t.i == 0 ) // Si c'est le premier terrain
 			{
@@ -413,35 +410,7 @@ namespace Jeu
 			} else {
 				t = o.t.i - 1; // si c'est un terrain normal
 			}
-			
-			for (int i = 0; i < 3; i++)
-			{
-				foreach ( var ia in listeTerrains[t].objets )
-				{
-					if ( o.i != ia.i ) // Pas lui même !
-					{
-						float x = o.pos.x - ia.pos.x;
-						float y = o.pos.y - ia.pos.y;
-						float d = x*x + y*y;
-						
-						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
-						{
-							Jeu.Aff.son.play (0,0);
-							
-							#if DEBUG 
-								print ("\t Gerant : Collision !\n", CouleurConsole.VERT);
-							#endif
-							
-							o.move (o.pos.x - ia.pos.x - o.r);
-							o.rebondirx (); // Mauvais Manque des conditions
-							ia.velx += o.velx;
-							o.velx /= 2;
-							// o.rebondiry (); // pour gérer les différentes réacs
-						}
-					}
-				}
-				t++;
-			}
+			collision (o,ref listeTerrains,t);
 		}
 		
 		/**
@@ -483,7 +452,7 @@ namespace Jeu
 			#if DEBUG
 				print ("\t Gérant : bouge Player \n", CouleurConsole.VERT);
 			#endif
-			players[p-1].velx += 5 * x;
+			players[p-1].velx += 2 * x;
 		}
 	}
 }
