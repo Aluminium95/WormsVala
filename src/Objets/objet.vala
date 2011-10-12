@@ -73,7 +73,7 @@ namespace Jeu
 		/**
 		 * Effectue un mouvement
 		 */
-		public void move ( int x )
+		public void move ( float x )
 		{
 			this.pos.x += x;
 			

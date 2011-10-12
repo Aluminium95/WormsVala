@@ -48,7 +48,7 @@ namespace Jeu
 				foreach ( var pers in listeTerrains[t].objets ) // pour chaque objet du terrain
 				{
 					// Calcul de la distance de frappe
-					int d = (int)  (pers.pos.x - pers.dim.x - p.pos.x)^2 + (pers.pos.y - pers.dim.y - p.pos.y)^2 ;
+					double d = GLib.Math.pow(pers.pos.x - pers.r - p.pos.x,2) + GLib.Math.pow(pers.pos.y - pers.r - p.pos.y, 2);
 					if ( d <= p.armeActuelle.r ) // Si c'est dedans
 					{
 						pers.modifierVie (10); // On enlève 10 pv
@@ -86,7 +86,7 @@ namespace Jeu
 		/**
 		 * Retourne le terrain auquel appartien cette position
 		 */
-		private Terrain getTerrainPos (int x)
+		private Terrain getTerrainPos (float x)
 		{
 			Terrain ret = listeTerrains[0]; // Terrain par défaut
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
@@ -420,9 +420,9 @@ namespace Jeu
 				{
 					if ( o.i != ia.i ) // Pas lui même !
 					{
-						int x = o.pos.x - ia.pos.x;
-						int y = o.pos.y - ia.pos.y;
-						int d = x*x + y*y;
+						float x = o.pos.x - ia.pos.x;
+						float y = o.pos.y - ia.pos.y;
+						float d = x*x + y*y;
 						
 						if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 						{

@@ -50,9 +50,9 @@ namespace Jeu
 		 * 		Prendre en compte la « superposition d'objets » !!!!
 		 * 		Faire une gestion des collisions !
 		 */
-		public int getSol ( int x )
+		public float getSol ( float x )
 		{
-			return (int) (x - this.start) * ( hd - hg ) / largeur + hg;
+			return (x - this.start) * ( hd - hg ) / largeur + hg;
 		}
 		
 		/**
