@@ -4,9 +4,8 @@ using Gee;
 namespace Jeu
 {
 	/**
-	 * Pour l'instant je crée 2 ia … et je les nomme !
-	 * Il faut utiliser des tableaux et créer des tableaux de terrain 
-	 * Il faut gérer les déplacements et les changements de terrain ! ( et donc attribution à une zone ).
+	 * Classe gérant qui va mettre en scène tous les acteurs 
+	 * du jeu ( Terrains; IA; Joueurs; Décor etc … )
 	 */
 	public class Gerant : Object
 	{
@@ -17,10 +16,10 @@ namespace Jeu
 		/*
 		 * Variables environnement 
 		 */
-		public float gravity; // Gravité : Inutilisé !
+		// public float gravity; // Gravité : Inutilisé !
 		public float air_res; // Résistance de l'air
-		public float wind; // Vent : Inutilisé !
-		public float friction; // Friction : inutilisé !
+		// public float wind; // Vent : Inutilisé !
+		// public float friction; // Friction : inutilisé !
 		
 		private int idmax; // Identifiant unique maximum
 
