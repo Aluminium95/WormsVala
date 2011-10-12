@@ -483,7 +483,7 @@ namespace Jeu
 			#if DEBUG
 				print ("\t Gérant : bouge Player \n", CouleurConsole.VERT);
 			#endif
-			players[p-1].velx = 5 * x;
+			players[p-1].velx += 5 * x;
 		}
 	}
 }
