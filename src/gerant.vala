@@ -120,10 +120,10 @@ namespace Jeu
 			
 			this.idmax = 0;
 			
-			this.gravity = 9.8f;
+			// this.gravity = 9.8f;
 			this.air_res = 0.06f;
-			this.wind = 0.2f;
-			this.friction = 0.03f;
+			// this.wind = 0.2f;
+			// this.friction = 0.03f;
 			
 			
 			creerCannaux (3);
@@ -279,11 +279,11 @@ namespace Jeu
 			{
 				Jeu.Aff.draw_objet (o); // Affiche l'objet
 				
-				o.calcVel (this.air_res);
+				o.calcVel (this.air_res); // Calcule la vélocité de l'objet
 				
 				bool sortDuJeu;
 				
-				gererCollisions (o);
+				gererCollisions (o); // Gère les collisions
 				
 				/*
 				 * Conditions de sortie du terrain
