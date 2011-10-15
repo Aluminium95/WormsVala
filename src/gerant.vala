@@ -34,6 +34,19 @@ namespace Jeu
 		delegate void delegateJoueurTire (Personnage p, TuplePos t);
 		
 		/**
+		 * Signaux pour demander l'affichage
+		 */
+		public signal void needDrawLine (int x1, int y1, int x2, int y2);
+		public signal void needDrawObjet (Objet o);
+		public signal void needDrawTerrain (Terrain t);
+		
+		/**
+		 * Signaux pour demander le son
+		 */
+		public signal void needPlayHit (); // frapper/collision
+		public signal void needPlayBam (); // sort de l'écran ( bam contre le mur :D )
+		
+		/**
 		 * Delegate pour qu'un joueur frappe !
 		 * Regarde dans tous les terrains autour de celui du
 		 * personnage
@@ -71,12 +84,12 @@ namespace Jeu
 			{
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i+1].addObjet (o);
-				Jeu.Aff.son.play (2,2);
+				needPlayBam ();
 				return true;
 			} else if ( !d && o.t.i > 0 )  {
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i-1].addObjet (o);
-				Jeu.Aff.son.play (2,2);
+				needPlayBam ();
 				return true;
 			} else { // Si on peut pas changer de terrain
 				return false; 
@@ -274,18 +287,16 @@ namespace Jeu
 		 * 			+ Les fait changer de terrain | zone si nécessaire
 		 */
 		public void execute ()
-		{
-			Jeu.Aff.draw ();
-			
+		{			
 			foreach ( Terrain t in listeTerrains )
 			{
-				Jeu.Aff.draw_terrain (t);
-				Jeu.Aff.draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
+				needDrawTerrain (t);
+				needDrawLine (t.start, t.hg, t.start + t.largeur, t.hd);
 			}
 			
 			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
 			{
-				Jeu.Aff.draw_objet (o); // Affiche l'objet
+				needDrawObjet (o); // Affiche l'objet
 				
 				o.calcVel (this.air_res); // Calcule la vélocité de l'objet
 				
@@ -327,7 +338,7 @@ namespace Jeu
 			
 			foreach ( var p in players )
 			{
-				Jeu.Aff.draw_objet (p); // Affiche l'objet
+				needDrawObjet (p); // Affiche l'objet
 				
 				p.calcVel (this.air_res);
 				

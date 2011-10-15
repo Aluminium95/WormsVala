@@ -10,44 +10,41 @@ namespace Jeu
 	 */
 	public class Aff : Object {
 
-		public static const int SCREEN_WIDTH = 800; // Largeur de l'écran
-		public static const int SCREEN_HEIGHT = 400; // Hauteur de l'écran
+		public const int SCREEN_WIDTH = 800; // Largeur de l'écran
+		public const int SCREEN_HEIGHT = 400; // Hauteur de l'écran
 		
-		private static const int SCREEN_BPP = 32;
-		public static const int DELAY = 20; // Délai entre chaque tour de boucle
+		private const int SCREEN_BPP = 32;
+		public const int DELAY = 20; // Délai entre chaque tour de boucle
 
-		private static unowned SDL.Screen screen; // L'écran 
+		private unowned SDL.Screen screen; // L'écran 
 		
-		private static SDL.Surface surf; // La surface de fond
+		private SDL.Surface surf; // La surface de fond
 		
-		private static GLib.Rand rand; // Le générateur de nombre aléatoires
+		private GLib.Rand rand; // Le générateur de nombre aléatoires
 		
-		public static Son son; // Le gestionnaire de son
+		public bool done; // Tant que l'affichage n'est pas fini
 		
-		public static bool done; // 
-		
-		public static Gerant g; // Le gestionnaire du jeu !
+		public delegate void draw_line (int x1, int y1, int x2, int y2);
+		public delegate void draw_objet (Objet o);
+		public delegate void draw_terrain (Terrain t);
 		
 		/**
-		 * Initialise les objets 
+		 * Constructeur 
 		 */
-		public static void init () {
+		public Aff ()
+		{
 			#if DEBUG
 				print ("\tAff : Initialisation \n", CouleurConsole.BLEU);
 			#endif
-			son = new Son ();
-			rand = new GLib.Rand ();			
-			g = new Gerant ();
+			rand = new GLib.Rand ();
+			
+			init_video ();
 		}
 		
 		/**
 		 * Fait tourner la boucle principale
 		 */
-		public static void run () {
-			init_video ();
-			
-			son.music.volume (25);
-			son.music.play (-1);
+		public void run () {
 			
 			while (!done) {
 				screen.fill (null,5468);
@@ -74,7 +71,7 @@ namespace Jeu
 		/**
 		 * Initialise la vidéo
 		 */
-		private static void init_video () {
+		private void init_video () {
 			#if DEBUG
 				print ("\tAff : Initialisation de la vidéo\n", CouleurConsole.BLEU);
 			#endif 
@@ -96,7 +93,7 @@ namespace Jeu
 		/**
 		 * Dessine le fond 
 		 */
-		public static void draw () {
+		public void draw () {
 			int16 x = (int16) rand.int_range (0, screen.w);
 			int16 y = (int16) rand.int_range (0, screen.h);
 			int16 radius = (int16) rand.int_range (0, 100);
@@ -111,7 +108,7 @@ namespace Jeu
 		/**
 		 * Dessine un objet
 		 */
-		public static void draw_objet (Objet o)
+		public void draw_objet (Objet o)
 		{
 			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, o.col);
 			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0xFFFFFFF);
@@ -120,7 +117,7 @@ namespace Jeu
 		/**
 		 * Dessine un terrain
 		 */
-		public static void draw_terrain (Terrain t)
+		public void draw_terrain (Terrain t)
 		{
 			
 			int16[] vx = {
@@ -142,7 +139,7 @@ namespace Jeu
 		/**
 		 * Dessine une ligne 
 		 */
-		public static void draw_line (int x1, int y1, int x2, int y2)
+		public void draw_line (int x1, int y1, int x2, int y2)
 		{
 			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 0xFFFFFFF);
 		}
@@ -150,7 +147,7 @@ namespace Jeu
 		/**
 		 * Fait la boucle événementielle
 		 */
-		private static void process_events () {
+		private void process_events () {
 			
 			Event event = Event ();
 			while (Event.poll (event) == 1) {
@@ -170,7 +167,7 @@ namespace Jeu
 		 * Récupère la touche appuyée et fait les actions 
 		 * nécessaires en fonction
 		 */
-		private static void on_keyboard_event (KeyboardEvent event) {
+		private void on_keyboard_event (KeyboardEvent event) {
 			#if DEBUG
 				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
 			#endif
