@@ -1,5 +1,6 @@
 using GLib;
 using SDL;
+using Gee;
 
 namespace Jeu
 {
@@ -13,7 +14,8 @@ namespace Jeu
 		 */
 		public class Menu : Object 
 		{
-			public MenuAffiche menu;
+			public MenuAffiche menu {get;private set;}
+			private HashSet<Bouton> boutons; // Boutons du menu
 			
 			/**
 			 * Constructeur
@@ -21,6 +23,15 @@ namespace Jeu
 			public Menu ()
 			{
 				menu = MenuAffiche.START; // Premier menu !
+				boutouns = new HashSet<Bouton> ();
+			}
+			
+			/**
+			 * Un clic sur la position (@x,@y)
+			 */
+			public void clic (int x, int y)
+			{
+				
 			}
 		}
 		
