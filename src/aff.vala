@@ -44,28 +44,10 @@ namespace Jeu
 		/**
 		 * Fait tourner la boucle principale
 		 */
-		public void run () {
-			
-			while (!done) {
+		public void affiche () {
 				screen.fill (null,5468);
-				g.execute ();
-				process_events ();
-				/*
-				 * Quitte sans attendre le delai ni rafaichir l'écran
-				 * si durant l'éxécution done = true
-				 */
-				if (done) { break; }
-				
 				screen.flip ();
-				SDL.Timer.delay (DELAY);
 			}
-			#if DEBUG
-				print ("\tAff : Boucle principale finie\n", CouleurConsole.BLEU);
-			#endif
-			son.quit ();
-			#if DEBUG 
-				print ("\tAff : Son quitté\n", CouleurConsole.BLEU);
-			#endif
 		}
 		
 		/**

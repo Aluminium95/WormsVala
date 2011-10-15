@@ -139,10 +139,6 @@ namespace Jeu
 			// this.wind = 0.2f;
 			// this.friction = 0.03f;
 			
-			
-			creerCannaux (3);
-			creerSons ();
-			
 			/*
 			 * Appel des fonctions créatrices 
 			 */
@@ -429,37 +425,6 @@ namespace Jeu
 				t = o.t.i - 1; // si c'est un terrain normal
 			}
 			collision (o,ref listeTerrains,t);
-		}
-		
-		/**
-		 * Crée les sons : 
-		 * 		@hit : 0
-		 * 		@terrain : 1
-		 * 		@bordure : 2
-		 */
-		private void creerSons ()
-		{
-			Jeu.Aff.son.addSon (Config.MUSIQUE + "/hit.ogg");
-			Jeu.Aff.son.addSon (Config.MUSIQUE + "/terrain.ogg");
-			Jeu.Aff.son.addSon (Config.MUSIQUE + "/bordure.ogg");
-		}
-		
-		/**
-		 * Crée les cannaux et met les volumes des 
-		 * trois premiers cannaux comme ceci :
-		 * 		@0 = 25
-		 * 		@1 = 25
-		 * 		@2 = 120
-		 */
-		private void creerCannaux (int nbr)
-		{
-			for ( int i = 0; i < nbr; i++ )
-			{
-				Jeu.Aff.son.addChannel ();
-			}
-			Jeu.Aff.son.setChannelVolume (0, 25);
-			Jeu.Aff.son.setChannelVolume (2, 50);
-			Jeu.Aff.son.setChannelVolume (3, 120);
 		}
 		
 		/**

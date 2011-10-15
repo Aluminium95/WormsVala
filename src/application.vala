@@ -17,9 +17,8 @@ namespace Jeu
 			s = new Son ();
 			
 			g = new Gerant ();
-			g.needDrawLine.connect (a.draw_line);
-			g.needDrawObjet.connect (a.draw_objet);
-			g.needDrawTerrain.connect (a.draw_terrain);
+			
+			connectSignals();
 			
 			done = false;
 		}
@@ -42,6 +41,21 @@ namespace Jeu
 				
 				SDL.Timer.delay (DELAY);
 			}
+		}
+		
+		/**
+		 * Connection des signaux de l'application
+		 */
+		public void connectSignals ()
+		{
+			g.needDrawLine.connect (a.draw_line);
+			g.needDrawObjet.connect (a.draw_objet);
+			g.needDrawTerrain.connect (a.draw_terrain);
+			g.needPlayHit.connect (
+			
+			Jeu.Aff.son.addSon (Config.MUSIQUE + "/hit.ogg");
+			Jeu.Aff.son.addSon (Config.MUSIQUE + "/terrain.ogg");
+			Jeu.Aff.son.addSon (Config.MUSIQUE + "/bordure.ogg");
 		}
 	}
 }

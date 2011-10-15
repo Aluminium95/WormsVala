@@ -92,13 +92,5 @@ namespace Jeu
 			#endif
 			sons[son].volume (vol);
 		}
-		
-		/**
-		 * Quitte tous les systèmes 
-		 */
-		public void quit () // Détruit tous les sons …
-		{
-			
-		}
 	}
 }
