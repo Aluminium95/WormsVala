@@ -33,20 +33,27 @@ namespace Jeu
 		 */
 		public void run ()
 		{
+			s.music.play (-1); // Joue la musique de fond en boucle
 			
-			s.music.play (-1);
 			while (!done)
 			{
-				g.execute ();
-				process_events ();
-				a.affiche ();
+				a.clearscr (); // Efface l'écran
+				
+				a.draw (); // Dessine le fond animé 
+				
+				g.execute (); // Execute un tour de boucle du jeu
+				
+				process_events (); // Process les évent
+				
+				a.affiche (); // Rafraichit l'écran
+				
 				/*
 				 * Quitte sans attendre le delai ni rafaichir l'écran
 				 * si durant l'éxécution done = true
 				 */
 				if (done) { break; }
 				
-				SDL.Timer.delay (DELAY);
+				SDL.Timer.delay (DELAY); // Wait le délai
 			}
 		}
 		

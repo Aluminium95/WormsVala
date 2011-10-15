@@ -44,9 +44,18 @@ namespace Jeu
 		}
 		
 		/**
-		 * Fait tourner la boucle principale
+		 * Efface l'écran
 		 */
-		public void affiche () {
+		public void clearscr ()
+		{
+			screen.fill (null,5468);
+		}
+		
+		/**
+		 * Raffraichit l'écran
+		 */
+		public void affiche () 
+		{
 				screen.flip ();
 		}
 		
