@@ -5,7 +5,7 @@ src="src src/Objets src/Objets/IA src/Armes"
 packages="gee-1.0 sdl sdl-gfx sdl-mixer config" # Paquets à utiliser
 ccargs="lSDL_gfx lSDL_mixer" # Arguments passés au compilo C
 
-props="-D DEBUG -g --save-temps --enable-experimental --thread --enable-mem-profiler --enable-checking " # Arguments supplémentaires de debug
+props="-D DEBUG -g --save-temps --enable-experimental --thread --enable-mem-profiler" # Arguments supplémentaires de debug
 
 # Définition des constantes du paquet 
 vars[0]="MUSIQUE=\"`pwd`/Musique\""
