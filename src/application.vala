@@ -20,6 +20,7 @@ namespace Jeu
 			s = new Son ();
 			s.hit = Config.MUSIQUE + "/hit.ogg";
 			s.bam = Config.MUSIQUE + "/terrain.ogg";
+			s.createSons ();
 			
 			g = new Gerant ();
 			
