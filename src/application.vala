@@ -33,11 +33,13 @@ namespace Jeu
 		 */
 		public void run ()
 		{
+			
+			s.music.play (-1);
 			while (!done)
 			{
 				g.execute ();
 				process_events ();
-				
+				a.affiche ();
 				/*
 				 * Quitte sans attendre le delai ni rafaichir l'écran
 				 * si durant l'éxécution done = true

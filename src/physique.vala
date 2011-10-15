@@ -3,12 +3,11 @@ using Gee;
 
 namespace Jeu
 {
-	public void collision (Objet o, ref ArrayList<Terrain> t, int start)
+	public void collision (Gerant g, Objet o, ref ArrayList<Terrain> t, int start)
 	{
 		/*
 		 * Gestion des collisions 
 		 */
-		
 		for (int i = 0; i < 3; i++)
 		{
 			foreach ( var ia in t[start].objets )
@@ -22,7 +21,7 @@ namespace Jeu
 					if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 					{
 						
-						
+						g.needPlayHit ();
 						#if DEBUG 
 							print ("\t\t\t Physique : Collision !\n", CouleurConsole.CYAN);
 						#endif

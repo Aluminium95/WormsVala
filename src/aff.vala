@@ -47,7 +47,6 @@ namespace Jeu
 		 * Fait tourner la boucle principale
 		 */
 		public void affiche () {
-				screen.fill (null,5468);
 				screen.flip ();
 		}
 		

@@ -426,7 +426,7 @@ namespace Jeu
 			} else {
 				t = o.t.i - 1; // si c'est un terrain normal
 			}
-			collision (o,ref listeTerrains,t);
+			collision (this, o,ref listeTerrains,t);
 		}
 		
 		/**
