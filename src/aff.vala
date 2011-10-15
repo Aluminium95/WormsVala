@@ -125,7 +125,7 @@ namespace Jeu
 			} else {
 				Polygon.fill_rgba (screen, vx, vy, 4, 'F', 'F', 'F', 255);
 			}
-			Line.color (screen, (int16) (t.start + t.largeur), 0, (int16) (t.start + t.largeur), (int16) SCREEN_HEIGHT, 0xFFFFFFF);
+			// Line.color (screen, (int16) (t.start + t.largeur), 0, (int16) (t.start + t.largeur), (int16) SCREEN_HEIGHT, 0xFFFFFFF);
 		}
 		
 		/**

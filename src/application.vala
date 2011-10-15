@@ -131,7 +131,7 @@ namespace Jeu
 					this.done = true;
 					break;
 				case KeySymbol.m:
-					/* affiche le menu */
+					this.menu = true;
 					s.music.pause ();
 					break;
 				default:
@@ -149,7 +149,11 @@ namespace Jeu
 					break;
 				case Menu.ActionMenu.COMMENCER:
 					this.menu = false;
-					//g.restart ();
+					g.restart ();
+					s.music.rewind ();
+					break;
+				case Menu.ActionMenu.RECOMMENCER:
+					this.menu = false;
 					s.music.resume ();
 					break;
 			}
