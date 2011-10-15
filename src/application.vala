@@ -14,8 +14,13 @@ namespace Jeu
 		public Application ()
 		{
 			a = new Aff ();
-			g = new Gerant ();
 			s = new Son ();
+			
+			g = new Gerant ();
+			g.needDrawLine.connect (a.draw_line);
+			g.needDrawObjet.connect (a.draw_objet);
+			g.needDrawTerrain.connect (a.draw_terrain);
+			
 			done = false;
 		}
 		
