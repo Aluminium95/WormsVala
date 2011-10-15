@@ -1,5 +1,6 @@
 using GLib;
 using Gee;
+using SDL;
 
 namespace Jeu
 {
@@ -25,7 +26,7 @@ namespace Jeu
 
 		private int tailleTotaleTerrain = 0; // Taille de tous les terrains réunis
 
-		/**
+		/** 
 		 * Délégates pour connecter aux signaux 
 		 */
 		delegate void delegateJoueurFrappe (Personnage p);
@@ -241,9 +242,12 @@ namespace Jeu
 		 */
 		private void creerJoueur (int nbr)
 		{
+			nbr = (nbr > 2) ? 2 : nbr;
 			#if DEBUG
 				print ("\t\t Gerant : Création des Players \n", CouleurConsole.VERT);
 			#endif
+			
+			
 			for ( int i = 0; i < nbr; i++ )
 			{
 				int x = i * 20;
@@ -251,6 +255,10 @@ namespace Jeu
 				p.i = idmax;
 				
 				p.col = 0xCCCCCCC * (i + 60) * 5;
+				
+				p.left = KeySymbol.e;
+				p.right = KeySymbol.t;
+				p.up = KeySymbol.k;
 				
 				addPlayer (p);
 				
@@ -444,14 +452,18 @@ namespace Jeu
 		}
 		
 		/**
-		 * Fait bouger le joueur numéro @p avec une force de @x
+		 * Brute force pour faire bouger un joueur avec la touche enfoncée @k
 		 */
-		public void movePlayer (int p, int x)
+		public void movePlayer (KeySymbol k)
 		{
 			#if DEBUG
 				print ("\t\t Gérant : bouge Player \n", CouleurConsole.VERT);
 			#endif
-			players[p-1].velx += 2 * x;
+			foreach (var p in players)
+			{
+				bool b = p.computeKey (k);
+				if (b) { break; }
+			}
 		}
 	}
 }

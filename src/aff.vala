@@ -174,34 +174,16 @@ namespace Jeu
 			#if DEBUG
 				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
 			#endif
-			if(event.keysym.sym==KeySymbol.q)
+			switch (event.keysym.sym)
 			{
-				Jeu.Aff.done = true;
-			} else if ( event.keysym.sym == KeySymbol.m )  {
-				/* Afficher menu */
-			} else {
-				clavier_joueur (event.keysym.sym);
-			}
-		}
-		
-		/**
-		 * Gère les mouvements des joueurs en fonction 
-		 * des touches utilisées
-		 */
-		private static void clavier_joueur (KeySymbol k)
-		{
-			#if DEBUG
-				print ("\tAff : entrée clavier joueur !\n", CouleurConsole.BLEU);
-			#endif
-			switch (k)
-			{
-				case KeySymbol.t:
-					/* demande le déplacement du personnage 1 de 1 */
-					g.movePlayer (1,1);
+				case KeySymbol.q:
+					Jeu.Aff.done = true;
 					break;
-				case KeySymbol.e:
-					/* demande le déplacement du personnage -1 de 1 */
-					g.movePlayer (1,-1);
+				case KeySymbol.m:
+					/* affiche le menu */
+					break;
+				default:
+					g.movePlayer (event.keysym.sym);
 					break;
 			}
 		}
