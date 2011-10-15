@@ -192,7 +192,7 @@ namespace Jeu
 				velx = (velx + t.collage > 0) ? 0 : velx + t.collage;
 			}
 			
-			this.vely += this.t.accely;
+			this.vely += this.t.accely; // Stupide !
 			this.vely += ( this.vely < 0 ) ? res : -res;
 			
 		}
