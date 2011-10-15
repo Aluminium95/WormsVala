@@ -29,6 +29,7 @@ namespace Jeu
 		public delegate void drawLine (int x1, int y1, int x2, int y2);
 		public delegate void drawObjet (Objet o);
 		public delegate void drawTerrain (Terrain t);
+		public delegate void drawBouton (Menu.Bouton b);
 		
 		/**
 		 * Constructeur 
@@ -133,6 +134,15 @@ namespace Jeu
 		public void draw_line (int x1, int y1, int x2, int y2)
 		{
 			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 0xFFFFFFF);
+		}
+		
+		/**
+		 * Dessine un bouton
+		 */
+		public void draw_bouton (Menu.Bouton b)
+		{
+			Rectangle.fill_color (screen, b.x, b.y, b.x2, b.y2, 98654321);
+			Text.color (screen, (int16) ((b.x2 - b.x) / 4 + b.x) , (int16) ((b.y2 - b.y) / 2 + b.y), b.text,  0xFFFFFFF);
 		}
 	}
 }

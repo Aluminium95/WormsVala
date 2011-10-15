@@ -11,11 +11,11 @@ namespace Jeu
 		public class Bouton : Object
 		{
 			// Point Haut Gauche
-			public int x { get; private set; }
-			public int y { get; private set; }
+			public int16 x { get; private set; }
+			public int16 y { get; private set; }
 			// Point Bas Droite
-			public int x2 { get; private set; }
-			public int y2 { get; private set; }
+			public int16 x2 { get; private set; }
+			public int16 y2 { get; private set; }
 			
 			// Texte du bouton
 			public string text { get; private set; }
@@ -23,12 +23,12 @@ namespace Jeu
 			/**
 			 * Constructeur
 			 */
-			public Bouton (int x, int y, int x1, int y1, string text)
+			public Bouton (int16 x, int16 y, int16 x2, int16 y2, string text)
 			{
 				this.x = x;
 				this.y = y;
-				this.x1 = x1;
-				this.y1 = y1;
+				this.x2 = x2;
+				this.y2 = y2;
 				this.text = text;
 			}
 		}

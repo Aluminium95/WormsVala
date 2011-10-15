@@ -6,7 +6,7 @@ namespace Jeu
 	public class Application : Object
 	{
 		private Gerant g; // Moteur du jeu
-		private Menu m; // Menu du jeu
+		private Menu.Menu m; // Menu du jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		
@@ -44,10 +44,9 @@ namespace Jeu
 			{
 				a.clearscr (); // Efface l'écran
 				
-				a.draw (); // Dessine le fond animé 
-				
 				if (!menu)
 				{
+					a.draw (); // Dessine le fond animé 
 					g.execute (); // Execute un tour de boucle du jeu
 					process_events_gerant (); // Process les évent du gérant
 				} else { 
@@ -80,6 +79,7 @@ namespace Jeu
 			g.needPlayBam.connect (s.playBam);
 			
 			// Signaux de menu 
+			m.needDrawBouton.connect (a.draw_bouton);
 		}
 		
 		/**
@@ -107,7 +107,7 @@ namespace Jeu
 						this.done = true;
 						break;
 					case EventType.MOUSEBUTTONDOWN:
-						this.menu.clic (event.button.x,event.button.y);
+						this.m.clic (event.button.x,event.button.y);
 						break;
 				}
 			}
