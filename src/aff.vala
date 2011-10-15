@@ -24,9 +24,12 @@ namespace Jeu
 		
 		public bool done; // Tant que l'affichage n'est pas fini
 		
-		public delegate void draw_line (int x1, int y1, int x2, int y2);
-		public delegate void draw_objet (Objet o);
-		public delegate void draw_terrain (Terrain t);
+		/**
+		 * Délégates pour connection aux signaux
+		 */
+		public delegate void drawLine (int x1, int y1, int x2, int y2);
+		public delegate void drawObjet (Objet o);
+		public delegate void drawTerrain (Terrain t);
 		
 		/**
 		 * Constructeur 

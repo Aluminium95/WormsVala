@@ -15,7 +15,12 @@ namespace Jeu
 		
 		private Channel[] chans; // Liste des cannaux 
 		
-		private Chunk[] sons; // Liste des sons 
+		private Chunk[] sons; // Liste des sons
+		
+		public delegate void playSon ();
+		
+		public string hit; // Chemin vers hit
+		public string bam; // Chemin vers bam
 		
 		public Son ()
 		{
@@ -28,6 +33,24 @@ namespace Jeu
 			
 			music = new Music (Config.MUSIQUE + "/mus.ogg");
 			music.volume (50);
+		}
+		
+		public void createSons ()
+		{
+			this.addChannel ();
+			this.addSon (hit);
+			this.addChannel ();
+			this.addSon (bam);
+		}
+		
+		public void playHit ()
+		{
+			play (0,0);
+		}
+		
+		public void playBam ()
+		{
+			play (1,1);
 		}
 		
 		/**

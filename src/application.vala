@@ -14,7 +14,10 @@ namespace Jeu
 		public Application ()
 		{
 			a = new Aff ();
+			
 			s = new Son ();
+			s.hit = Config.MUSIQUE + "/hit.ogg";
+			s.bam = Config.MUSIQUE + "/terrain.ogg";
 			
 			g = new Gerant ();
 			
@@ -51,11 +54,8 @@ namespace Jeu
 			g.needDrawLine.connect (a.draw_line);
 			g.needDrawObjet.connect (a.draw_objet);
 			g.needDrawTerrain.connect (a.draw_terrain);
-			g.needPlayHit.connect (
-			
-			Jeu.Aff.son.addSon (Config.MUSIQUE + "/hit.ogg");
-			Jeu.Aff.son.addSon (Config.MUSIQUE + "/terrain.ogg");
-			Jeu.Aff.son.addSon (Config.MUSIQUE + "/bordure.ogg");
+			g.needPlayHit.connect (s.playHit);
+			g.needPlayBam.connect (s.playBam);
 		}
 		
 		/**
