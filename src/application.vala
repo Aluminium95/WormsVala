@@ -9,6 +9,8 @@ namespace Jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		
+		public const int DELAY = 20; // Délai entre chaque tour de boucle
+		
 		private bool done;
 		
 		public Application ()
@@ -67,10 +69,10 @@ namespace Jeu
 			while (Event.poll (event) == 1) {
 		        switch (event.type) {
 		        	case EventType.QUIT:
-						Jeu.Aff.done = true;
+						this.done = true;
               	 		break;
 					case EventType.KEYDOWN:
-						Jeu.Aff.on_keyboard_event (event.key);
+						this.on_keyboard_event (event.key);
 						break;
 		        }
         	}
@@ -88,7 +90,7 @@ namespace Jeu
 			switch (event.keysym.sym)
 			{
 				case KeySymbol.q:
-					Jeu.Aff.done = true;
+					this.done = true;
 					break;
 				case KeySymbol.m:
 					/* affiche le menu */

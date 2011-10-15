@@ -14,7 +14,6 @@ namespace Jeu
 		public const int SCREEN_HEIGHT = 400; // Hauteur de l'écran
 		
 		private const int SCREEN_BPP = 32;
-		public const int DELAY = 20; // Délai entre chaque tour de boucle
 
 		private unowned SDL.Screen screen; // L'écran 
 		

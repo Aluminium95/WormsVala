@@ -325,7 +325,8 @@ namespace Jeu
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
 					o.velx = o.velx/2;
-					Jeu.Aff.son.play (1,1);
+					
+					needPlayBam ();
 				} else {
 					o.move ((int)o.velx); // Pas de y !!!
 				}
@@ -362,7 +363,8 @@ namespace Jeu
 						B = Jeu.Aff.SCREEN_WIDTH - 5;
 					}
 					p.move ((int) (B - p.pos.x - p.r));
-					Jeu.Aff.son.play (1,1);
+					
+					needPlayBam ();
 				} else {
 					p.move ((int)p.velx); // Pas de y !!!
 				}

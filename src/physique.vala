@@ -21,7 +21,7 @@ namespace Jeu
 					
 					if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 					{
-						Jeu.Aff.son.play (0,0);
+						
 						
 						#if DEBUG 
 							print ("\t\t\t Physique : Collision !\n", CouleurConsole.CYAN);

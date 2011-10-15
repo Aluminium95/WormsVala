@@ -13,12 +13,12 @@ void main (string[] args)
 	SDLMixer.open (44100, 0, 2, 1024);
 	SDLMixer.Channel.allocate (2);
 	
-	Jeu.Aff.init ();
+	var jeu = new Jeu.Application ();
 	#if DEBUG 
 		Jeu.print ("Jeu initialisé !\n", Jeu.CouleurConsole.JAUNE);
 	#endif
 	
-	Jeu.Aff.run ();
+	jeu.run ();
 	#if DEBUG 
 		Jeu.print ("Jeu terminé !\n", Jeu.CouleurConsole.JAUNE);
 	#endif
