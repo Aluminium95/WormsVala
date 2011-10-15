@@ -5,6 +5,8 @@ src="src src/Objets src/Objets/IA src/Armes"
 packages="gee-1.0 sdl sdl-gfx sdl-mixer config" # Paquets à utiliser
 ccargs="lSDL_gfx lSDL_mixer" # Arguments passés au compilo C
 
+props="-D DEBUG -g --save-temps --enable-experimental --thread --enable-mem-profiler --enable-checking " # Arguments supplémentaires de debug
+
 # Définition des constantes du paquet 
 vars[0]="MUSIQUE=\"`pwd`/Musique\""
 vars[1]="FOND=\"`pwd`/Images/Fonds\""
@@ -38,5 +40,5 @@ do
 done
 
 ### --- EXECUTING --- ###
-CMD="valac -D DEBUG -g --save-temps $listedirs -o WormsVala -X -I\"`pwd`/config.h\" --vapidir vapi/ $listepaquets $listeccargs $listevars "
+CMD="valac $props $listedirs -o WormsVala -X -I\"`pwd`/config.h\" --vapidir vapi/ $listepaquets $listeccargs $listevars "
 $CMD
