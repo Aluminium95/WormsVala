@@ -49,11 +49,11 @@ namespace Jeu
 				if (!menu)
 				{
 					g.execute (); // Execute un tour de boucle du jeu
+					process_events_gerant (); // Process les évent du gérant
 				} else { 
 					m.execute ();
+					process_events_menu (); // Process les évent du menu
 				}
-				
-				process_events (); // Process les évent
 				
 				a.affiche (); // Rafraichit l'écran
 				
@@ -85,8 +85,7 @@ namespace Jeu
 		/**
 		 * Fait la boucle événementielle
 		 */
-		private void process_events () {
-			
+		private void process_events_gerant () {
 			Event event = Event ();
 			while (Event.poll (event) == 1) {
 		        switch (event.type) {
@@ -98,7 +97,20 @@ namespace Jeu
 						break;
 		        }
         	}
-        	
+		}
+		
+		private void process_events_menu () {
+			Event event = Event ();
+			while (Event.poll (event) == 1) {
+				switch (event.type) {
+					case EventType.QUIT:
+						this.done = true;
+						break;
+					case EventType.MOUSEBUTTONDOWN:
+						this.menu.clic (event.button.x,event.button.y);
+						break;
+				}
+			}
 		}
 		
 		/**
