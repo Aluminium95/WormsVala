@@ -15,6 +15,8 @@ namespace Jeu
 		private bool done;
 		private bool menu;
 		
+		private delegate void dActionMenu (Menu.ActionMenu a);
+		
 		public Application ()
 		{
 			a = new Aff ();
@@ -80,6 +82,7 @@ namespace Jeu
 			
 			// Signaux de menu 
 			m.needDrawBouton.connect (a.draw_bouton);
+			m.actionMenu.connect (this.gererActionMenu);
 		}
 		
 		/**
@@ -131,6 +134,20 @@ namespace Jeu
 					break;
 				default:
 					g.movePlayer (event.keysym.sym);
+					break;
+			}
+		}
+		
+		private void gererActionMenu (Menu.ActionMenu a)
+		{
+			switch (a)
+			{
+				case Menu.ActionMenu.QUITTER:
+					this.done = true;
+					break;
+				case Menu.ActionMenu.COMMENCER:
+					this.menu = false;
+					// g.restart (); <-- à faire !
 					break;
 			}
 		}

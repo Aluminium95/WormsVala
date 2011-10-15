@@ -19,6 +19,8 @@ namespace Jeu
 			
 			public signal void needDrawBouton (Bouton b);
 			
+			public signal void actionMenu (ActionMenu a); 
+			
 			/**
 			 * Constructeur
 			 */
@@ -45,10 +47,14 @@ namespace Jeu
 			 */
 			public void clic (int x, int y)
 			{
-				/**foreach (var b in boutons)
+				foreach (var b in boutons)
 				{
-					Tester si le point est dans le bouton !
-				}*/
+					if ( (b.x < x < b.x2 ) && (b.y < y < b.y2 ) )
+					{
+						actionMenu (b.action);
+						break;
+					}
+				}
 			}
 			
 			/**
@@ -57,8 +63,8 @@ namespace Jeu
 			public void creer_menu_start ()
 			{
 				this.boutons.clear ();
-				this.boutons.add (new Bouton (20,20,150,60,"Quitter ?"));
-				this.boutons.add (new Bouton (150,60,300,120, "Commencer"));
+				this.boutons.add (new Bouton (20,20,150,60,"Quitter ?", ActionMenu.COMMENCER));
+				this.boutons.add (new Bouton (150,60,300,120, "Commencer", ActionMenu.QUITTER));
 			}
 			
 			/**
@@ -76,6 +82,11 @@ namespace Jeu
 		public enum MenuAffiche 
 		{
 			START, RUNNING, LEVEL, END
+		}
+		
+		public enum ActionMenu 
+		{
+			COMMENCER, CONTINUER, QUITTER
 		}
 	}
 }

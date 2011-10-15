@@ -7,6 +7,7 @@ namespace Jeu
 	{
 		/**
 		 * Classe qui gère un bouton dans le menu
+		 * On pourrait juste faire une structure !!!!
 		 */
 		public class Bouton : Object
 		{
@@ -20,16 +21,19 @@ namespace Jeu
 			// Texte du bouton
 			public string text { get; private set; }
 			
+			public ActionMenu action { get; private set; }
+			
 			/**
 			 * Constructeur
 			 */
-			public Bouton (int16 x, int16 y, int16 x2, int16 y2, string text)
+			public Bouton (int16 x, int16 y, int16 x2, int16 y2, string text, ActionMenu a)
 			{
 				this.x = x;
 				this.y = y;
 				this.x2 = x2;
 				this.y2 = y2;
 				this.text = text;
+				this.action = a;
 			}
 		}
 	}
