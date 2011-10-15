@@ -13,13 +13,23 @@ namespace Jeu
 		 */
 		public class Menu : Object 
 		{
+			public MenuAffiche menu;
+			
 			/**
 			 * Constructeur
 			 */
 			public Menu ()
 			{
-				
+				menu = MenuAffiche.START; // Premier menu !
 			}
+		}
+		
+		/**
+		 * Énnumération des différents menus possibles 
+		 */
+		public enum MenuAffiche 
+		{
+			START, RUNNING, LEVEL, END
 		}
 	}
 }

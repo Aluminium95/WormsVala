@@ -13,6 +13,7 @@ namespace Jeu
 		public const int DELAY = 20; // Délai entre chaque tour de boucle
 		
 		private bool done;
+		private bool menu;
 		
 		public Application ()
 		{
@@ -29,6 +30,7 @@ namespace Jeu
 			connectSignals();
 			
 			done = false;
+			menu = true; // On affiche le menu au début
 		}
 		
 		/**
@@ -44,7 +46,12 @@ namespace Jeu
 				
 				a.draw (); // Dessine le fond animé 
 				
-				g.execute (); // Execute un tour de boucle du jeu
+				if (!menu)
+				{
+					g.execute (); // Execute un tour de boucle du jeu
+				} else { 
+					m.execute ();
+				}
 				
 				process_events (); // Process les évent
 				
@@ -65,11 +72,14 @@ namespace Jeu
 		 */
 		public void connectSignals ()
 		{
+			// Signaux de gérant 
 			g.needDrawLine.connect (a.draw_line);
 			g.needDrawObjet.connect (a.draw_objet);
 			g.needDrawTerrain.connect (a.draw_terrain);
 			g.needPlayHit.connect (s.playHit);
 			g.needPlayBam.connect (s.playBam);
+			
+			// Signaux de menu 
 		}
 		
 		/**
