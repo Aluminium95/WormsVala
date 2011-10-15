@@ -6,6 +6,7 @@ namespace Jeu
 	public class Application : Object
 	{
 		private Gerant g; // Moteur du jeu
+		private Menu m; // Menu du jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		
@@ -23,6 +24,7 @@ namespace Jeu
 			s.createSons ();
 			
 			g = new Gerant ();
+			m = new Menu.Menu ();
 			
 			connectSignals();
 			
