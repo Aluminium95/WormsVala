@@ -10,6 +10,9 @@ namespace Jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		
+		private bool keyHeld[256];
+		private KeySymbol keySym[256];
+		
 		public const int DELAY = 20; // Délai entre chaque tour de boucle
 		
 		private bool done;
@@ -18,7 +21,7 @@ namespace Jeu
 		private delegate void dActionMenu (Menu.ActionMenu a);
 		
 		public Application ()
-		{
+		{		
 			a = new Aff ();
 			
 			s = new Son ();
@@ -56,7 +59,7 @@ namespace Jeu
 					m.execute ();
 					process_events_menu (); // Process les évent du menu
 				}
-				
+				touchesEnfoncees ();
 				a.affiche (); // Rafraichit l'écran
 				
 				/*
@@ -97,7 +100,10 @@ namespace Jeu
 						this.done = true;
               	 		break;
 					case EventType.KEYDOWN:
-						this.on_keyboard_event (event.key);
+						this.on_keyboard_event (event.key, true);
+						break;
+					case EventType.KEYUP:
+						this.on_keyboard_event (event.key, false);
 						break;
 		        }
         	}
@@ -121,7 +127,7 @@ namespace Jeu
 		 * Récupère la touche appuyée et fait les actions 
 		 * nécessaires en fonction
 		 */
-		private void on_keyboard_event (KeyboardEvent event) {
+		private void on_keyboard_event (KeyboardEvent event, bool down) {
 			#if DEBUG
 				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
 			#endif
@@ -135,7 +141,8 @@ namespace Jeu
 					s.music.pause ();
 					break;
 				default:
-					g.movePlayer (event.keysym.sym);
+					keyHeld[event.keysym.sym] = down;
+					keySym[event.keysym.sym] = event.keysym.sym;
 					break;
 			}
 		}
@@ -163,6 +170,20 @@ namespace Jeu
 					this.menu = false;
 					s.music.resume ();
 					break;
+			}
+		}
+		
+		/**
+		 * Gère les touches appuyées
+		 */
+		private void touchesEnfoncees ()
+		{
+			for (int i = 0; i < 256; i++ )
+			{
+				if ( keyHeld[i] == true )
+				{
+					g.movePlayer (keySym[i]);
+				}
 			}
 		}
 	}
