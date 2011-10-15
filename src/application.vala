@@ -149,7 +149,7 @@ namespace Jeu
 					break;
 				case Menu.ActionMenu.COMMENCER:
 					this.menu = false;
-					g.restart ();
+					//g.restart ();
 					s.music.resume ();
 					break;
 			}
