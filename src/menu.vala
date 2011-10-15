@@ -64,7 +64,8 @@ namespace Jeu
 			{
 				this.boutons.clear ();
 				this.boutons.add (new Bouton (20, 20, 150, 60, "Quitter ?", ActionMenu.QUITTER));
-				this.boutons.add (new Bouton (150, 60, 300, 120, "Commencer", ActionMenu.COMMENCER));
+				this.boutons.add (new Bouton (150, 60, 300, 120, "(Re)Commencer", ActionMenu.COMMENCER));
+				this.boutons.add (new Bouton (300, 200, 350, 400, "Reprendre", ActionMenu.CONTINUER));
 			}
 			
 			/**

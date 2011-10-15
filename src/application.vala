@@ -140,6 +140,9 @@ namespace Jeu
 			}
 		}
 		
+		/**
+		 * Gère les actionns retournées par le menu
+		 */
 		private void gererActionMenu (Menu.ActionMenu a)
 		{
 			switch (a)
@@ -150,9 +153,13 @@ namespace Jeu
 				case Menu.ActionMenu.COMMENCER:
 					this.menu = false;
 					g.restart ();
+					if ( s.music.is_paused () == 1 )
+					{
+						s.music.resume ();
+					}
 					s.music.rewind ();
 					break;
-				case Menu.ActionMenu.RECOMMENCER:
+				case Menu.ActionMenu.CONTINUER:
 					this.menu = false;
 					s.music.resume ();
 					break;
