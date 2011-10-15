@@ -41,9 +41,9 @@ namespace Jeu
 		{
 			if ( k == this.left)
 			{
-				this.velx -= 2;
+				this.velx -= 0.7f;
 			} else if ( k == this.right ) {
-				this.velx += 2;
+				this.velx += 0.7f;
 			} else if ( k == this.up ) {
 				/** Gestion des sauts !!!!! */
 			} else {
