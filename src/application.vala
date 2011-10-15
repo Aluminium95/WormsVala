@@ -40,7 +40,8 @@ namespace Jeu
 		 */
 		public void run ()
 		{
-			s.music.play (-1); // Joue la musique de fond en boucle
+			s.music.play (-1);
+			s.music.pause ();
 			
 			while (!done)
 			{
@@ -131,6 +132,7 @@ namespace Jeu
 					break;
 				case KeySymbol.m:
 					/* affiche le menu */
+					s.music.pause ();
 					break;
 				default:
 					g.movePlayer (event.keysym.sym);
@@ -148,6 +150,7 @@ namespace Jeu
 				case Menu.ActionMenu.COMMENCER:
 					this.menu = false;
 					g.restart ();
+					s.music.resume ();
 					break;
 			}
 		}
