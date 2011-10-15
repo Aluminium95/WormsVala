@@ -148,6 +148,20 @@ namespace Jeu
 		}
 		
 		/**
+		 * Recommence le jeu 
+		 */
+		public void restart ()
+		{
+			this.listeTerrains.clear ();
+			this.objets.clear ();
+			this.players.clear ();
+			
+			creerTerrain (10);
+			creerIA (2);
+			creerJoueur (1);
+		}
+		
+		/**
 		 * Créer les IAs du jeu
 		 */
 		private void creerIA (int nbr)

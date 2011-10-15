@@ -147,7 +147,7 @@ namespace Jeu
 					break;
 				case Menu.ActionMenu.COMMENCER:
 					this.menu = false;
-					// g.restart (); <-- à faire !
+					g.restart ();
 					break;
 			}
 		}
