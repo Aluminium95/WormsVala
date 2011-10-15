@@ -57,5 +57,46 @@ namespace Jeu
 			Jeu.Aff.son.addSon (Config.MUSIQUE + "/terrain.ogg");
 			Jeu.Aff.son.addSon (Config.MUSIQUE + "/bordure.ogg");
 		}
+		
+		/**
+		 * Fait la boucle événementielle
+		 */
+		private void process_events () {
+			
+			Event event = Event ();
+			while (Event.poll (event) == 1) {
+		        switch (event.type) {
+		        	case EventType.QUIT:
+						Jeu.Aff.done = true;
+              	 		break;
+					case EventType.KEYDOWN:
+						Jeu.Aff.on_keyboard_event (event.key);
+						break;
+		        }
+        	}
+        	
+		}
+		
+		/**
+		 * Récupère la touche appuyée et fait les actions 
+		 * nécessaires en fonction
+		 */
+		private void on_keyboard_event (KeyboardEvent event) {
+			#if DEBUG
+				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
+			#endif
+			switch (event.keysym.sym)
+			{
+				case KeySymbol.q:
+					Jeu.Aff.done = true;
+					break;
+				case KeySymbol.m:
+					/* affiche le menu */
+					break;
+				default:
+					g.movePlayer (event.keysym.sym);
+					break;
+			}
+		}
 	}
 }

@@ -47,7 +47,6 @@ namespace Jeu
 		public void affiche () {
 				screen.fill (null,5468);
 				screen.flip ();
-			}
 		}
 		
 		/**
@@ -124,47 +123,6 @@ namespace Jeu
 		public void draw_line (int x1, int y1, int x2, int y2)
 		{
 			Line.color (screen, (int16) x1, (int16) (SCREEN_HEIGHT - y1), (int16) x2, (int16) (SCREEN_HEIGHT - y2) , 0xFFFFFFF);
-		}
-
-		/**
-		 * Fait la boucle événementielle
-		 */
-		private void process_events () {
-			
-			Event event = Event ();
-			while (Event.poll (event) == 1) {
-		        switch (event.type) {
-		        	case EventType.QUIT:
-						Jeu.Aff.done = true;
-              	 		break;
-					case EventType.KEYDOWN:
-						Jeu.Aff.on_keyboard_event (event.key);
-						break;
-		        }
-        	}
-        	
-		}
-		
-		/**
-		 * Récupère la touche appuyée et fait les actions 
-		 * nécessaires en fonction
-		 */
-		private void on_keyboard_event (KeyboardEvent event) {
-			#if DEBUG
-				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
-			#endif
-			switch (event.keysym.sym)
-			{
-				case KeySymbol.q:
-					Jeu.Aff.done = true;
-					break;
-				case KeySymbol.m:
-					/* affiche le menu */
-					break;
-				default:
-					g.movePlayer (event.keysym.sym);
-					break;
-			}
 		}
 	}
 }
