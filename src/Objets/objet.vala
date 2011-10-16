@@ -80,7 +80,7 @@ namespace Jeu
 			
 			if ( this.m == Mouvement.SAUT)
 			{
-				if ( this.pos.x + (int) this.vely > this.t.getSol (this.pos.x) )
+				if ( this.pos.y + (int) this.vely > this.t.getSol (this.pos.x) )
 				{
 					this.pos.y += (int) this.vely;
 				} else {
