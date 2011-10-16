@@ -186,21 +186,19 @@ namespace Jeu
 		{
 			this.velx += (this.m == Mouvement.MARCHE ) ? this.t.accelx : 0;
 			
-			if ( velx > 0 )
-			{
-				velx -= this.w.air_res;
-				/* Si on change de signe, on met à 0 */
-				velx = (velx - t.collage < 0 && this.m == Mouvement.MARCHE) ? 0 : velx - t.collage;
-			} else if ( velx < 0 ) {
-				velx += this.w.air_res;
-				/* Si on change de signe, on met à 0 */
-				velx = (velx + t.collage > 0 && this.m == Mouvement.MARCHE) ? 0 : velx + t.collage;
-			}
+			velx += (velx < 0 ) ? this.w.air_res : -this.w.air_res;
 			
 			if ( this.m == Mouvement.SAUT )
 			{
 				this.vely -= this.masse * this.w.gravity / 10;
 				this.vely += ( this.vely < 0 ) ? this.w.air_res : -this.w.air_res;
+			} else if ( this.m == Mouvement.MARCHE ){
+				if ( velx > 0 )
+				{
+					velx = (velx - t.collage < 0 && this.m == Mouvement.MARCHE) ? 0 : velx - t.collage;
+				} else {
+					velx = (velx + t.collage > 0 && this.m == Mouvement.MARCHE) ? 0 : velx + t.collage;
+				}
 			}
 		}
 	}
