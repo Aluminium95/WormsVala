@@ -3,8 +3,7 @@
 PROGRAM = WormsVala
  
  
-# for most cases the following two are the only you'll need to change
-# add your source files here
+# Sources du programme
 SRC =	src/main.vala \
 		src/application.vala \
 		src/aff.vala \
@@ -25,38 +24,39 @@ SRC =	src/main.vala \
 			src/Armes/armeDist.vala
 			
  
-# add your used packges here
+# Paquets utilisés
 PKGS = 	--pkg gee-1.0 \
 		--pkg sdl \
 		--pkg sdl-gfx \
 		--pkg sdl-mixer \
 		--pkg config
 
+# Variables définies à la compilation
 CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \
 			-X -DFOND=\"`pwd`/Images/Fonds\" \
 			-X -DLOCALE=\"`pwd`\" \
 			-X -DDATA=\"`pwd`/Data\"
-			
+
+# Link des librairies SDL
 LINK = 	-X -lSDL -X -lSDL_gfx -X -lSDL_mixer
 
-# vala compiler
+# Commande pour compiler
 VALAC = valac --enable-experimental --thread
  
-# compiler options for a debug build
+# Option de debug
 VALACOPTS = -D DEBUG -g --save-temps --enable-mem-profiler 
  
 # set this as root makefile for Valencia
 BUILD_ROOT = 1
  
-# the 'all' target build a debug build
+# Le projet par défaut : debug
 all:
 	@$(VALAC) $(VALACOPTS)$(SRC) -o $(PROGRAM) -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG) 
 	
  
-# the 'release' target builds a release build
-# you might want to disabled asserts also
+# Le projet Release : non debug, optimisé 
 release: clean
-	@$(VALAC) -X -O2 $(SRC) -o WormsValaRelease -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG)
+	@$(VALAC) --disable-assert -X -O2 $(SRC) -o WormsValaRelease -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG)
 
  
 # clean all built files
