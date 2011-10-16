@@ -1,45 +1,47 @@
-### Jeu bidon en Vala pour s'éclater
-	Un écran fixe 
-	Différents terrains ( pentes ) de différentes tailles.
-	Des objets / armes / IA / joueurs qui évoluent dessus
+# Jeu bidon en Vala pour s'éclater
+
+	* Un écran fixe 
+	* Différents terrains ( pentes ) de différentes tailles.
+	* Des objets / armes / IA / joueurs qui évoluent dessus
 	
-	Gestion des dégats, des morts etc …
+	* Gestion des dégats, des morts etc …
 	
-### Pour l'instant 	
-	- Affichage via une classe statique aff
-	- Gestion via une classe gestion
-	- Sons via une classe son 
-	- IA / Objets / Joueurs via des classes
+# Pour l'instant 
+
+	* Affichage via une classe statique aff
+	* Gestion via une classe gestion
+	* Sons via une classe son 
+	* IA / Objets / Joueurs via des classes
 	
-	+ Le jeu tourne assez bien, il gère la vitesse, la vélocité
+	* Le jeu tourne assez bien, il gère la vitesse, la vélocité
 		l'accélération, l'adhérence du terrain.
-	+ Le jeu gère ( très mal ) les collisions entre objets 
-	+ Le jeu gère à peu près le déplacement d'un joueur 
+	* Le jeu gère ( très mal ) les collisions entre objets 
+	* Le jeu gère à peu près le déplacement d'un joueur 
 	
-### Fonctions à venir
-	- Gestion de la gravité en fonction de la masse de l'objet
-		+ Sauts
-		+ JetPack
-		+ Projectiles
-	- Gestion améliorée des collisions avec transmission des vélocités
-		+ Projectiles
-	- Gestion des dégats de chute, de collision etc …
-	- Gestion des joueurs multiples [en cours] 
+# Fonctions à venir
+
+	* Gestion de la gravité en fonction de la masse de l'objet
+		* Sauts
+		* JetPack
+		* Projectiles
+	* Gestion améliorée des collisions avec transmission des vélocités
+		* Projectiles
+	* Gestion des dégats de chute, de collision etc …
+	* Gestion des joueurs multiples [en cours] 
 	
-### Code moche
-	- Une grande partie du code pour les joueurs est bancale !
-	
-	- Les collisons sont bancales
-	
-	- La gestion des sons est approximative ( pas bien OO … )
+# Code moche
+
+	* Une grande partie du code pour les joueurs est bancale !
+	* Les collisons sont bancales
+	* La gestion des sons est approximative ( pas bien OO … )
 		
-### Note
+# Note
 	Ce programme fait une utilisation abusive des signaux ! :D
 
 
-### Problème 
-	Si quelqu'un pouvait me dire comment fonctionne le binding de SDL_mixer en vala … parce que c'est pour le moins étrange … j'irais même jusqu'à dire plus compliqué qu'en C.
+# Problème 
+	Si quelqu'un pouvait me dire comment fonctionne le binding de `SDL_mixer` en vala … parce que c'est pour le moins étrange … j'irais même jusqu'à dire plus compliqué qu'en C.
 
-### Librairies
-	SDL SDL_gfx SDL_mixer SDL_image libgee
+# Librairies
+	`SDL SDL_gfx SDL_mixer SDL_image libgee`
 	Sont nécessaires en mode « devel » ! ( cf : INSTALL )
