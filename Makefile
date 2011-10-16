@@ -4,25 +4,11 @@ PROGRAM = WormsVala
  
  
 # Sources du programme
-SRC =	src/main.vala \
-		src/application.vala \
-		src/aff.vala \
-		src/sound.vala \
-		src/gerant.vala \
-		src/physique.vala \
-		src/terrain.vala \
-		src/menu.vala \
-		src/bouton.vala \
-		src/utils.vala \
-			src/Objets/objet.vala \
-			src/Objets/personnage.vala \
-			src/Objets/joueur.vala \
-			src/Objets/projectile.vala \
-				src/Objets/IA/ia.vala \
-			src/Armes/arme.vala \
-			src/Armes/armeCac.vala \
-			src/Armes/armeDist.vala
-			
+SRC =	"src"/*.vala \
+			"src/Objets"/*.vala \
+				"src/Objets/IA"/*.vala \
+			"src/Armes"/*.vala 
+
  
 # Paquets utilisés
 PKGS = 	--pkg gee-1.0 \
@@ -51,7 +37,7 @@ BUILD_ROOT = 1
  
 # Le projet par défaut : debug
 all:
-	@$(VALAC) $(VALACOPTS)$(SRC) -o $(PROGRAM) -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG) 
+	@$(VALAC) $(VALACOPTS) $(SRC) -o $(PROGRAM) -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG) 
 	
  
 # Le projet Release : non debug, optimisé 
