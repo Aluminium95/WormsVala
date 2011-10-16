@@ -45,7 +45,11 @@ namespace Jeu
 			} else if ( k == this.right ) {
 				this.velx += 0.7f;
 			} else if ( k == this.up ) {
-				/** Gestion des sauts !!!!! */
+				if ( this.m == Mouvement.MARCHE )
+				{
+					this.vely = 5 + this.masse * 5;
+					this.m = Mouvement.SAUT;
+				}
 			} else {
 				return false;
 			}

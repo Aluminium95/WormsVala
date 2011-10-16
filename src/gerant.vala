@@ -341,7 +341,7 @@ namespace Jeu
 					{
 						B = Jeu.Aff.SCREEN_WIDTH - 5;
 					}
-					o.move ((int) (B - o.pos.x));
+					o.move (B - o.pos.x);
 					
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
@@ -349,7 +349,7 @@ namespace Jeu
 					
 					needPlayBam ();
 				} else {
-					o.move ((int)o.velx); // Pas de y !!!
+					o.move (o.velx); // Pas de y !!!
 				}
 
 			}

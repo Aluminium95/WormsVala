@@ -66,6 +66,9 @@ namespace Jeu
 			// this.calc_rect ();
 			
 			this.r = 10;
+			this.masse = 1;
+			
+			this.m = Mouvement.MARCHE;
 		}
 
 		/**
@@ -77,15 +80,16 @@ namespace Jeu
 			
 			if ( this.m == Mouvement.SAUT)
 			{
-				if ( this.pos.x + (int) this.vely >= this.t.getSol (this.pos.x) )
+				if ( this.pos.x + (int) this.vely > this.t.getSol (this.pos.x) )
 				{
 					this.pos.y += (int) this.vely;
 				} else {
 					this.pos.y = this.t.getSol (this.pos.x);
 					this.m = Mouvement.MARCHE;
 				}
+			} else if ( this.m == Mouvement.MARCHE ){
+				this.pos.y = this.t.getSol (this.pos.x);
 			}
-			this.pos.y = this.t.getSol (this.pos.x);
 			
 			// this.calc_rect (); Inutile ça marche pas !
 			
@@ -180,21 +184,21 @@ namespace Jeu
 		 */
 		public void calcVel ()
 		{
-			this.velx += this.t.accelx;
+			this.velx += (this.m == Mouvement.MARCHE ) ? this.t.accelx : 0;
 			
 			if ( velx > 0 )
 			{
 				velx -= this.w.air_res;
 				/* Si on change de signe, on met à 0 */
-				velx = (velx - t.collage < 0) ? 0 : velx - t.collage;
+				velx = (velx - t.collage < 0 && this.m == Mouvement.MARCHE) ? 0 : velx - t.collage;
 			} else if ( velx < 0 ) {
 				velx += this.w.air_res;
 				/* Si on change de signe, on met à 0 */
-				velx = (velx + t.collage > 0) ? 0 : velx + t.collage;
+				velx = (velx + t.collage > 0 && this.m == Mouvement.MARCHE) ? 0 : velx + t.collage;
 			}
 			
-			this.vely -= 
-			this.vely += ( this.vely < 0 ) ? this.w.air_res : -this.w.air_res;
+			this.vely -= this.masse * this.w.gravity / 10;
+			this.vely += ( this.vely < 0 ) ? this.w.air_res*2 : -this.w.air_res*2;
 			
 		}
 	}
