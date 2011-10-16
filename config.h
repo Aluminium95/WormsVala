@@ -17,5 +17,3 @@
 #ifndef SPRITES 
 #define SPRITES "/usr/share/WormsVala/Images/Sprites"
 #endif
-
-#ifndef 
