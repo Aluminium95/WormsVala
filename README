@@ -24,12 +24,10 @@
 	- Gestion améliorée des collisions avec transmission des vélocités
 		+ Projectiles
 	- Gestion des dégats de chute, de collision etc …
-	- Gestion des joueurs multiples 
+	- Gestion des joueurs multiples [en cours] 
 	
 ### Code moche
 	- Une grande partie du code pour les joueurs est bancale !
-	
-	- L'affichage se fait via une classe statique !!!!! Arrf
 	
 	- Les collisons sont bancales
 	
@@ -41,3 +39,7 @@
 
 ### Problème 
 	Si quelqu'un pouvait me dire comment fonctionne le binding de SDL_mixer en vala … parce que c'est pour le moins étrange … j'irais même jusqu'à dire plus compliqué qu'en C.
+
+### Librairies
+	SDL SDL_gfx SDL_mixer SDL_image libgee
+	Sont nécessaires en mode « devel » ! ( cf : INSTALL )
