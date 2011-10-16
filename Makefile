@@ -56,7 +56,8 @@ all:
 # the 'release' target builds a release build
 # you might want to disabled asserts also
 release: clean
-	@$(VALAC) $(LINK) -X -O2 $(SRC) $(PKGS) $(CONFIG) -o WormsValaRelease 
+	@$(VALAC) -X -O2 $(SRC) -o WormsValaRelease -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG)
+
  
 # clean all built files
 clean:
