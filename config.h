@@ -1,19 +1,21 @@
 #ifndef MUSIQUE
-#define MUSIQUE "./Musique"
+#define MUSIQUE "/usr/share/WormsVala/Musique"
 #endif
 
 #ifndef FOND
-#define FOND "./Images/Fonds"
+#define FOND "/usr/share/WormsVala/Images/Fonds"
 #endif
 
 #ifndef DATA
-#define DATA "./Data"
+#define DATA "/usr/share/WormsVala/Data"
 #endif
 
-#ifndef LOCALE
-#define LOCALE "."
+#ifndef MENUIMG
+#define MENUIMG "/usr/share/WormsVala/Images/Menu"
 #endif
 
 #ifndef SPRITES 
-#define SPRITES "./Images/Sprites"
+#define SPRITES "/usr/share/WormsVala/Images/Sprites"
 #endif
+
+#ifndef 

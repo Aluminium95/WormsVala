@@ -24,14 +24,6 @@ CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \
 			-X -DMENUIMG=\"`pwd`\" \
 			-X -DDATA=\"`pwd`/Data\"
 
-# Variables définies à la compilation pour l'installation
-CONFIG_INSTALL = 	-X -DMUSIQUE=\"/usr/share/WormsVala/Musique\" \
-					-X -DFOND=\"/usr/share/WormsVala/Images/Fonds\" \
-					-X -DSPRITES=\"/usr/share/WormsVala/Images/Sprites\" \
-					-X -DMENUIMG=\"/usr/share/WormsVala/Images/Menu\" \
-					-X -DDATA=\"/usr/share/WormsVala/Data\"
-					
-
 # Link des librairies SDL
 LINK = 	-X -lSDL -X -lSDL_gfx -X -lSDL_mixer
 
@@ -54,7 +46,7 @@ release: clean
 	@rm -v -fr $(PROGRAM)
 	@$(VALAC) --disable-assert -X -O2 $(SRC) -o WormsValaRelease -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG)
  
-# clean all built files
+# Supprime tous les fichiers « inutiles »
 .PHONY : clean
 clean:
 	@rm -v -fr src/*~ src/*.c \
@@ -66,18 +58,18 @@ clean:
 .PHONY : install
 install : clean
 	@rm -v -fr $(PROGRAM)
-	# Compile avec les bons flags
-	@$(VALAC) --disable-assert -X -O2 $(SRC) -o WormsVala -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG_INSTALL)
+	# Compilation du programme
+	@$(VALAC) --disable-assert -X -O2 $(SRC) -o WormsVala -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK)
 	
-	# Crée le répertoire qui contient les Datas
+	# Création du répertoire du programme
 	@mkdir -p "/usr/share/WormsVala"
 	
-	# Copie les fichiers 
+	# Copie des données du programme
 	@cp -R ./Images/ "/usr/share/WormsVala/Images"
 	@cp -R ./Musique/ "/usr/share/WormsVala/Musique"
 	@cp -R ./Data/ "/usr/share/WormsVala/Data"
 	
-	# Copie le programme
+	# Déplacement du programme dans /usr/bin
 	@mv WormsVala "/usr/bin/WormsVala"
 	
 # Désinstalle le jeu 
