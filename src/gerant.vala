@@ -17,7 +17,7 @@ namespace Jeu
 		/*
 		 * Variables environnement 
 		 */
-		// public float gravity; // Gravité : Inutilisé !
+		public float gravity; // Gravité
 		public float air_res; // Résistance de l'air
 		// public float wind; // Vent : Inutilisé !
 		// public float friction; // Friction : inutilisé !
@@ -134,8 +134,9 @@ namespace Jeu
 			
 			this.idmax = 0;
 			
-			// this.gravity = 9.8f;
+			this.gravity = 9.81f;
 			this.air_res = 0.06f;
+			
 			// this.wind = 0.2f;
 			// this.friction = 0.03f;
 			
@@ -280,6 +281,7 @@ namespace Jeu
 				p.col = 0xCCCCCCC * (i + 60) * 5;
 				
 				addPlayer (p);
+				addObjet (p);
 				
 				if (i==1)
 				{
@@ -348,43 +350,6 @@ namespace Jeu
 					o.move ((int)o.velx); // Pas de y !!!
 				}
 
-			}
-			
-			foreach ( var p in players )
-			{
-				needDrawObjet (p); // Affiche l'objet
-				
-				p.calcVel (this.air_res);
-				
-				bool sortDuJeu;
-				
-				/*
-				 * Conditions de sortie du terrain
-				 */
-				if ( p.pos.x + p.velx < p.t.start ) {
-					bool v = changeTerrain (false, p);
-					sortDuJeu = !v;
-				} else if ( p.pos.x + p.velx > p.t.start + p.t.largeur ) {
-					bool v = changeTerrain (true, p);
-					sortDuJeu = !v;
-				} else {
-					sortDuJeu = false;
-				}
-				
-				if ( sortDuJeu ) // Si on sort du jeu
-				{
-					int B = 1;
-					
-					if ( p.velx > 0 ) // on va vers la droite
-					{
-						B = Jeu.Aff.SCREEN_WIDTH - 5;
-					}
-					p.move ((int) (B - p.pos.x - p.r));
-					
-					needPlayBam ();
-				} else {
-					p.move ((int)p.velx); // Pas de y !!!
-				}
 			}
 		}
 		

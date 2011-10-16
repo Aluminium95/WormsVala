@@ -52,7 +52,8 @@ clean:
 	@rm -v -fr src/*~ src/*.c \
 		src/Objets/*.c src/Objets/*~ \
 		src/Objets/IA/*.c src/Objets/IA/*~ \
-		src/Armes/*.c Armes/*~
+		src/Armes/*.c Armes/*~ \
+		*~
 		
 # Installe le jeu sur le système !
 .PHONY : install
