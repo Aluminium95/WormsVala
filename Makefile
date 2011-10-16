@@ -56,9 +56,13 @@ all:
  
 # Le projet Release : non debug, optimisé 
 release: clean
+	@rm -v -fr $(PROGRAM)
 	@$(VALAC) --disable-assert -X -O2 $(SRC) -o WormsValaRelease -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG)
 
  
 # clean all built files
 clean:
-	@rm -v -fr *~ *.c $(PROGRAM)
+	@rm -v -fr src/*~ src/*.c \
+		src/Objets/*.c src/Objets/*~ \
+		src/Objets/IA/*.c src/Objets/IA/*~ \
+		src/Armes/*.c Armes/*~
