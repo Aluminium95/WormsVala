@@ -197,9 +197,11 @@ namespace Jeu
 				velx = (velx + t.collage > 0 && this.m == Mouvement.MARCHE) ? 0 : velx + t.collage;
 			}
 			
-			this.vely -= this.masse * this.w.gravity / 10;
-			this.vely += ( this.vely < 0 ) ? this.w.air_res*2 : -this.w.air_res*2;
-			
+			if ( this.m == Mouvement.SAUT )
+			{
+				this.vely -= this.masse * this.w.gravity / 10;
+				this.vely += ( this.vely < 0 ) ? this.w.air_res : -this.w.air_res;
+			}
 		}
 	}
 }
