@@ -34,7 +34,8 @@ namespace Jeu
 		public TuplePos dim; // Dimensions de l'objet */
 		
 		// Contient une référence faible vers le terrain 
-		public unowned Terrain t; 
+		public unowned Terrain t {get;set;} 
+		public unowned World w {get;set;}
 		
 		public string name {get; protected set; } // Oh pourquoi pas !!
 		
@@ -177,23 +178,23 @@ namespace Jeu
 		/**
 		 * Calcule de la vélocité 
 		 */
-		public void calcVel (float res)
+		public void calcVel ()
 		{
 			this.velx += this.t.accelx;
 			
 			if ( velx > 0 )
 			{
-				velx -= res;
+				velx -= this.w.air_res;
 				/* Si on change de signe, on met à 0 */
 				velx = (velx - t.collage < 0) ? 0 : velx - t.collage;
 			} else if ( velx < 0 ) {
-				velx += res;
+				velx += this.w.air_res;
 				/* Si on change de signe, on met à 0 */
 				velx = (velx + t.collage > 0) ? 0 : velx + t.collage;
 			}
 			
-			this.vely += this.t.accely; // Stupide !
-			this.vely += ( this.vely < 0 ) ? res : -res;
+			this.vely -= 
+			this.vely += ( this.vely < 0 ) ? this.w.air_res : -this.w.air_res;
 			
 		}
 	}

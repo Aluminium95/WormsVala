@@ -17,10 +17,7 @@ namespace Jeu
 		/*
 		 * Variables environnement 
 		 */
-		public float gravity; // Gravité
-		public float air_res; // Résistance de l'air
-		// public float wind; // Vent : Inutilisé !
-		// public float friction; // Friction : inutilisé !
+		public World w;
 		
 		private int idmax; // Identifiant unique maximum
 
@@ -134,8 +131,8 @@ namespace Jeu
 			
 			this.idmax = 0;
 			
-			this.gravity = 9.81f;
-			this.air_res = 0.06f;
+			this.w.gravity = 9.81f;
+			this.w.air_res = 0.06f;
 			
 			// this.wind = 0.2f;
 			// this.friction = 0.03f;
@@ -186,6 +183,8 @@ namespace Jeu
 				addObjet (ia); // Ajoute l'objet au gérant
 				
 				ia.i = idmax;
+				
+				ia.w = this.w;
 				
 				if ( i % 2 == 0)
 				{
@@ -283,6 +282,8 @@ namespace Jeu
 				addPlayer (p);
 				addObjet (p);
 				
+				p.w = this.w;
+				
 				if (i==1)
 				{
 					p.left = KeySymbol.l;
@@ -313,7 +314,7 @@ namespace Jeu
 			{
 				needDrawObjet (o); // Affiche l'objet
 				
-				o.calcVel (this.air_res); // Calcule la vélocité de l'objet
+				o.calcVel (); // Calcule la vélocité de l'objet
 				
 				bool sortDuJeu;
 				
@@ -341,9 +342,10 @@ namespace Jeu
 						B = Jeu.Aff.SCREEN_WIDTH - 5;
 					}
 					o.move ((int) (B - o.pos.x));
+					
 					//Jeu.Aff.done = true;
 					o.rebondirx ();
-					o.velx = o.velx/2;
+					o.velx = o.velx/4;
 					
 					needPlayBam ();
 				} else {
