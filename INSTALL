@@ -14,9 +14,15 @@
 		pour archlinux :
 		$ sudo pacman -S valac libgee sdl sdl_mixer sdl_image sdl_gfx
 
-### Scripts de compilation 
+### Avec les scripts de compilation 
 	Étant donné mon incapacité à faire un Makefile, 
 	j'ai fait mes propres scripts bash : 
 		./configure : configue le projet
 		./make : compile le projet
 		./clear : supprime les fichiers .c générés pour le debug
+		
+### Avec le Makefile
+	./configure
+	make
+	sudo make install
+	WormsVala
