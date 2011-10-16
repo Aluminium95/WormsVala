@@ -5,7 +5,7 @@ sortie="[CCode (cprefix = \"\", lower_case_cprefix = \"\", cheader_filename=\"`p
 sortie="${sortie}
 namespace Config {"
 
-vars="MUSIQUE FOND LOCALE DATA"
+vars="MUSIQUE FOND LOCALE DATA" ## Variables définies dans config.h
 
 for i in $vars
 do 
