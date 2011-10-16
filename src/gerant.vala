@@ -144,7 +144,7 @@ namespace Jeu
 			 */
 			creerTerrain (10);
 			creerIA (2);
-			creerJoueur (1);
+			creerJoueur (2);
 		}
 		
 		/**
@@ -158,7 +158,7 @@ namespace Jeu
 			
 			creerTerrain (10);
 			creerIA (2);
-			creerJoueur (1);
+			creerJoueur (2);
 		}
 		
 		/**
@@ -279,11 +279,14 @@ namespace Jeu
 				
 				p.col = 0xCCCCCCC * (i + 60) * 5;
 				
-				p.left = KeySymbol.e;
-				p.right = KeySymbol.t;
-				p.up = KeySymbol.k;
-				
 				addPlayer (p);
+				
+				if (i==1)
+				{
+					p.left = KeySymbol.l;
+					p.right = KeySymbol.z;
+					p.up = KeySymbol.j;
+				}
 				
 				idmax++;
 			}
