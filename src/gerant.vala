@@ -81,12 +81,10 @@ namespace Jeu
 			{
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i+1].addObjet (o);
-				needPlayBam ();
 				return true;
 			} else if ( !d && o.t.i > 0 )  {
 				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
 				listeTerrains[o.t.i-1].addObjet (o);
-				needPlayBam ();
 				return true;
 			} else { // Si on peut pas changer de terrain
 				return false; 
