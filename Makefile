@@ -15,6 +15,7 @@ PKGS = 	--pkg gee-1.0 \
 		--pkg sdl \
 		--pkg sdl-gfx \
 		--pkg sdl-mixer \
+		--pkg sdl-image \
 		--pkg config
 
 # Variables définies à la compilation
@@ -25,7 +26,7 @@ CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \
 			-X -DDATA=\"`pwd`/Data\"
 
 # Link des librairies SDL
-LINK = 	-X -lSDL -X -lSDL_gfx -X -lSDL_mixer
+LINK = 	-X -lSDL -X -lSDL_gfx -X -lSDL_mixer -X -lSDL_image
 
 # Commande pour compiler
 VALAC = valac --enable-experimental --thread

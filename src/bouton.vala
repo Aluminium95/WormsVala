@@ -1,5 +1,6 @@
 using GLib;
 using SDL;
+using SDLImage;
 
 namespace Jeu
 {
@@ -25,20 +26,21 @@ namespace Jeu
 			
 			public ActionMenu action { get; private set; }
 			
-			public int32 textColor { get; private set; }
-			public int32 bgColor { get; private set; }
+			public Surface s;
 			
 			/**
 			 * Constructeur
 			 */
-			public Bouton (int16 x, int16 y, int16 x2, int16 y2, string text, ActionMenu a)
+			public Bouton (int16 x, int16 y, string file, ActionMenu a)
 			{
 				this.x = x;
 				this.y = y;
-				this.x2 = x2;
-				this.y2 = y2;
+				this.x2 = x + 150;
+				this.y2 = y + 80;
 				this.text = text;
 				this.action = a;
+				
+				this.s = SDLImage.load (file);
 			}
 		}
 	}

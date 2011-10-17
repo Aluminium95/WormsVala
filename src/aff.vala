@@ -1,6 +1,7 @@
 using GLib;
 using SDL; // Écran
 using SDLGraphics; // Géométrie
+using SDLImage; // Images
 
 namespace Jeu
 {
@@ -141,8 +142,7 @@ namespace Jeu
 		 */
 		public void draw_bouton (Menu.Bouton b)
 		{
-			Rectangle.fill_color (screen, b.x, b.y, b.x2, b.y2, 98654321);
-			Text.color (screen, (int16) ((b.x2 - b.x) / 4 + b.x) , (int16) ((b.y2 - b.y) / 2 + b.y), b.text,  0xFFFFFFF);
+			b.s.blit (null, screen, SDL.Rect () {x = b.x, y = b.y, w = 150, h = 80});
 		}
 	}
 }
