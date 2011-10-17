@@ -1,4 +1,6 @@
 using GLib;
+using SDL;
+using SDLImage;
 
 namespace Jeu
 {
@@ -43,6 +45,8 @@ namespace Jeu
 		
 		protected int vie; // Vie de l'objet
 		
+		public Surface s; // Image de l'objet
+		
 		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
 			this.t = t;
@@ -55,10 +59,12 @@ namespace Jeu
 			
 			this.vie = vie;
 			
-			this.r = 10;
+			this.r = 25;
 			this.masse = 1;
 			
 			this.m = Mouvement.MARCHE;
+			
+			this.s = SDLImage.load (Config.SPRITES + "/undefinied.png");
 		}
 
 		/**

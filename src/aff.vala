@@ -103,8 +103,7 @@ namespace Jeu
 		 */
 		public void draw_objet (Objet o)
 		{
-			Circle.fill_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, o.col);
-			Circle.outline_color (screen, (int16) o.pos.x, (int16) (SCREEN_HEIGHT - o.pos.y), (int16) o.r, 0xFFFFFFF);
+			o.s.blit (null, screen, SDL.Rect () { x = (int16) (o.pos.x - o.r), y = (int16)(SCREEN_HEIGHT - o.pos.y - 2 * o.r), w = (int16) (2 * o.r), h = (int16) (2 * o.r) });
 		}
 		
 		/**

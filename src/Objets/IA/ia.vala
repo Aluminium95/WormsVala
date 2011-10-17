@@ -7,13 +7,13 @@ namespace Jeu
 	 */
 	public class IA : Personnage
 	{
-		protected Strategie s; // Stratégie
+		protected Strategie strat; // Stratégie
 		
 		public IA (int x, Terrain t, int vie, string name)
 		{
 			base ( x, t, vie); // Chaine vers personnage
 			
-			this.s = Strategie.CAC;
+			this.strat = Strategie.CAC;
 			this.name = name;
 		}
 		
@@ -26,7 +26,7 @@ namespace Jeu
 		{
 			int depl = 0;
 			double d = GLib.Math.pow(o.pos.x - this.pos.x,2) + GLib.Math.pow(o.pos.y - this.pos.y,2);
-			switch (this.s)
+			switch (this.strat)
 			{
 				case Strategie.CAC: // Corps à Corps
 					if ( d > 10)
@@ -80,7 +80,7 @@ namespace Jeu
 		 */
 		public void reviseStrategie ()
 		{
-			this.s = (this.s == Strategie.DISTANCE) ? Strategie.CAC : Strategie.DISTANCE;
+			this.strat = (this.strat == Strategie.DISTANCE) ? Strategie.CAC : Strategie.DISTANCE;
 		}
 		
 		/**
@@ -91,9 +91,9 @@ namespace Jeu
 		{
 			if ( this.armeActuelle.distance == true )
 			{
-				this.s = Strategie.DISTANCE;
+				this.strat = Strategie.DISTANCE;
 			} else {
-				this.s = Strategie.CAC;
+				this.strat = Strategie.CAC;
 			}
 		}
 
