@@ -55,7 +55,7 @@ namespace Jeu
 					g.execute (); // Execute un tour de boucle du jeu
 					process_events_gerant (); // Process les évent du gérant
 				} else { 
-					m.execute ();
+					// m.execute ();
 					process_events_menu (); // Process les évent du menu
 				}
 				touchesEnfoncees ();
@@ -137,6 +137,7 @@ namespace Jeu
 					break;
 				case KeySymbol.m:
 					this.menu = true;
+					m.execute ();
 					s.music.pause ();
 					break;
 				default:

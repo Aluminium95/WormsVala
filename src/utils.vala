@@ -3,6 +3,14 @@ using GLib;
 namespace Jeu
 {
 	/**
+	 * Orientation d'un objet
+	 */
+	public enum Orientation
+	{
+		DROITE, GAUCHE, HAUT, BAS
+	}
+	
+	/**
 	 * Mouvement en train d'être effectué
 	 * par un objet
 	 */

@@ -32,7 +32,7 @@ namespace Jeu
 			}
 			
 			/**
-			 * Execute un cycle ( affiche les boutons )
+			 * Execute Affiche les boutons
 			 */
 			public void execute ()
 			{
@@ -85,6 +85,9 @@ namespace Jeu
 			START, RUNNING, LEVEL, END
 		}
 		
+		/**
+		 * Actions du menu 
+		 */
 		public enum ActionMenu 
 		{
 			COMMENCER, CONTINUER, QUITTER

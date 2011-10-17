@@ -34,6 +34,8 @@ namespace Jeu
 		public unowned Terrain t {get;set;}
 		public unowned World w {get;set;}
 		
+		public Orientation orientation {get; protected set;}
+		
 		public string name {get; protected set; } // Oh pourquoi pas !!
 		
 		public Mouvement m; // Mouvement entrain d'être effectué
@@ -46,6 +48,13 @@ namespace Jeu
 		protected int vie; // Vie de l'objet
 		
 		public Surface s; // Image de l'objet
+		
+		/**
+		 * Chemin racine du sprite, ex : 
+		 * 		/home/…/sprite_
+		 * Afin de trouver : sprite_0.png / sprite_1.png etc … 
+		 */
+		public string racineFileSprite {get; protected set;}
 		
 		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
