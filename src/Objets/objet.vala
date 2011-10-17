@@ -34,7 +34,7 @@ namespace Jeu
 		public unowned Terrain t {get;set;}
 		public unowned World w {get;set;}
 		
-		public Orientation orientation {get; protected set;}
+		// public Orientation orientation {get; protected set;}
 		
 		public string name {get; protected set; } // Oh pourquoi pas !!
 		
@@ -54,7 +54,7 @@ namespace Jeu
 		 * 		/home/…/sprite_
 		 * Afin de trouver : sprite_0.png / sprite_1.png etc … 
 		 */
-		public string racineFileSprite {get; protected set;}
+		// public string racineFileSprite {get; protected set;}
 		
 		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
@@ -68,12 +68,14 @@ namespace Jeu
 			
 			this.vie = vie;
 			
-			this.r = 25;
+			this.r = 20;
 			this.masse = 1;
 			
 			this.m = Mouvement.MARCHE;
 			
-			this.s = SDLImage.load (Config.SPRITES + "/undefinied.png");
+			// this.orientation = Orientation.DROITE;
+			
+			this.s = SDLImage.load (Config.SPRITES + "/undef_0.png");
 		}
 
 		/**

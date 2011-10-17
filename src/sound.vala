@@ -49,6 +49,7 @@ namespace Jeu
 			this.hitc = new Chunk.WAV (src);
 			var src2 = new SDL.RWops.from_file (bam, "r");
 			this.bamc = new Chunk.WAV (src2);
+			bamc.volume (25);
 		}
 		
 		public void playHit ()
@@ -60,68 +61,5 @@ namespace Jeu
 		{
 			this.cbam.play (bamc, 0);
 		}
-		
-		/**
-		 * Joue sur le cannal @chan le son numero @son @repeat fois
-		 */
-		/*public void play (int chan, int son, int repeat = 1)
-		{
-			#if DEBUG == 3
-				print ("\t\t Son : Joue un son \n", CouleurConsole.ROUGE);
-			#endif
-			chans[chan].play (sons[son], repeat - 1);
-		}*/
-		
-		/**
-		 * Ajoute un cannal avec pour volume @vol = 100
-		 */
-		/*public int addChannel (int vol = 100)
-		{
-			#if DEBUG
-				print ("\t\t Son : Ajout d'un canal !\n", CouleurConsole.ROUGE);
-			#endif
-			
-			Channel c = 0;
-			c.volume (vol);
-			chans += c;
-			
-			return chans.length - 1;
-		}*/
-		
-		/**
-		 * Ajoute un son depuis un fichier avec le volume @vol 
-		 */
-		/*public int addSon (string file, int vol = 100)
-		{
-			#if DEBUG
-				print ("\t\t Son : Ajout d'un son ! \n", CouleurConsole.ROUGE);
-			#endif
-			var src = new SDL.RWops.from_file (file, "r");
-			sons += new Chunk.WAV (src);
-			// sons[-1].volume (vol); FAIT BUGGER L'ÉXÉCUTION 
-			return sons.length - 1;
-		}*/
-		
-		/**
-		 * Définit le volume du cannal @chan à @vol
-		 */
-		/*public void setChannelVolume (int chan, int vol)
-		{
-			#if DEBUG
-				print ("\t\t Son : Modification du volume d'un cannal \n", CouleurConsole.ROUGE);
-			#endif
-			chans[chan].volume (vol);
-		}*/
-		
-		/**
-		 * Définit le volume de l'effet sonore @son à @vol
-		 */
-		/*public void setSonVolume (int son, int vol)
-		{
-			#if DEBUG
-				print ("\t\t Son : Modification du volume d'un son \n", CouleurConsole.ROUGE);
-			#endif
-			sons[son].volume (vol);
-		}*/
 	}
 }

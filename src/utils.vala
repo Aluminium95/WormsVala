@@ -7,7 +7,7 @@ namespace Jeu
 	 */
 	public enum Orientation
 	{
-		DROITE, GAUCHE, HAUT, BAS
+		DROITE = 0, GAUCHE = 1, HAUT = 2, BAS = 3
 	}
 	
 	/**
