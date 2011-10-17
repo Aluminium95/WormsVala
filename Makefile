@@ -21,8 +21,8 @@ PKGS = 	--pkg gee-1.0 \
 # Variables définies à la compilation
 CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \
 			-X -DFOND=\"`pwd`/Images/Fonds\" \
-			-X -DSPRITES=\"`pwd`\" \
-			-X -DMENUIMG=\"`pwd`\" \
+			-X -DSPRITES=\"`pwd`/Images/Sprites\" \
+			-X -DMENUIMG=\"`pwd`/Images/Menu\" \
 			-X -DDATA=\"`pwd`/Data\"
 
 # Link des librairies SDL

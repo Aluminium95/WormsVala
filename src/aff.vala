@@ -142,7 +142,7 @@ namespace Jeu
 		 */
 		public void draw_bouton (Menu.Bouton b)
 		{
-			b.s.blit (null, screen, SDL.Rect () {x = b.x, y = b.y, w = 150, h = 80});
+			b.s.blit (null, screen, SDL.Rect () { x = b.x, y = b.y, w = 150, h = 80});
 		}
 	}
 }

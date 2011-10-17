@@ -41,6 +41,10 @@ namespace Jeu
 				this.action = a;
 				
 				this.s = SDLImage.load (file);
+				if (this.s == null)
+				{
+					stderr.printf ("Erreur chargement img !!! "+file+"\n");
+				}
 			}
 		}
 	}

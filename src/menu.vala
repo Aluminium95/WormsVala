@@ -63,8 +63,8 @@ namespace Jeu
 			public void creer_menu_start ()
 			{
 				this.boutons.clear ();
-				this.boutons.add (new Bouton (20, 20, Config.MENUIMG + "/Quitter.png", ActionMenu.QUITTER));
-				this.boutons.add (new Bouton (150, 60, Config.MENUIMG + "/Commencer.png", ActionMenu.COMMENCER));
+				this.boutons.add (new Bouton (200, 40, Config.MENUIMG + "/Quitter.png", ActionMenu.QUITTER));
+				this.boutons.add (new Bouton (400, 40, Config.MENUIMG + "/Commencer.png", ActionMenu.COMMENCER));
 				this.boutons.add (new Bouton (300, 200, Config.MENUIMG + "/Resume.png", ActionMenu.CONTINUER));
 			}
 			

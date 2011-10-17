@@ -48,10 +48,9 @@ namespace Jeu
 			
 			while (!done)
 			{
-				a.clearscr (); // Efface l'écran
-				
 				if (!menu)
 				{
+					a.clearscr (); // Efface l'écran
 					a.draw (); // Dessine le fond animé 
 					g.execute (); // Execute un tour de boucle du jeu
 					process_events_gerant (); // Process les évent du gérant

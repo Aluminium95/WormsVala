@@ -10,6 +10,7 @@ void main (string[] args)
 	#endif
 	
 	SDL.init (InitFlag.VIDEO | InitFlag.AUDIO);
+	SDLImage.init (InitFlag.VIDEO | InitFlag.AUDIO);
 	SDLMixer.open (44100, 0, 2, 1024);
 	SDLMixer.Channel.allocate (2);
 	
@@ -27,7 +28,7 @@ void main (string[] args)
 	#if DEBUG 
 		Jeu.print ("SDL_mixer fermé!\n", Jeu.CouleurConsole.JAUNE);
 	#endif
-	
+	SDLImage.quit ();
 	SDL.quit ();
 	#if DEBUG 
 		Jeu.print ("SDL fermé !\n", Jeu.CouleurConsole.JAUNE);
