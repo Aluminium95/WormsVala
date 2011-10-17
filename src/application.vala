@@ -46,6 +46,8 @@ namespace Jeu
 			s.music.play (-1);
 			s.music.pause ();
 			
+			m.execute ();
+			
 			while (!done)
 			{
 				if (!menu)
