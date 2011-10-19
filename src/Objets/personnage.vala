@@ -7,8 +7,6 @@ namespace Jeu
 	 */
 	public abstract class Personnage : Objet
 	{
-		public string uri;
-		
 		public Arme armeActuelle { get; protected set; } // Arme en main
 		
 		protected Arme armePrincipale; // Arme principale de l'IA
@@ -30,7 +28,7 @@ namespace Jeu
 			
 			this.masse = 100;
 			
-			this.uri = Config.SPRITES + "/def/";
+			this.baseURI = Config.SPRITES + "/def/";
 		}
 		
 		/**
@@ -90,9 +88,9 @@ namespace Jeu
 		 */
 		protected void definirSprite () {
 			if ( this.velx < 0 ) {
-				setSprite (Config.SPRITES + "/undef_1.png");
-			} else {
-				setSprite (Config.SPRITES + "/undef_0.png");
+				setSprite (baseURI + "gauche.png");
+			} else if ( this.velx > 0 ) {
+				setSprite (baseURI + "droite.png");
 			}
 		}
 	}
