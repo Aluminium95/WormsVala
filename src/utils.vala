@@ -1,4 +1,5 @@
 using GLib;
+using SDL;
 
 namespace Jeu
 {

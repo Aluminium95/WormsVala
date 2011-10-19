@@ -7,6 +7,7 @@ namespace Jeu
 	 */
 	public abstract class Personnage : Objet
 	{
+		public string uri;
 		
 		public Arme armeActuelle { get; protected set; } // Arme en main
 		
@@ -28,6 +29,8 @@ namespace Jeu
 			this.armeActuelle = armePrincipale;
 			
 			this.masse = 100;
+			
+			this.uri = Config.SPRITES + "/def/";
 		}
 		
 		/**
@@ -70,6 +73,26 @@ namespace Jeu
 				 * Calcul du vecteur initial en fonction du tuplePos regard 
 				 */
 				tirer (vecteurRegard);
+			}
+		}
+		
+		/**
+		 * Surcharge de la fonction calcVel
+		 */
+		public override void calcVel ()
+		{
+			definirSprite ();
+			base.calcVel ();
+		}
+		
+		/**
+		 * Recalcule le sprite
+		 */
+		protected void definirSprite () {
+			if ( this.velx < 0 ) {
+				setSprite (Config.SPRITES + "/undef_1.png");
+			} else {
+				setSprite (Config.SPRITES + "/undef_0.png");
 			}
 		}
 	}

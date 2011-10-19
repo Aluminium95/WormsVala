@@ -20,7 +20,7 @@ namespace Jeu
 		public float velx; // Vélocité X
 		public float vely; // Vélocité Y
 		
-		public float elastic; // Élasticité 
+		// public float elastic; // Élasticité 
 		
 		public float masse { get; protected set; } // Masse de l'objet
 		
@@ -48,6 +48,8 @@ namespace Jeu
 		protected int vie; // Vie de l'objet
 		
 		public Surface s; // Image de l'objet
+		
+		protected string baseURI; // Chemin de base pour les images !
 		
 		/**
 		 * Chemin racine du sprite, ex : 
@@ -108,13 +110,12 @@ namespace Jeu
 		/**
 		 * Modifie la vie
 		 */
-		public void modifierVie (int v)
+		public virtual void modifierVie (int v)
 		{
 			if ( this.vie == 0)
 			{
 				mourrir ();
-			} else if ( vie != -1 )
-			{
+			} else if ( vie != -1 ) {
 				this.vie -= v;
 			}
 		}
@@ -146,7 +147,7 @@ namespace Jeu
 		/**
 		 * Calcule de la vélocité 
 		 */
-		public void calcVel ()
+		public virtual void calcVel ()
 		{
 			this.velx += (this.m == Mouvement.MARCHE ) ? this.t.accelx : 0;
 			
@@ -164,6 +165,15 @@ namespace Jeu
 					velx = (velx + t.collage > 0 && this.m == Mouvement.MARCHE) ? 0 : velx + t.collage;
 				}
 			}
+		}
+		
+		/**
+		 * Change le sprite en fonction de l'uri
+		 * donnée en param
+		 */
+		public void setSprite (string uri)
+		{
+			this.s = SDLImage.load (uri);
 		}
 	}
 }
