@@ -26,6 +26,8 @@ namespace Jeu
 			this.armeSecondaire = new Arme (10);
 
 			this.armeActuelle = armePrincipale;
+			
+			this.masse = 100;
 		}
 		
 		/**

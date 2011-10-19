@@ -13,7 +13,7 @@ namespace Jeu
 		private bool keyHeld[256];
 		private KeySymbol keySym[256];
 		
-		public const int DELAY = 20; // Délai entre chaque tour de boucle
+		public const int DELAY = 10; // Délai entre chaque tour de boucle
 		
 		private bool done;
 		private bool menu;
