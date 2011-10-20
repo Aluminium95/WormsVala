@@ -12,7 +12,7 @@ namespace Jeu
 		public Decor (int x, Terrain t)
 		{
 			base (x,t);
-			this.baseURI = Config.SPRITES + "/Decor/";
+			this.baseURI = Config.SPRITES + "/Decor/default/";
 		}
 		
 		/**
@@ -23,14 +23,20 @@ namespace Jeu
 		public override void modifierVie (int v)
 		{
 			base.modifierVie (v);
-			
-			if ( 0 < vie < 2 )
+			if (this.sens == true )
 			{
-				setSprite (baseURI + "Sdammage.png");
-			} else if ( 0 < vie < 6 ) {
-				setSprite (baseURI + "Mdammage.png");
+				if ( 0 < vie < 2 )
+				{
+					setSprite (baseURI + "sdegats.png");
+				} else if ( 0 < vie < 6 ) {
+					setSprite (baseURI + "mdegats.png");
+				} else {
+					setSprite (baseURI + "ndegats.png");
+				}
 			} else {
-				setSprite (baseURI + "Ndammage.png");
+				/**
+				 * Gérer le changement de dossier
+				 */
 			}
 		}
 	}
