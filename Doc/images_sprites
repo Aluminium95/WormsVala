@@ -1,0 +1,46 @@
+# Gestion des images / sprites
+
+	Config.SPRITES = chemin de base vers le dossier Images/Sprites
+	
+	+ Personnages
+		- IA // Intelligences artificielles
+			+ un type d'ia
+				- NDegats // Pas de dégats
+					+ gauche.png
+					+ droite.png
+				- MDegats // Dégats moyenss
+					+ gauche.png
+					+ droite.png
+				- SDegats // Dégats forts
+					+ gauche.png
+					+ droite.png
+				- destruction.png // Image de destruction
+		- Joueur // Joueurs du jeu
+			+ un joueur
+				- NDegats // Pas de dégats
+					+ gauche.png
+					+ droite.png
+				- MDegats // Dégats moyenss
+					+ gauche.png
+					+ droite.png
+				- SDegats // Dégats forts
+					+ gauche.png
+					+ droite.png
+				- destruction.png // Image de destruction
+	+ Decors
+		- type de décor avec un sens
+			+ NDegats
+				+ gauche.png
+				+ droite.png
+			+ MDegats
+			+ SDegats
+			+ destruction.png
+		- type de décor sans sens
+			+ mdegats.png
+			+ ndegats.png
+			+ sdegats.png
+			+ destruction.png
+	+ Autres
+		- type 
+			sprite.png
+			destruction.png

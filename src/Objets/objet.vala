@@ -83,7 +83,7 @@ namespace Jeu
 		/**
 		 * Effectue un mouvement
 		 */
-		public void move ( float x )
+		public virtual void move ( float x )
 		{
 			this.pos.x += x;
 			
@@ -123,7 +123,7 @@ namespace Jeu
 		/**
 		 * Meurt
 		 */
-		public void mourrir ()
+		public virtual void mourrir ()
 		{
 			dead (); // Envoie le signal de mort
 		}
