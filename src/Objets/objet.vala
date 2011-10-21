@@ -101,10 +101,12 @@ namespace Jeu
 		 */
 		public virtual void modifierVie (int v)
 		{
-			if ( this.vie == 0)
+			if ( this.vie - v < 0 && this.vie != -1)
 			{
+				stderr.printf ("Mourrir !\n");
 				mourrir ();
-			} else if ( vie != -1 ) {
+			} else {
+				stderr.printf ("Moins de vie !\n");
 				this.vie -= v;
 			}
 		}

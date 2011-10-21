@@ -26,15 +26,15 @@ namespace Jeu
 
 			this.armeActuelle = armePrincipale;
 			
-			this.masse = 100;
+			this.masse = 50;
 			
-			this.baseURI = Config.SPRITES + "/def/";
+			this.baseURI = Config.SPRITES + "/Personnages";
 		}
 		
 		/**
 		 * Change l'arme
 		 */
-		protected void changerArme ()
+		protected virtual void changerArme ()
 		{
 			this.armeActuelle = ( this.armeActuelle == this.armePrincipale ) ? this.armeSecondaire : this.armePrincipale;
 		}
@@ -42,7 +42,7 @@ namespace Jeu
 		/**
 		 * Échange l'arme actuelle avec une autre proposée 
 		 */
-		public void echangerArme (Arme a)
+		public virtual void echangerArme (Arme a)
 		{
 			if ( this.armeActuelle == this.armePrincipale )
 			{
@@ -63,7 +63,7 @@ namespace Jeu
 		 * Utilise l'arme pour envoyer un projectile 
 		 * dans la direction de l'objet
 		 */
-		protected void attaquerDistance ()
+		protected virtual void attaquerDistance ()
 		{
 			if ( armeActuelle.utiliser () == true )
 			{
@@ -86,7 +86,7 @@ namespace Jeu
 		/**
 		 * Recalcule le sprite
 		 */
-		protected void definirSprite () {
+		protected virtual void definirSprite () {
 			if ( this.velx < 0 ) {
 				setSprite (baseURI + "gauche.png");
 			} else if ( this.velx > 0 ) {

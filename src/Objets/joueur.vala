@@ -14,6 +14,7 @@ namespace Jeu
 		public KeySymbol left;
 		public KeySymbol right;
 		public KeySymbol up;
+		public KeySymbol hit;
 		
 		/**
 		 * Construit un player 
@@ -24,7 +25,7 @@ namespace Jeu
 			
 			this.name = name; // Définit le nom
 			
-			this.baseURI = Config.SPRITES + "/Personnages/Joueur/default/SDegats/";
+			this.baseURI += "/Joueur/default/SDegats/";
 			
 			this.s = SDLImage.load (baseURI + "droite.png");
 			
@@ -34,6 +35,7 @@ namespace Jeu
 			left = KeySymbol.e;
 			right = KeySymbol.t;
 			up = KeySymbol.k;
+			hit = KeySymbol.h;
 		}
 		
 		/**
@@ -54,6 +56,8 @@ namespace Jeu
 					this.vely = 10;
 					this.m = Mouvement.SAUT;
 				}
+			} else if ( k == this.hit ) {
+				this.frapper ();
 			} else {
 				return false;
 			}

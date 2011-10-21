@@ -11,17 +11,15 @@ namespace Jeu
 	{
 		public int degats { get; protected set; } // Dégats de contact
 		
-		public Projectile (Terrain t, int deg)
+		public Projectile (Terrain t, int deg, float velx, float vely)
 		{
 			base ( 10, t, 10);
+			this.masse = 5;
 			
 			this.degats = deg;
-		}
-
-		public int execute ()
-		{
-			stdout.printf ("Éxécute !\n");
-			return 0;
+			
+			this.velx = velx;
+			this.vely = vely;
 		}
 	}
 }

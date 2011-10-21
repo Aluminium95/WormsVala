@@ -25,6 +25,7 @@ namespace Jeu
 
 		/** 
 		 * Délégates pour connecter aux signaux 
+		 * Liés au personnages
 		 */
 		delegate void delegateJoueurFrappe (Personnage p);
 		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
@@ -50,19 +51,19 @@ namespace Jeu
 		 */
 		private void joueurFrappe (Personnage p)
 		{
+			needPlayHit ();
 			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i; // On regarde dans les terrains alentours
-			t = ( t == listeTerrains.size -1 ) ? t - 1 : t;
+			t = ( t == listeTerrains.size -1 ) ? t - 2 : t;
 			
 			for (int i = 0; i < 3; i++) // On fait trois fois 
 			{
 				foreach ( var pers in listeTerrains[t].objets ) // pour chaque objet du terrain
 				{
 					// Calcul de la distance de frappe
-					double d = GLib.Math.pow(pers.pos.x - pers.r - p.pos.x,2) + GLib.Math.pow(pers.pos.y - pers.r - p.pos.y, 2);
+					double d = GLib.Math.pow(pers.pos.x - p.pos.x,2) + GLib.Math.pow(pers.pos.y - p.pos.y, 2);
 					if ( d <= p.armeActuelle.r ) // Si c'est dedans
 					{
 						pers.modifierVie (10); // On enlève 10 pv
-						stdout.printf ("AIE ! - 10 pv\n");
 					}
 				}
 				t++; // Indice du prochain terrain
@@ -289,6 +290,8 @@ namespace Jeu
 					p.up = KeySymbol.j;
 				}
 				
+				p.frapper.connect (joueurFrappe);
+				
 				idmax++;
 			}
 		}
@@ -389,7 +392,7 @@ namespace Jeu
 		 */
 		public void rmObjet (Objet o)
 		{
-			o.t.rmObjet (o);
+			o.t.objets.remove (o);
 			objets.remove (o);
 		}
 		
