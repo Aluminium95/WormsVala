@@ -51,7 +51,7 @@ namespace Jeu
 			} else if ( k == this.up ) {
 				if ( this.m == Mouvement.MARCHE )
 				{
-					this.vely = 500;
+					this.vely = 10;
 					this.m = Mouvement.SAUT;
 				}
 			} else {

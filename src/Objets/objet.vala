@@ -64,7 +64,7 @@ namespace Jeu
 			this.vie = vie;
 			
 			this.r = 20;
-			this.masse = 10;
+			this.masse = 50;
 			
 			this.m = Mouvement.MARCHE;
 		}
@@ -80,7 +80,7 @@ namespace Jeu
 			{
 				if ( this.pos.y + (int) this.vely > this.t.getSol (this.pos.x) )
 				{
-					this.pos.y += (int) this.vely;
+					this.pos.y += this.vely;
 				} else {
 					this.pos.y = this.t.getSol (this.pos.x);
 					/*
@@ -144,7 +144,9 @@ namespace Jeu
 			
 			if ( this.m == Mouvement.SAUT )
 			{
-				this.vely -= this.masse * this.w.gravity / 100;
+				double calc = this.masse * this.w.gravity;
+				calc /= 1000;
+				this.vely -= (float) calc;
 				this.vely += ( this.vely < 0 ) ? this.w.air_res : -this.w.air_res;
 			} else if ( this.m == Mouvement.MARCHE ){
 				if ( velx > 0 )
