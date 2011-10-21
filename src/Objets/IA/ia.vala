@@ -15,6 +15,10 @@ namespace Jeu
 			
 			this.strat = Strategie.CAC;
 			this.name = name;
+			
+			this.baseURI = Config.SPRITES + "/Personnages/IA/default/SDegats/";
+			
+			this.s = SDLImage.load (baseURI + "droite.png");
 		}
 		
 		/**

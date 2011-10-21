@@ -24,6 +24,10 @@ namespace Jeu
 			
 			this.name = name; // Définit le nom
 			
+			this.baseURI = Config.SPRITES + "/Personnages/Joueur/default/SDegats/";
+			
+			this.s = SDLImage.load (baseURI + "droite.png");
+			
 			/**
 			 * Définition des touches par défaut 
 			 */

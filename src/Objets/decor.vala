@@ -9,10 +9,12 @@ namespace Jeu
 	 */
 	public class Decor : Objet
 	{
+		private bool sens;
 		public Decor (int x, Terrain t)
 		{
 			base (x,t);
 			this.baseURI = Config.SPRITES + "/Decor/default/";
+			sens = false;
 		}
 		
 		/**
@@ -23,7 +25,7 @@ namespace Jeu
 		public override void modifierVie (int v)
 		{
 			base.modifierVie (v);
-			if (this.sens == true )
+			if (this.sens == false )
 			{
 				if ( 0 < vie < 2 )
 				{

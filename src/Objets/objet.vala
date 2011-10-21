@@ -51,13 +51,6 @@ namespace Jeu
 		
 		protected string baseURI; // Chemin de base pour les images !
 		
-		/**
-		 * Chemin racine du sprite, ex : 
-		 * 		/home/…/sprite_
-		 * Afin de trouver : sprite_0.png / sprite_1.png etc … 
-		 */
-		// public string racineFileSprite {get; protected set;}
-		
 		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
 			this.t = t;
@@ -74,10 +67,6 @@ namespace Jeu
 			this.masse = 10;
 			
 			this.m = Mouvement.MARCHE;
-			
-			// this.orientation = Orientation.DROITE;
-			
-			this.s = SDLImage.load (Config.SPRITES + "/undef_0.png");
 		}
 
 		/**
