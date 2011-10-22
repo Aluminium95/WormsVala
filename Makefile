@@ -39,7 +39,7 @@ BUILD_ROOT = 1
  
 # Le projet par défaut : debug
 all:
-	@$(VALAC) $(VALACOPTS) $(SRC) -o $(PROGRAM) -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG) 
+	@$(VALAC) $(VALACOPTS) $(SRC) -o $(PROGRAM) -X -I\"`pwd`/config.h\" --vapidir vapi/ $(PKGS) $(LINK) $(CONFIG)
 	
  
 # Le projet Release : non debug, optimisé 

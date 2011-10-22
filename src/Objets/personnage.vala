@@ -87,9 +87,9 @@ namespace Jeu
 		 * Recalcule le sprite
 		 */
 		protected virtual void definirSprite () {
-			if ( this.velx < 0 ) {
+			if ( this.velx < -1 ) {
 				setSprite (baseURI + "gauche.png");
-			} else if ( this.velx > 0 ) {
+			} else if ( this.velx > 1 ) {
 				setSprite (baseURI + "droite.png");
 			}
 		}

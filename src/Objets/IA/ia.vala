@@ -29,7 +29,7 @@ namespace Jeu
 		public int execute (Objet o) // Joueurs ou autre IA
 		{
 			int depl = 0;
-			double d = GLib.Math.pow(o.pos.x - this.pos.x,2) + GLib.Math.pow(o.pos.y - this.pos.y,2);
+			double d = GLib.Math.pow (o.pos.x - this.pos.x,2) + GLib.Math.pow(o.pos.y - this.pos.y,2);
 			switch (this.strat)
 			{
 				case Strategie.CAC: // Corps à Corps
