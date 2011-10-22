@@ -51,7 +51,6 @@ namespace Jeu
 		 */
 		private void joueurFrappe (Personnage p)
 		{
-			needPlayHit ();
 			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i; // On regarde dans les terrains alentours
 			t = ( t == listeTerrains.size -1 ) ? t - 2 : t;
 			
@@ -60,7 +59,7 @@ namespace Jeu
 				foreach ( var pers in listeTerrains[t].objets ) // pour chaque objet du terrain
 				{
 					// Calcul de la distance de frappe
-					double d = GLib.Math.pow(pers.pos.x - p.pos.x,2) + GLib.Math.pow(pers.pos.y - p.pos.y, 2);
+					double d = pow(pers.pos.x - p.pos.x,2) + pow(pers.pos.y - p.pos.y, 2);
 					if ( d <= p.armeActuelle.r ) // Si c'est dedans
 					{
 						pers.modifierVie (10); // On enlève 10 pv
@@ -291,6 +290,7 @@ namespace Jeu
 				}
 				
 				p.frapper.connect (joueurFrappe);
+				p.dead.connect (rmObjet);
 				
 				idmax++;
 			}
@@ -392,7 +392,7 @@ namespace Jeu
 		 */
 		public void rmObjet (Objet o)
 		{
-			o.t.objets.remove (o);
+			// o.t.objets.remove (o);
 			objets.remove (o);
 		}
 		

@@ -74,4 +74,16 @@ namespace Jeu
 			stdout.printf ("\033[0m");
 		#endif
 	}
+	
+	/**
+	 * Gestion des puissances !
+	 */
+	public float pow (float x, int pow)
+	{
+		for (int i = 0; i < pow; i++)
+		{
+			x *= x;
+		}
+		return x;
+	}
 }
