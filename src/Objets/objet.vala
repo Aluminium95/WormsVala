@@ -11,46 +11,87 @@ namespace Jeu
 	 */
 	public abstract class Objet : Object
 	{
-		public int l; // Largeur
-		public int h; // Hauteur
+		/**
+		 * Largeur et hauteur 
+		 */
+		public int l;
+		public int h;
 		
-		public int r; // Rayon ( temporaire … avant d'utiliser des rectangles ! )
+		// Rayon du personnage
+		public int r;
 		
-		/* Il faudrait passer à un TuplePos vel { x; y; } */
+		/**
+		 * Vélocité x et y 
+		 */
 		public float velx; // Vélocité X
 		public float vely; // Vélocité Y
 		
 		// public float elastic; // Élasticité 
 		
-		public float masse { get; protected set; } // Masse de l'objet
-		
-		public int32 col; // Couleur
+		/**
+		 * Masse de l'objet, utilisée pour les calculs
+		 * physiques 
+		 */
+		public float masse { get; protected set; }
 		
 		public int i; // Id ( très moche !!! )
 
 		public TuplePos pos; // Point en bas à gauche ( départ )
 		
-		// Contient une référence faible vers le terrain 
+		/**
+		 * Références faibles ( unowned ) vers le terrain 
+		 * auquel il appartient et le monde auquel il appartient
+		 * ( va sûrement changer vu que world sera dans terrain bientôt ! )
+		 */
 		public unowned Terrain t {get;set;}
 		public unowned World w {get;set;}
 		
+		/**
+		 * Orientation du personnage ( gauche, droite, haut, bas )
+		 */
 		// public Orientation orientation {get; protected set;}
 		
-		public string name {get; protected set; } // Oh pourquoi pas !!
+		/**
+		 * Nom de l'objet :
+		 * 	sera sûrement supprimée ou mis en virtual
+		 * 	et définit dans des classe filles
+		 * 	ex: caisse, mur, etc …
+		 */
+		public string name {get; protected set; }
 		
-		public Mouvement m; // Mouvement entrain d'être effectué
+		/**
+		 * Mouvement en train d'être effectué
+		 * sachant que saut peut aussi être une chute !
+		 */
+		public Mouvement m;
 		
 		/*public Type type; Peut servir, mais pour l'instant inutile ! */
 		
-		public signal void dead (); // Signal quand on meurt
-		public signal void moved (); // Signal quand on bouge
+		// Vie restante à l'objet
+		protected int vie;
 		
-		protected int vie; // Vie de l'objet
+		// Surface ( image ) de l'objet
+		public Surface s
 		
-		public Surface s; // Image de l'objet
+		// Chemin de base pour les images à charger
+		protected string baseURI;
 		
-		protected string baseURI; // Chemin de base pour les images !
+		/** 
+		 * Définit si le personnage à déjà 
+		 * « donné un coup de reins » en l'air
+		 */
+		protected bool virementEnAir;
 		
+		/**
+		 * Signaux envoyés pour utilisation
+		 * ultérieure 
+		 */
+		public signal void dead ();
+		public signal void moved ();
+		
+		/**
+		 * Constructeur
+		 */
 		public Objet (int x, Terrain t, int vie = 10, int l = 10, int h = 10)
 		{
 			this.t = t;
@@ -88,6 +129,7 @@ namespace Jeu
 					 * de la vélocité + gravité !
 					 */
 					this.m = Mouvement.MARCHE; // En attendant
+					this.virementEnAir = false; // Reset de la possiblitité de s'orienter
 				}
 			} else if ( this.m == Mouvement.MARCHE ){
 				this.pos.y = this.t.getSol (this.pos.x);
