@@ -14,14 +14,22 @@ namespace Jeu
 		// Munitions de l'arme ( -1 = infini )
 		public int munitions { get; protected set; default = -1; }
 		
-		// Arme de distance ou de CAC ?
-		public bool distance;
-		
 		// Rayon de l'arme
 		public int r {get; protected set; default = 50; }
 		
 		// Image de l'arme
 		public Surface s;
+		
+		// Est une arme de distance 
+		public virtual const bool distance = false;
+		
+		/**
+		 * Signal envoyé lors de l'utilisation 
+		 * de l'arme, on va se démerder avec pour 
+		 * ne plus passer par joueurFrappe et autres
+		 *
+		 * public abstract signal void utilise (bool d);
+		 */
 		
 		/**
 		 * Constructeur 

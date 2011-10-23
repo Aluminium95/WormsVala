@@ -3,6 +3,9 @@ using Gee;
 
 namespace Jeu
 {
+	/**
+	 * Fonction qui gère les collisions : c'est très moche !
+	 */
 	public void collision (Gerant g, Objet o, ref ArrayList<Terrain> t, int start)
 	{
 		/*
