@@ -9,7 +9,12 @@ namespace Jeu
 	 */
 	public class Decor : Objet
 	{
+		// L'objet a un sens ( droite/gauche )
 		private bool sens;
+		
+		/**
+		 * Constructeur
+		 */
 		public Decor (int x, Terrain t)
 		{
 			base (x,t);

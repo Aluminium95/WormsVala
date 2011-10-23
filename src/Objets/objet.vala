@@ -182,8 +182,10 @@ namespace Jeu
 		 */
 		public virtual void calcVel ()
 		{
+			// Si on est sur le sol, on subit la pente
 			this.velx += (this.m == Mouvement.MARCHE ) ? this.t.accelx : 0;
 			
+			// Résistance de l'air
 			velx += (velx < 0 ) ? this.w.air_res : -this.w.air_res;
 			
 			if ( this.m == Mouvement.SAUT )
@@ -192,7 +194,7 @@ namespace Jeu
 				calc /= 1000;
 				this.vely -= (float) calc;
 				this.vely += ( this.vely < 0 ) ? this.w.air_res : -this.w.air_res;
-			} else if ( this.m == Mouvement.MARCHE ){
+			} else if ( this.m == Mouvement.MARCHE ){ // Gestion de l'adhérence
 				if ( velx > 0 )
 				{
 					velx = (velx - t.collage < 0 && this.m == Mouvement.MARCHE) ? 0 : velx - t.collage;

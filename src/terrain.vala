@@ -34,7 +34,12 @@ namespace Jeu
 		public float accelx { get; protected set; }
 		
 		// Adhérence du terrain
-		public float collage { get; protected set; } 
+		public float collage { get; protected set; }
+		
+		/** Variation des valeurs du monde pour chaque terrain
+		 * public float gravity;
+		 * public fload air_res;
+		 */
 		
 		/**
 		 * Crée le terrain
