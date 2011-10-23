@@ -9,23 +9,32 @@ namespace Jeu
 	 */
 	public class Terrain : Object
 	{
-		public HashSet<Objet> objets; // Tableau des Objets | on va peut-être passer à un Set 
+		// Tableau des Objets | on va peut-être passer à un Set 
+		public HashSet<Objet> objets;
 		
-		public int i; // Position dans le tableau des terrains
+		// Position dans le tableau des terrains
+		public int i;
 		
-		public int start; // Position de départ du terrain 
+		/**
+		 * Position de départ du terrain par rapport au 
+		 * début de l'écran
+		 */
+		public int start;
 		
-		public int largeur { get; protected set; default = 0; } // Largeur du terrain
+		// Largeur du terrain
+		public int largeur { get; protected set;}
 		
-		public int hg { get; protected set; default = 0; } // Hauteur gauche du terrain
+		// Hauteur gauche du terrain
+		public int hg { get; protected set;}
 		
-		public int hd { get; protected set; default = 0; } // Hauteur droite du terrain
+		// Hauteur droite du terrain
+		public int hd { get; protected set;}
 		
-		public float accelx { get; protected set; } // Acceleration X du terrain
+		// Acceleration X du terrain
+		public float accelx { get; protected set; }
 		
-		public float accely { get; protected set; }
-		
-		public float collage { get; protected set; } // Adhérence du terrain
+		// Adhérence du terrain
+		public float collage { get; protected set; } 
 		
 		/**
 		 * Crée le terrain
