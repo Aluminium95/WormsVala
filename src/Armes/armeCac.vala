@@ -11,11 +11,12 @@ namespace Jeu
 		{
 			base (deg);
 		}
-		public new void utiliser ()
+		public override bool utiliser ()
 		{
 			/*
 			 * Code d'utilisation d'une arme Cac
 			 */
+			return true;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using GLib;
+using SDL;
 
 namespace Jeu
 {
@@ -15,9 +16,6 @@ namespace Jeu
 		
 		// Arme de distance ou de CAC ?
 		public bool distance;
-		
-		// Munitions dans le chargeur !
-		public int chargeur {get; protected set;}
 		
 		// Rayon de l'arme
 		public int r {get; protected set; default = 50; }
@@ -36,7 +34,7 @@ namespace Jeu
 		/**
 		 * Utiliser l'arme !
 		 */
-		public bool utiliser ()
+		public virtual bool utiliser ()
 		{
 			if ( this.munitions > 0 )
 			{

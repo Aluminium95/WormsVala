@@ -184,13 +184,6 @@ namespace Jeu
 				
 				ia.w = this.w;
 				
-				if ( i % 2 == 0)
-				{
-					ia.col = 0x000FFFF * (i + 60) * 5;
-				} else {
-					ia.col = 0xFFF0000 * (i + 60) * 5;
-				}
-				
 				#if DEBUG 
 					print ("\t\t Gerant : New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n", CouleurConsole.VERT);
 				#endif 
@@ -274,8 +267,6 @@ namespace Jeu
 				int x = i * 20;
 				var p = new Player (x, getTerrainPos(x), 50, "Joueur "+(i+1).to_string ());
 				p.i = idmax;
-				
-				p.col = 0xCCCCCCC * (i + 60) * 5;
 				
 				addPlayer (p);
 				addObjet (p);

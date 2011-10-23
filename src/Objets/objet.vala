@@ -71,7 +71,7 @@ namespace Jeu
 		protected int vie;
 		
 		// Surface ( image ) de l'objet
-		public Surface s
+		public Surface s;
 		
 		// Chemin de base pour les images à charger
 		protected string baseURI;

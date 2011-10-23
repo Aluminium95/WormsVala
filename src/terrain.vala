@@ -46,7 +46,6 @@ namespace Jeu
 			this.hg = g;
 			
 			this.accelx = ( hg - hd ) / largeur;
-			this.accely = 0;
 			
 			this.collage = 0.5f;
 			
