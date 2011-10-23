@@ -45,21 +45,33 @@ namespace Jeu
 		 */
 		public bool computeKey (KeySymbol k)
 		{
-			if ( k == this.left)
+			if ( this.m == Mouvement.MARCHE )
 			{
-				this.velx -= 0.7f;
-			} else if ( k == this.right ) {
-				this.velx += 0.7f;
-			} else if ( k == this.up ) {
-				if ( this.m == Mouvement.MARCHE )
+				if ( k == this.left )
 				{
-					this.vely = 10;
-					this.m = Mouvement.SAUT;
+					this.velx -= 0.7f;
+				} else if ( k == this.right ) {
+					this.velx += 0.7f;
+				} else if ( k == this.up ) {
+					if ( this.m == Mouvement.MARCHE )
+					{
+						this.vely = 10;
+						this.m = Mouvement.SAUT;
+					}
+				} else if ( k == this.hit ) {
+					this.frapper ();
+				} else {
+					return false;
 				}
-			} else if ( k == this.hit ) {
-				this.frapper ();
-			} else {
-				return false;
+			} else if ( this.m == Mouvement.SAUT ) {
+				if ( k == this.left && this.virementEnAir == false) 
+				{
+					this.velx -= 1;
+					virementEnAir = true;
+				} else if ( k == this.right && this.virementEnAir == false) {
+					this.velx += 1;
+					virementEnAir = true;
+				}
 			}
 			
 			return true;

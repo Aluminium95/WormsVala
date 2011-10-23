@@ -8,7 +8,7 @@ namespace Jeu
 	 */
 	public enum Orientation
 	{
-		DROITE = 0, GAUCHE = 1, HAUT = 2, BAS = 3
+		DROITE, GAUCHE, HAUT, BAS
 	}
 	
 	/**
@@ -27,15 +27,6 @@ namespace Jeu
 	{
 		DISTANCE, CAC // CAC = Corps À Corps
 	}
-	
-	/**
-	 * Type d'objet ( utile pour les tableaux confondant tout ! ) 
-	 * Euh, vu qu'on a une fonction « typeof » ça devrait être bon
-	 */
-	/*public enum Type
-	{
-		DECOR, ENNEMI, JOUEUR
-	} Peut servir mais pour l'instant inutile */
 	
 	/**
 	 * Gestion des positions ( tuples )
