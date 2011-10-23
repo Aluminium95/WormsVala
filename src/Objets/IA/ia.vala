@@ -7,8 +7,18 @@ namespace Jeu
 	 */
 	public class IA : Personnage
 	{
-		protected Strategie strat; // Stratégie
+		// Stratégie
+		protected Strategie strat;
 		
+		/**
+		 * protected static unowned HashSet<Objet> objets; 
+		 * protected static unowned HashSet<Player> players;
+		 * De manière à bien utiliser les réactions
+		 */
+		
+		/**
+		 * Constructeur 
+		 */
 		public IA (int x, Terrain t, int vie, string name)
 		{
 			base ( x, t, vie); // Chaine vers personnage
@@ -23,8 +33,6 @@ namespace Jeu
 		
 		/**
 		 * Execute un cycle : fait une action longue
-		 * Le problème est que l'on devrait plutôt faire un truc
-		 * différent !
 		 */
 		public int execute (Objet o) // Joueurs ou autre IA
 		{

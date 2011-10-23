@@ -10,6 +10,7 @@ namespace Jeu
 	{
 		/**
 		 * Pour l'instant les attributs sont en public
+		 * ce sont les touches utilisées pour se déplacer
 		 */
 		public KeySymbol left;
 		public KeySymbol right;

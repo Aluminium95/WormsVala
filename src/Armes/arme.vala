@@ -2,26 +2,40 @@ using GLib;
 
 namespace Jeu
 {
-	/*
+	/**
 	 * Représente une arme du jeu
 	 */
 	public class Arme : Object
 	{
+		// Dégats infligés par l'arme
 		public int degats { get; protected set; default = 0; }
 		
-		public int munitions { get; protected set; default = -1; } // Pour les armes Cac c'est l'usure
+		// Munitions de l'arme ( -1 = infini )
+		public int munitions { get; protected set; default = -1; }
 		
-		public bool distance; // Distance ou Cac
-
-		public int gravite { get; protected set; default = 0; } // Force de la courbe … A(x-a)²+b
-
+		// Arme de distance ou de CAC ?
+		public bool distance;
+		
+		// Munitions dans le chargeur !
+		public int chargeur {get; protected set;}
+		
+		// Rayon de l'arme
 		public int r {get; protected set; default = 50; }
 		
+		// Image de l'arme
+		public Surface s;
+		
+		/**
+		 * Constructeur 
+		 */
 		public Arme (int deg)
 		{
 			this.degats = deg;
 		}
 		
+		/**
+		 * Utiliser l'arme !
+		 */
 		public bool utiliser ()
 		{
 			if ( this.munitions > 0 )
