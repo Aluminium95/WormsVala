@@ -8,6 +8,8 @@ namespace Jeu
 	 * Classe pour gérer la musique de fond
 	 * et les effets sonores supplémentaires 
 	 * de façon simple et transparente
+	 * Elle est très simple … et absolument pas OO,
+	 * mais c'est à cause des bugs de SDLMixer … 
 	 */
 	public class Son : Object
 	{

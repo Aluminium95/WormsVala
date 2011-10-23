@@ -4,6 +4,7 @@ using Gee;
 
 namespace Jeu
 {
+	// Tous les objets relatifs au menu sont dans ce namespace
 	namespace Menu
 	{
 		/**
