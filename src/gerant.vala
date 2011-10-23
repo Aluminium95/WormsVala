@@ -19,9 +19,11 @@ namespace Jeu
 		 */
 		public World w;
 		
-		private int idmax; // Identifiant unique maximum
+		// Identifiant unique maximum pour un objet
+		private int idmax;
 
-		private int tailleTotaleTerrain = 0; // Taille de tous les terrains réunis
+		// Taille de tous les terrains réunis
+		private int tailleTotaleTerrain = 0;
 
 		/** 
 		 * Délégates pour connecter aux signaux 

@@ -6,23 +6,27 @@ using SDLImage; // Images
 namespace Jeu
 {
 	/**
-	 * Gestion de l'affichage du jeu
-	 * Classe statique !
+	 * Gestion de l'affichage de tous les objets possibles du jeu
+	 * menu y compris ! Fonctionne par délégate !
 	 */
 	public class Aff : Object {
-
-		public const int SCREEN_WIDTH = 800; // Largeur de l'écran
-		public const int SCREEN_HEIGHT = 400; // Hauteur de l'écran
+	
+		/**
+		 * Largeur et Hauteur de l'écran
+		 */
+		public const int SCREEN_WIDTH = 800;
+		public const int SCREEN_HEIGHT = 400;
 		
 		private const int SCREEN_BPP = 32;
 
-		private unowned SDL.Screen screen; // L'écran 
+		// L'écran lui-même
+		private unowned SDL.Screen screen; 
 		
-		private SDL.Surface surf; // La surface de fond
+		// La surface de fond d'écran
+		private SDL.Surface surf;
 		
-		private GLib.Rand rand; // Le générateur de nombre aléatoires
-		
-		public bool done; // Tant que l'affichage n'est pas fini
+		// Le générateur de nombre aléatoires
+		private GLib.Rand rand;
 		
 		/**
 		 * Délégates pour connection aux signaux

@@ -10,13 +10,12 @@ namespace Jeu
 		 * Classe qui gère un bouton dans le menu
 		 * On pourrait juste faire une structure !!!!
 		 */
-		
 		public class Bouton : Object
-		
 		{
 			// Point Haut Gauche
 			public int16 x { get; private set; }
 			public int16 y { get; private set; }
+			
 			// Point Bas Droite
 			public int16 x2 { get; private set; }
 			public int16 y2 { get; private set; }
@@ -24,8 +23,10 @@ namespace Jeu
 			// Texte du bouton
 			public string text { get; private set; }
 			
+			// Action du bouton au clic
 			public ActionMenu action { get; private set; }
 			
+			// Surface du bouton
 			public Surface s;
 			
 			/**

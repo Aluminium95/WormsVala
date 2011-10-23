@@ -3,6 +3,9 @@ using SDL;
 
 namespace Jeu
 {
+	/**
+	 * L'application en elle-même du jeu
+	 */
 	public class Application : Object
 	{
 		private Gerant g; // Moteur du jeu
@@ -10,16 +13,34 @@ namespace Jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		
+		/**
+		 * Contient si les touches sont enfoncées
+		 */
 		private bool keyHeld[256];
+		
+		/**
+		 * Contient les symboles correspondants 
+		 * utilisé en lien avec le tableau précédent
+		 */
 		private KeySymbol keySym[256];
 		
-		public const int DELAY = 10; // Délai entre chaque tour de boucle
+		// Délai entre chaque tour de boucle
+		public const int DELAY = 10;
 		
+		// Tant que ce n'est pas fini
 		private bool done;
+		
+		// Affiche le menu ?
 		private bool menu;
 		
+		/**
+		 * Délégate pour récupérér une action du menu
+		 */
 		private delegate void dActionMenu (Menu.ActionMenu a);
 		
+		/** 
+		 * Constructeur
+		 */
 		public Application ()
 		{		
 			a = new Aff ();
@@ -96,20 +117,23 @@ namespace Jeu
 		private void process_events_gerant () {
 			Event event = Event ();
 			while (Event.poll (event) == 1) {
-		        switch (event.type) {
-		        	case EventType.QUIT:
-						this.done = true;
-              	 		break;
-					case EventType.KEYDOWN:
-						this.on_keyboard_event (event.key, true);
-						break;
-					case EventType.KEYUP:
-						this.on_keyboard_event (event.key, false);
-						break;
-		        }
-        	}
+				switch (event.type) {
+					case EventType.QUIT:
+							this.done = true;
+		      	 		break;
+						case EventType.KEYDOWN:
+							this.on_keyboard_event (event.key, true);
+							break;
+						case EventType.KEYUP:
+							this.on_keyboard_event (event.key, false);
+							break;
+				}
+        		}
 		}
 		
+		/**
+		 * Fait la boucle événementielle pour le menu uniquement
+		 */
 		private void process_events_menu () {
 			Event event = Event ();
 			while (Event.poll (event) == 1) {
