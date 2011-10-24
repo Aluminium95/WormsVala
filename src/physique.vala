@@ -21,15 +21,25 @@ namespace Jeu
 					float y = o.pos.y - ia.pos.y;
 					float d = x*x + y*y;
 					
-					if ( d <= (o.r+ia.r)*(o.r+ia.r) )
+					if ( d < (o.r+ia.r)*(o.r+ia.r) )
 					{
 						// Play le son
 						g.needPlayHit ();
+						
 						#if DEBUG 
 							print ("\t\t\t Physique : Collision !\n", CouleurConsole.CYAN);
 						#endif
 						
-						o.rebondirx ();
+						/** 
+						 * Arf ça ne marche pas !
+						 * Ou du moins ça fait n'importe quoi !
+						 */
+						if (ia.pos.x < o.pos.x)
+						{
+							o.move ((o.pos.x + o.r) - (ia.pos.x));
+						} else {
+							o.move ((o.pos.x - o.r) - (ia.pos.x));
+						}
 						
 						// o.rebondiry (); // collisions en l'air …
 					}

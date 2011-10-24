@@ -107,7 +107,8 @@ namespace Jeu
 		 */
 		public void draw_objet (Objet o)
 		{
-			o.s.blit (null, screen, SDL.Rect () { x = (int16) (o.pos.x - o.r), y = (int16)(SCREEN_HEIGHT - o.pos.y - 2 * o.r), w = (int16) (2 * o.r), h = (int16) (2 * o.r) });
+			// o.s.blit (null, screen, SDL.Rect () { x = (int16) (o.pos.x - o.r), y = (int16)(SCREEN_HEIGHT - o.pos.y - 2 * o.r), w = (int16) (2 * o.r), h = (int16) (2 * o.r) });
+			o.s.blit (null, screen, SDL.Rect () { x = (int16) (o.pos.x - o.r), y = (int16) (SCREEN_HEIGHT - o.pos.y - o.r), w = (int16) (2 * o.r), h = (int16) (o.r)});
 		}
 		
 		/**
