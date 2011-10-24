@@ -23,17 +23,15 @@ namespace Jeu
 					
 					if ( d <= (o.r+ia.r)*(o.r+ia.r) )
 					{
-						
+						// Play le son
 						g.needPlayHit ();
 						#if DEBUG 
 							print ("\t\t\t Physique : Collision !\n", CouleurConsole.CYAN);
 						#endif
 						
-						o.move (o.pos.x - ia.pos.x - o.r);
-						o.rebondirx (); // Mauvais Manque des conditions
-						ia.velx += o.velx;
-						o.velx /= 2;
-						// o.rebondiry (); // pour gérer les différentes réacs
+						o.rebondirx ();
+						
+						// o.rebondiry (); // collisions en l'air …
 					}
 				}
 			}
