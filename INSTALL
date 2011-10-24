@@ -15,9 +15,10 @@
 		$ sudo pacman -S valac libgee sdl sdl_mixer sdl_image sdl_gfx
 		
 ### Avec le Makefile
-	./configure
-	make
-        make clean
-        make release
-	sudo make install
-	WormsVala
+	./configure # met a jour le vapi/config.vapi en fonction de l'ordi
+	make # Compile le programme en mode débug  
+        make clean # Supprime tous les fichiers C générés à la compile debug
+        make release # Appelle clean, puis compile en mode Release
+	sudo make install # Appelle clean, puis compile en mode Install, puis installe dans les repértoires !
+	./WormsVala # lance le programme compilé en Debug
+	./WormsValaRelease # lance le programme compilé en Release 
