@@ -1,9 +1,9 @@
 [Desktop Entry]
-	Encoding=UTF-8
-	Name=WormsVala The Game
-	Comment=Un méga jeu en SDL/Vala !
-	Exec=WormsVala
-	Icon=WormsVala
-	Type=Application
-	Categories=Jeux;
-	Terminal=false
+Encoding=UTF-8
+Name=worms vala game
+Comment=Un méga jeu en SDL/Vala !
+Exec=worms-vala
+Icon=/home/aluminium95/code/Vala/WormsVala/DesktopIntegration/Icon.svg
+Type=Application
+Categories=GNOME;GTK;Game;LogicGame;
+Terminal=false

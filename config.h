@@ -1,5 +1,5 @@
 #ifndef PROGRAM
-#define PROGRAM "WormsVala"
+#define PROGRAM "worms-vala"
 #endif
 
 #ifndef MUSIQUE

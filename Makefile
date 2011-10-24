@@ -1,7 +1,7 @@
 ## Makefile du projet !
 
 # Nom du programme et nom du dossier dans usr/share
-PROGRAM = WormsVala
+PROGRAM = worms-vala
 
 # Sources du programme + vapi
 SRC =	"src"/*.vala \
@@ -23,7 +23,7 @@ CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \
 			-X -DFOND=\"`pwd`/Images/Fonds\" \
 			-X -DSPRITES=\"`pwd`/Images/Sprites\" \
 			-X -DMENUIMG=\"`pwd`/Images/Menu\" \
-			-X -DDATA=\"`pwd`/Data\"
+			-X -DDATA=\"`pwd`/Data\" \
 
 IMPORT_CONFIG = -X -I\"`pwd`/config.h\"
 
@@ -32,13 +32,13 @@ LINK = 	-X -lSDL -X -lSDL_gfx -X -lSDL_mixer -X -lSDL_image
 
 # Commande pour compiler
 VALAC = valac --enable-experimental --thread
- 
+
 # Option de debug
 VALACOPTS = -D DEBUG -g --save-temps --enable-mem-profiler 
  
-# set this as root makefile for Valencia
+# Makefile principal pour Valencia
 BUILD_ROOT = 1
- 
+
 # Le projet par défaut : debug
 all:
 	@$(VALAC) $(VALACOPTS) $(SRC) -o $(PROGRAM) $(IMPORT_CONFIG) $(PKGS) $(LINK) $(CONFIG)
@@ -84,11 +84,10 @@ install : clean
 	@cp ./DesktopIntegration/48.png "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/64.png "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/128.png "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
-	@cp ./DesktopIntegration/256.png "/usr/share/icons/hicolor/256x256/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/Icon.svg "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
 	
 	# Déplacement du programme dans /usr/bin
-	@mv WormsVala "/usr/bin/$(PROGRAM)"
+	@mv $(PROGRAM) "/usr/bin/$(PROGRAM)"
 	
 # Désinstalle le jeu 
 .PHONY : uninstall
@@ -104,6 +103,5 @@ uninstall: clean
 	@rm -v -fr "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
-	@rm -v -fr "/usr/share/icons/hicolor/256x256/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
 	@echo "Désinstallé avec succès"
