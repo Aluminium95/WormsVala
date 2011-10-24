@@ -67,10 +67,10 @@ namespace Jeu
 			} else if ( this.m == Mouvement.SAUT ) {
 				if ( k == this.left && this.virementEnAir == false) 
 				{
-					this.velx -= 1;
+					this.velx -= 5;
 					virementEnAir = true;
 				} else if ( k == this.right && this.virementEnAir == false) {
-					this.velx += 1;
+					this.velx += 5;
 					virementEnAir = true;
 				}
 			}
