@@ -13,14 +13,14 @@ namespace Jeu
 		/**
 		 * Tableau avec toutes les infos
 		 */
-		public ArrayList<Info?> infos;
+		public ArrayList<Info> infos;
 		
-		public delegate void dAddInfo (int x, int y, string text);
+		public delegate void dAddInfo (Info i);
 		
 		/**
 		 * Constructeur
 		 */
-		public Info (int x, int y)
+		public GestionInfo (int x, int y)
 		{
 			infos = new ArrayList<Info?> ();
 		}
@@ -28,26 +28,16 @@ namespace Jeu
 		/**
 		 * Ajoute une info à afficher 
 		 */
-		public void addInfo (int x, int y, string text)
+		public void addInfo (ref Info i)
 		{
-			infos.add(Info () {x = x, y = y, text = text});
+			infos.add(i);
 		}
 		
 		/**
 		 * Supprime une info à afficher
 		 */
-		public void delInfo (int x, int y, string text)
+		public void delInfo (ref Info i)
 		{
-			int i = 0;
-			
-			foreach (var i in infos)
-			{
-				if (i.x == x && i.y == y && i.text == text)
-				{
-					break;
-				}
-				i++;
-			}
 			infos.remove (i);
 		}
 	}
@@ -55,10 +45,17 @@ namespace Jeu
 	/**
 	 * Une info affichée à l'écran 
 	 */
-	public struct Info 
+	public class Info 
 	{
-		public int x;
-		public int y;
-		public string text;
+		public int x {get; set;}
+		public int y {get; set;}
+		public string text {get; set;}
+
+		public Info (int x, int y, string text, int time = 0)
+		{
+			this.x = x;
+			this.y = y;
+			this.text = text;
+		}
 	}
 }
