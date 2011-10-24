@@ -70,6 +70,8 @@ install : clean
 	@cp -R ./Images/ "/usr/share/WormsVala/Images"
 	@cp -R ./Musique/ "/usr/share/WormsVala/Musique"
 	@cp -R ./Data/ "/usr/share/WormsVala/Data"
+
+	@chmod -R u+rw "/usr/share/WormsVala" 
 	
 	# Déplacement du programme dans /usr/bin
 	@mv WormsVala "/usr/bin/WormsVala"
