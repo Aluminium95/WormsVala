@@ -8,15 +8,15 @@ SRC =	"src"/*.vala \
 		"src/Objets"/*.vala \
 			"src/Objets/IA"/*.vala \
 			"src/Armes"/*.vala \
-	"vapi"/*.vapi
+		"vapi"/*.vapi
 
 
 # Paquets utilisés
 PKGS = 	--pkg gee-1.0 \
-	--pkg sdl \
-	--pkg sdl-gfx \
-	--pkg sdl-mixer \
-	--pkg sdl-image
+		--pkg sdl \
+		--pkg sdl-gfx \
+		--pkg sdl-mixer \
+		--pkg sdl-image
 
 # Variables définies à la compilation
 CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \
@@ -72,8 +72,20 @@ install : clean
 	@cp -R ./Images/ "/usr/share/$(PROGRAM)/Images"
 	@cp -R ./Musique/ "/usr/share/$(PROGRAM)/Musique"
 	@cp -R ./Data/ "/usr/share/$(PROGRAM)/Data"
-
+	
+	# Modification des permissions des fichiers 
 	@chmod -R u+rw "/usr/share/$(PROGRAM)"
+	
+	# Installation du .desktop
+	@cp ./DesktopIntegration/WormsVala.desktop "/usr/share/applications/$(PROGRAM).desktop"
+	# Installation des icones
+	@cp ./DesktopIntegration/16.png "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
+	@cp ./DesktopIntegration/32.png "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
+	@cp ./DesktopIntegration/48.png "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
+	@cp ./DesktopIntegration/64.png "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
+	@cp ./DesktopIntegration/128.png "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
+	@cp ./DesktopIntegration/256.png "/usr/share/icons/hicolor/256x256/apps/$(PROGRAM).png"
+	@cp ./DesktopIntegration/Icon.svg "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
 	
 	# Déplacement du programme dans /usr/bin
 	@mv WormsVala "/usr/bin/$(PROGRAM)"
@@ -81,6 +93,17 @@ install : clean
 # Désinstalle le jeu 
 .PHONY : uninstall
 uninstall: clean
+	# Supression des données du programme
 	@rm -v -fr -r "/usr/share/$(PROGRAM)"
+	# Supression du programme lui même
 	@rm -v -fr "/usr/bin/$(PROGRAM)"
+	# Supression de l'intégration au desktop
+	@rm -v -fr "/usr/share/applications/$(PROGRAM).desktop"
+	@rm -v -fr "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
+	@rm -v -fr "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
+	@rm -v -fr "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
+	@rm -v -fr "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
+	@rm -v -fr "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
+	@rm -v -fr "/usr/share/icons/hicolor/256x256/apps/$(PROGRAM).png"
+	@rm -v -fr "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
 	@echo "Désinstallé avec succès"

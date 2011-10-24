@@ -1,0 +1,8 @@
+[Desktop Entry]
+	Encoding=UTF-8
+	Name=WormsVala The Game
+	Comment=Un méga jeu en SDL/Vala !
+	Exec=WormsVala
+	Icon=WormsVala.png
+	Type=Application
+	Terminal=false
