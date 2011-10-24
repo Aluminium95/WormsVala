@@ -78,6 +78,7 @@ install : clean
 	
 	# Installation du .desktop
 	@cp ./DesktopIntegration/WormsVala.desktop "/usr/share/applications/$(PROGRAM).desktop"
+	@chmod +x "/usr/share/applications/$(PROGRAM).desktop"
 	# Installation des icones
 	@cp ./DesktopIntegration/16.png "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/32.png "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
