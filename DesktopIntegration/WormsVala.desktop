@@ -3,6 +3,7 @@
 	Name=WormsVala The Game
 	Comment=Un méga jeu en SDL/Vala !
 	Exec=WormsVala
-	Icon=WormsVala.png
+	Icon=WormsVala
 	Type=Application
+	Categories=Jeux;
 	Terminal=false
