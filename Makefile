@@ -83,8 +83,6 @@ install : clean
 	@chmod u+x "/usr/share/applications/$(PROGRAM).desktop"
 	
 	# Installation des icones
-	@cp ./DesktopIntegration/16.png "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
-	@cp ./DesktopIntegration/32.png "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/48.png "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/64.png "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/128.png "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
@@ -107,8 +105,6 @@ uninstall: clean
 	
 	# Supression de l'intégration au desktop
 	@rm -v -fr "/usr/share/applications/$(PROGRAM).desktop"
-	@rm -v -fr "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
-	@rm -v -fr "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/48x48/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
