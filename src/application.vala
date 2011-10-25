@@ -13,17 +13,6 @@ namespace Jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		
-		/**
-		 * Contient si les touches sont enfoncées
-		 */
-		private bool keyHeld[256];
-		
-		/**
-		 * Contient les symboles correspondants 
-		 * utilisé en lien avec le tableau précédent
-		 */
-		private KeySymbol keySym[256];
-		
 		// Délai entre chaque tour de boucle
 		public const int DELAY = 10;
 		
@@ -57,6 +46,9 @@ namespace Jeu
 			
 			done = false;
 			menu = true; // On affiche le menu au début
+			
+			// Répétition des touches !
+			SDL.Key.set_repeat (10,10);
 		}
 		
 		/**
@@ -81,7 +73,6 @@ namespace Jeu
 					// m.execute ();
 					process_events_menu (); // Process les évent du menu
 				}
-				touchesEnfoncees ();
 				a.affiche (); // Rafraichit l'écran
 				
 				/*
@@ -122,13 +113,10 @@ namespace Jeu
 							this.done = true;
 		      	 		break;
 						case EventType.KEYDOWN:
-							this.on_keyboard_event (event.key, true);
-							break;
-						case EventType.KEYUP:
-							this.on_keyboard_event (event.key, false);
+							this.on_keyboard_event (event.key);
 							break;
 				}
-        		}
+        	}
 		}
 		
 		/**
@@ -152,7 +140,7 @@ namespace Jeu
 		 * Récupère la touche appuyée et fait les actions 
 		 * nécessaires en fonction
 		 */
-		private void on_keyboard_event (KeyboardEvent event, bool down) {
+		private void on_keyboard_event (KeyboardEvent event) {
 			#if DEBUG
 				print ("\tAff : entrée clavier !\n", CouleurConsole.BLEU);
 			#endif
@@ -167,8 +155,7 @@ namespace Jeu
 					s.music.pause ();
 					break;
 				default:
-					keyHeld[event.keysym.sym] = down;
-					keySym[event.keysym.sym] = event.keysym.sym;
+					g.movePlayer (event.keysym.sym);
 					break;
 			}
 		}
@@ -196,20 +183,6 @@ namespace Jeu
 					this.menu = false;
 					s.music.resume ();
 					break;
-			}
-		}
-		
-		/**
-		 * Gère les touches appuyées
-		 */
-		private void touchesEnfoncees ()
-		{
-			for (int i = 0; i < 256; i++ )
-			{
-				if ( keyHeld[i] == true )
-				{
-					g.movePlayer (keySym[i]);
-				}
 			}
 		}
 	}
