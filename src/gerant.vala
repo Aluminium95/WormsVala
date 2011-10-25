@@ -290,6 +290,17 @@ namespace Jeu
 		}
 		
 		/**
+		 * Crée les décors du jeu
+		 */
+		private void creerDecors (int nbr)
+		{
+			for (int i = 0; i < nbr; i++)
+			{
+				var dec = new Decor ();
+			}
+		}
+		
+		/**
 		 * Fait éxecuter un cycle aux IA :
 		 * 		- Les fait choisir une action 
 		 * 		- Les fait bouger :

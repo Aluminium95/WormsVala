@@ -46,5 +46,21 @@ namespace Jeu
 				 */
 			}
 		}
+		
+		/**
+		 * Quand une collision se produit
+		 */
+		public override void onCollision (ref Objet o)
+		{
+			// Code en fonction du type d'objet
+		}
+		
+		/**
+		 * Quand on utilise la touche action sur cet objet
+		 */
+		public override void onAction (ref Objet o)
+		{
+			// Code en fonction du type d'objet
+		}
 	}
 }
