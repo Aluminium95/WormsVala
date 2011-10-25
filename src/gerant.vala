@@ -29,16 +29,16 @@ namespace Jeu
 		 * Délégates pour connecter aux signaux 
 		 * Liés au personnages
 		 */
-		delegate void delegateJoueurFrappe (Personnage p);
-		delegate void delegateAssignerTerrain (Terrain t, bool d, Objet o);
-		delegate void delegateJoueurTire (Personnage p, TuplePos t);
+		delegate void delegate_joueur_frappe (Personnage p);
+		delegate void delegate_assigner_terrain (Terrain t, bool d, Objet o);
+		delegate void delegate_joueur_tire (Personnage p, TuplePos t);
 		
 		/**
 		 * Signaux pour demander l'affichage
 		 */
-		public signal void needDrawLine (int x1, int y1, int x2, int y2);
-		public signal void needDrawObjet (Objet o);
-		public signal void needDrawTerrain (Terrain t);
+		public signal void need_draw_line (int x1, int y1, int x2, int y2);
+		public signal void need_draw_objet (Objet o);
+		public signal void need_draw_terrain (Terrain t);
 		
 		/**
 		 * Signaux pour demander le son
@@ -141,7 +141,7 @@ namespace Jeu
 			 * Appel des fonctions créatrices 
 			 */
 			creer_terrain (10);
-			creerIA (2);
+			creer_IA (2);
 			creer_joueur (2);
 		}
 		
@@ -207,7 +207,7 @@ namespace Jeu
 				{
 					// stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); :: " + o.t.i.to_string () + "\n");
 				});
-				ia.frapper.connect(joueurFrappe);
+				ia.frapper.connect(joueur_frappe);
 				
 				idmax++;
 			}
@@ -292,7 +292,7 @@ namespace Jeu
 					p.up = KeySymbol.j;
 				}
 				
-				p.frapper.connect (joueurFrappe);
+				p.frapper.connect (joueur_frappe);
 				p.dead.connect (rm_objet);
 				
 				idmax++;
@@ -325,13 +325,13 @@ namespace Jeu
 		{			
 			foreach ( Terrain t in listeTerrains )
 			{
-				needDrawTerrain (t);
-				needDrawLine (t.start, t.hg, t.start + t.largeur, t.hd);
+				need_draw_terrain (t);
+				need_draw_line (t.start, t.hg, t.start + t.largeur, t.hd);
 			}
 			
 			foreach ( var o in objets ) // Très mauvaise gestion, mais c'est pour la démo
 			{
-				needDrawObjet (o); // Affiche l'objet
+				need_draw_objet (o); // Affiche l'objet
 				
 				o.calc_vel (); // Calcule la vélocité de l'objet
 				
@@ -343,10 +343,10 @@ namespace Jeu
 				 * Conditions de sortie du terrain
 				 */
 				if ( o.pos.x + o.velx < o.t.start ) {
-					bool v = changeTerrain (false, o);
+					bool v = change_terrain (false, o);
 					sortDuJeu = !v;
 				} else if ( o.pos.x + o.velx > o.t.start + o.t.largeur ) {
-					bool v = changeTerrain (true, o);
+					bool v = change_terrain (true, o);
 					sortDuJeu = !v;
 				} else {
 					sortDuJeu = false;

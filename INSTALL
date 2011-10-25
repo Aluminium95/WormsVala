@@ -1,18 +1,18 @@
 ### INSTALL DE WORMSVALA
 	Il faut installer les librairies de développement :
-		SDL, SDL_mixer, SDL_image, SDL_gfx, libgee
+		SDL, SDL_mixer, SDL_image, SDL_gfx, libgee, lua
 
 	Pour compiler, il faut :
 		valac > 10
 	
 	Donc pour ubuntu / Debian : 
-		$ sudo apt-get install valac libgee-dev libsdl-image1.2 libsdl-image1.2-dev libsdl-ttf2.0-0 libsdl-ttf2.0-dev libsdl-mixer1.2 libsdl-mixer1.2-dev 
+		$ sudo apt-get install lua-dev valac libgee-dev libsdl-image1.2 libsdl-image1.2-dev libsdl-ttf2.0-0 libsdl-ttf2.0-dev libsdl-mixer1.2 libsdl-mixer1.2-dev 
 
 		pour fedora :
-		$ sudo yum install SDL-devel SDL_mixer-devel SDL_gfx-devel libgee-devel valac
+		$ sudo yum install lua-devel SDL-devel SDL_mixer-devel SDL_gfx-devel libgee-devel valac
 
 		pour archlinux :
-		$ sudo pacman -S valac libgee sdl sdl_mixer sdl_image sdl_gfx
+		$ sudo pacman -S lua valac libgee sdl sdl_mixer sdl_image sdl_gfx
 		
 ### Avec le Makefile
 	./configure # met a jour le vapi/config.vapi en fonction de l'ordi

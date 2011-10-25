@@ -93,9 +93,9 @@ namespace Jeu
 		public void connect_signaux ()
 		{
 			// Signaux de gérant 
-			g.needDrawLine.connect (a.draw_line);
-			g.needDrawObjet.connect (a.draw_objet);
-			g.needDrawTerrain.connect (a.draw_terrain);
+			g.need_draw_line.connect (a.draw_line);
+			g.need_draw_objet.connect (a.draw_objet);
+			g.need_draw_terrain.connect (a.draw_terrain);
 			g.need_play_hit.connect (s.play_hit);
 			g.need_play_bam.connect (s.play_bam);
 			
