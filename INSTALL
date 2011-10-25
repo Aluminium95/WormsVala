@@ -20,5 +20,5 @@
         make clean # Supprime tous les fichiers C générés à la compile debug
         make release # Appelle clean, puis compile en mode Release
 	sudo make install # Appelle clean, puis compile en mode Install, puis installe dans les repértoires !
-	./WormsVala # lance le programme compilé en Debug
-	./WormsValaRelease # lance le programme compilé en Release 
+	./worms-vala # lance le programme compilé en Debug
+	./worms-vala-release # lance le programme compilé en Release 

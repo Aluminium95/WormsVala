@@ -47,7 +47,7 @@ all:
 # Le projet Release : non debug, optimisé 
 release: clean
 	@rm -v -fr $(PROGRAM)
-	@$(VALAC) --disable-assert -X -O2 $(SRC) -o WormsValaRelease $(IMPORT_CONFIG) $(PKGS) $(LINK) $(CONFIG)
+	@$(VALAC) --disable-assert -X -O2 $(SRC) -o $(PROGRAM)-release $(IMPORT_CONFIG) $(PKGS) $(LINK) $(CONFIG)
  
 # Supprime tous les fichiers « inutiles »
 .PHONY : clean
@@ -79,6 +79,7 @@ install : clean
 	# Installation du .desktop
 	@cp ./DesktopIntegration/WormsVala.desktop "/usr/share/applications/$(PROGRAM).desktop"
 	@chmod u+x "/usr/share/applications/$(PROGRAM).desktop"
+	
 	# Installation des icones
 	@cp ./DesktopIntegration/16.png "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/32.png "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
@@ -86,8 +87,10 @@ install : clean
 	@cp ./DesktopIntegration/64.png "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/128.png "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/Icon.svg "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
+	
 	# Installation de la man page
 	@cp ./DesktopIntegration/$(PROGRAM).6.gz "/usr/share/man/man6/$(PROGRAM).6.gz"
+	
 	# Déplacement du programme dans /usr/bin
 	@mv $(PROGRAM) "/usr/bin/$(PROGRAM)"
 	
@@ -96,8 +99,10 @@ install : clean
 uninstall: clean
 	# Supression des données du programme
 	@rm -v -fr -r "/usr/share/$(PROGRAM)"
+	
 	# Supression du programme lui même
 	@rm -v -fr "/usr/bin/$(PROGRAM)"
+	
 	# Supression de l'intégration au desktop
 	@rm -v -fr "/usr/share/applications/$(PROGRAM).desktop"
 	@rm -v -fr "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
@@ -107,4 +112,5 @@ uninstall: clean
 	@rm -v -fr "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
 	@rm -v -fr "/usr/share/man/man6/$(PROGRAM).6.gz"
+	
 	@echo "Désinstallé avec succès"
