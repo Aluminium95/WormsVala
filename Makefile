@@ -78,7 +78,7 @@ install : clean
 	
 	# Installation du .desktop
 	@cp ./DesktopIntegration/WormsVala.desktop "/usr/share/applications/$(PROGRAM).desktop"
-	@chmod +x "/usr/share/applications/$(PROGRAM).desktop"
+	@chmod u+x "/usr/share/applications/$(PROGRAM).desktop"
 	# Installation des icones
 	@cp ./DesktopIntegration/16.png "/usr/share/icons/hicolor/16x16/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/32.png "/usr/share/icons/hicolor/32x32/apps/$(PROGRAM).png"
@@ -86,7 +86,8 @@ install : clean
 	@cp ./DesktopIntegration/64.png "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/128.png "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
 	@cp ./DesktopIntegration/Icon.svg "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
-	
+	# Installation de la man page
+	@cp ./DesktopIntegration/$(PROGRAM).6.gz "/usr/share/man/man6/$(PROGRAM).6.gz"
 	# Déplacement du programme dans /usr/bin
 	@mv $(PROGRAM) "/usr/bin/$(PROGRAM)"
 	
@@ -105,4 +106,5 @@ uninstall: clean
 	@rm -v -fr "/usr/share/icons/hicolor/64x64/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/128x128/apps/$(PROGRAM).png"
 	@rm -v -fr "/usr/share/icons/hicolor/scalable/apps/$(PROGRAM).svg"
+	@rm -v -fr "/usr/share/man/man6/$(PROGRAM).6.gz"
 	@echo "Désinstallé avec succès"
