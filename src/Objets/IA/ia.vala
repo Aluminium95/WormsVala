@@ -26,9 +26,10 @@ namespace Jeu
 			this.strat = Strategie.CAC;
 			this.name = name;
 			
-			this.baseURI += "/IA/default/SDegats/";
+			this.baseURI += "/IA/default/";
 			
-			this.s = SDLImage.load (baseURI + "droite.png");
+			this.s = SDLImage.load (baseURI + "SDegats.png");
+			this.surface = SDLImage.load (baseURI + "SDegats.png");
 		}
 		
 		/**

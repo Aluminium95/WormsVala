@@ -89,9 +89,9 @@ namespace Jeu
 		 */
 		protected virtual void definirSprite () {
 			if ( this.velx < -1 ) {
-				setSprite (baseURI + "gauche.png");
+				this.angle = -180 ;
 			} else if ( this.velx > 1 ) {
-				setSprite (baseURI + "droite.png");
+				this.angle = 180;
 			}
 		}
 	}

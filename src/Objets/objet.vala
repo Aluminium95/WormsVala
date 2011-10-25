@@ -26,6 +26,8 @@ namespace Jeu
 		public float velx; // Vélocité X
 		public float vely; // Vélocité Y
 		
+		protected double angle; // Angle de rotation
+		
 		// public float elastic; // Élasticité 
 		
 		/**
@@ -70,8 +72,11 @@ namespace Jeu
 		// Vie restante à l'objet
 		protected int vie;
 		
-		// Surface ( image ) de l'objet
+		// Surface ( image ) de l'objet à afficher
 		public Surface s;
+		
+		// Surface de base de l'objet
+		protected Surface surface;
 		
 		// Chemin de base pour les images à charger
 		protected string baseURI;
@@ -108,6 +113,8 @@ namespace Jeu
 			this.masse = 50;
 			
 			this.m = Mouvement.MARCHE;
+			
+			this.angle = 0.0;
 		}
 
 		/**
@@ -136,6 +143,7 @@ namespace Jeu
 			}
 			
 			moved (); // Envoie le signal de déplacement
+			this.rotate (); // rotate l'image
 		}
 
 		/**
@@ -211,6 +219,14 @@ namespace Jeu
 		public void setSprite (string uri)
 		{
 			this.s = SDLImage.load (uri);
+		}
+		
+		/**
+		 * Fait une rotation sur l'image 
+		 */
+		public void rotate ()
+		{
+			this.s = SDLGraphics.RotoZoom.rotozoom (this.surface, this.angle, 1.0, 1);
 		}
 		
 		/**

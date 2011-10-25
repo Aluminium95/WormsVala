@@ -26,9 +26,10 @@ namespace Jeu
 			
 			this.name = name; // Définit le nom
 			
-			this.baseURI += "/Joueur/default/SDegats/";
+			this.baseURI += "/Joueur/default/";
 			
-			this.s = SDLImage.load (baseURI + "droite.png");
+			this.s = SDLImage.load (baseURI + "SDegats.png");
+			this.surface = SDLImage.load (baseURI + "SDegats.png");
 			
 			/**
 			 * Définition des touches par défaut 
