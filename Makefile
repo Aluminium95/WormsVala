@@ -8,6 +8,7 @@ SRC =	"src"/*.vala \
 		"src/Objets"/*.vala \
 			"src/Objets/IA"/*.vala \
 			"src/Armes"/*.vala \
+		"src/Scripts"/*.vala \
 		"vapi"/*.vapi
 
 
@@ -16,7 +17,8 @@ PKGS = 	--pkg gee-1.0 \
 		--pkg sdl \
 		--pkg sdl-gfx \
 		--pkg sdl-mixer \
-		--pkg sdl-image
+		--pkg sdl-image \
+		--pkg lua
 
 # Variables définies à la compilation
 CONFIG =	-X -DMUSIQUE=\"`pwd`/Musique\" \

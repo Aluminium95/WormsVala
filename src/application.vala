@@ -40,6 +40,8 @@ namespace Jeu
 			s.createSons ();
 			
 			g = new Gerant ();
+			Scripts.init (g);
+			
 			m = new Menu.Menu ();
 			
 			connectSignals();

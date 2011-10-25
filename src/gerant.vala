@@ -254,6 +254,15 @@ namespace Jeu
 			tailleTotaleTerrain = pos; // Définiton de la taille totale du jeu
 		}
 		
+		public void ajouterTerrain (int l, int hg, int hd)
+		{
+			var t = new Terrain (l,hg,hd);
+			t.start = tailleTotaleTerrain;
+			t.i = listeTerrains.size; // Définition de l'indice du terrain dans le tableau
+			listeTerrains.add (t); // Ajout du terrain
+			tailleTotaleTerrain += l;
+		}
+		
 		/**
 		 * Crée les jouers du jeu
 		 */
