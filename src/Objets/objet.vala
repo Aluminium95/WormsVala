@@ -102,7 +102,7 @@ namespace Jeu
 			this.t = t;
 			
 			this.pos.x = x;
-			this.pos.y = t.getSol (this.pos.x);
+			this.pos.y = t.get_sol (this.pos.x);
 			
 			this.velx = 0;
 			this.vely = 0;
@@ -126,11 +126,11 @@ namespace Jeu
 			
 			if ( this.m == Mouvement.SAUT)
 			{
-				if ( this.pos.y + (int) this.vely > this.t.getSol (this.pos.x) )
+				if ( this.pos.y + (int) this.vely > this.t.get_sol (this.pos.x) )
 				{
 					this.pos.y += this.vely;
 				} else {
-					this.pos.y = this.t.getSol (this.pos.x);
+					this.pos.y = this.t.get_sol (this.pos.x);
 					/*
 					 * Gérér Ici l'élasticité et le rebon en fonction
 					 * de la vélocité + gravité !
@@ -139,7 +139,7 @@ namespace Jeu
 					this.virementEnAir = false; // Reset de la possiblitité de s'orienter
 				}
 			} else if ( this.m == Mouvement.MARCHE ){
-				this.pos.y = this.t.getSol (this.pos.x);
+				this.pos.y = this.t.get_sol (this.pos.x);
 			}
 			
 			moved (); // Envoie le signal de déplacement
@@ -149,7 +149,7 @@ namespace Jeu
 		/**
 		 * Modifie la vie
 		 */
-		public virtual void modifierVie (int v)
+		public virtual void modifier_vie (int v)
 		{
 			if ( this.vie - v < 0 && this.vie != -1)
 			{
@@ -188,7 +188,7 @@ namespace Jeu
 		/**
 		 * Calcule de la vélocité 
 		 */
-		public virtual void calcVel ()
+		public virtual void calc_vel ()
 		{
 			// Si on est sur le sol, on subit la pente
 			this.velx += (this.m == Mouvement.MARCHE ) ? this.t.accelx : 0;
@@ -216,7 +216,7 @@ namespace Jeu
 		 * Change le sprite en fonction de l'uri
 		 * donnée en param
 		 */
-		public void setSprite (string uri)
+		public void set_sprite (string uri)
 		{
 			this.s = SDLImage.load (uri);
 		}
@@ -232,12 +232,12 @@ namespace Jeu
 		/**
 		 * Fonction quand on est en collision !
 		 */
-		public virtual void onCollision (ref Objet o) {}
+		public virtual void on_collision (ref Objet o) {}
 		
 		/**
 		 * Fonction quand on tente d'utiliser 
 		 * la touche action sur l'objet
 		 */
-		public virtual void onAction (ref Objet o) {}
+		public virtual void on_action (ref Objet o) {}
 	}
 }

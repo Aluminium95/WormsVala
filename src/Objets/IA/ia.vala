@@ -50,12 +50,12 @@ namespace Jeu
 					}
 					break;
 				case Strategie.DISTANCE: // Distance
-					ajusteVisee (o);
+					ajuste_visee (o);
 					if ( d < 10 )
 					{
 						depl = -1;
 					} else {
-						attaquerDistance ();
+						attaquer_distance ();
 					}
 					break;
 				default:
@@ -67,7 +67,7 @@ namespace Jeu
 		/**
 		 * Échange l'arme actuelle avec une autre proposée 
 		 */
-		public new void echangerArme (Arme a)
+		public new void echanger_arme (Arme a)
 		{
 			if ( this.armeActuelle == this.armePrincipale )
 			{
@@ -76,22 +76,22 @@ namespace Jeu
 				this.armeSecondaire = a;
 			}
 			
-			checkStrategie (); // Vérifie que la stratégie correspond à l'arme
+			check_strategie (); // Vérifie que la stratégie correspond à l'arme
 		}
 		
 		/**
 		 * Change l'arme
 		 */
-		protected new void changerArme ()
+		protected new void changer_arme ()
 		{
 			this.armeActuelle = ( this.armeActuelle == this.armePrincipale ) ? this.armeSecondaire : this.armePrincipale;
-			checkStrategie (); // Vérifie que la stratégie correspond à l'arme
+			check_strategie (); // Vérifie que la stratégie correspond à l'arme
 		}
 		
 		/**
 		 * Change de strategie
 		 */
-		public void reviseStrategie ()
+		public void reviser_strategie ()
 		{
 			this.strat = (this.strat == Strategie.DISTANCE) ? Strategie.CAC : Strategie.DISTANCE;
 		}
@@ -100,7 +100,7 @@ namespace Jeu
 		 * Vérifie si la strategie correspond bien
 		 * au style de l'arme
 		 */
-		protected void checkStrategie ()
+		protected void check_strategie ()
 		{
 			if ( this.armeActuelle.distance == true )
 			{
@@ -113,7 +113,7 @@ namespace Jeu
 		/**
 		 * Ajuste le tir / la vision en fonction de l'objet !
 		 */
-		protected void ajusteVisee (Objet o)
+		protected void ajuste_visee (Objet o)
 		{
 			/**
 			 * Code d'ajustement de la visée

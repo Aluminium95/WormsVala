@@ -24,7 +24,7 @@ namespace Jeu
 					if ( d < (o.r+ia.r)*(o.r+ia.r) )
 					{
 						// Play le son
-						g.needPlayHit ();
+						g.need_play_hit ();
 						
 						#if DEBUG 
 							print ("\t\t\t Physique : Collision !\n", CouleurConsole.CYAN);

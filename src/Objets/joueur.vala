@@ -45,7 +45,7 @@ namespace Jeu
 		 * touche @k 
 		 * @return false si la touche ne fait rien au personnage
 		 */
-		public bool computeKey (KeySymbol k)
+		public bool compute_key (KeySymbol k)
 		{
 			if ( this.m == Mouvement.MARCHE )
 			{

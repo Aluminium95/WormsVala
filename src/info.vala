@@ -15,7 +15,7 @@ namespace Jeu
 		 */
 		public ArrayList<Info> infos;
 		
-		public delegate void dAddInfo (Info i);
+		public delegate void d_add_info (Info i);
 		
 		/**
 		 * Constructeur
@@ -28,7 +28,7 @@ namespace Jeu
 		/**
 		 * Ajoute une info à afficher 
 		 */
-		public void addInfo (ref Info i)
+		public void add_info (ref Info i)
 		{
 			infos.add(i);
 		}
@@ -36,7 +36,7 @@ namespace Jeu
 		/**
 		 * Supprime une info à afficher
 		 */
-		public void delInfo (ref Info i)
+		public void del_info (ref Info i)
 		{
 			infos.remove (i);
 		}

@@ -34,7 +34,7 @@ namespace Jeu
 		/**
 		 * Change l'arme
 		 */
-		protected virtual void changerArme ()
+		protected virtual void changer_arme ()
 		{
 			this.armeActuelle = ( this.armeActuelle == this.armePrincipale ) ? this.armeSecondaire : this.armePrincipale;
 		}
@@ -42,7 +42,7 @@ namespace Jeu
 		/**
 		 * Échange l'arme actuelle avec une autre proposée 
 		 */
-		public virtual void echangerArme (Arme a)
+		public virtual void echanger_arme (Arme a)
 		{
 			if ( this.armeActuelle == this.armePrincipale )
 			{
@@ -64,7 +64,7 @@ namespace Jeu
 		 * Utilise l'arme pour envoyer un projectile 
 		 * dans la direction de l'objet
 		 */
-		protected virtual void attaquerDistance ()
+		protected virtual void attaquer_distance ()
 		{
 			if ( armeActuelle.utiliser () == true )
 			{
@@ -76,18 +76,18 @@ namespace Jeu
 		}
 		
 		/**
-		 * Surcharge de la fonction calcVel
+		 * Surcharge de la fonction calc_vel
 		 */
-		public override void calcVel ()
+		public override void calc_vel ()
 		{
-			definirSprite ();
-			base.calcVel ();
+			definir_sprite ();
+			base.calc_vel ();
 		}
 		
 		/**
 		 * Recalcule le sprite
 		 */
-		protected virtual void definirSprite () {
+		protected virtual void definir_sprite () {
 			if ( this.velx < -1 ) {
 				this.angle = -180 ;
 			} else if ( this.velx > 1 ) {

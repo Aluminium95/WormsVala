@@ -39,7 +39,7 @@ namespace Jeu
 		
 		public static int ajoute_terrain ()
 		{
-			g.ajouterTerrain ((int)vm.to_number (1), (int)vm.to_number (2), (int)vm.to_number (3));
+			g.ajouter_terrain ((int)vm.to_number (1), (int)vm.to_number (2), (int)vm.to_number (3));
 			return 1;
 		}
 	}

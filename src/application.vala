@@ -37,14 +37,14 @@ namespace Jeu
 			s = new Son ();
 			s.hit = Config.MUSIQUE + "/hit.ogg";
 			s.bam = Config.MUSIQUE + "/test.ogg";
-			s.createSons ();
+			s.create_sons ();
 			
 			g = new Gerant ();
 			Scripts.init (g);
 			
 			m = new Menu.Menu ();
 			
-			connectSignals();
+			connect_signaux();
 			
 			done = false;
 			menu = true; // On affiche le menu au début
@@ -90,18 +90,18 @@ namespace Jeu
 		/**
 		 * Connection des signaux de l'application
 		 */
-		public void connectSignals ()
+		public void connect_signaux ()
 		{
 			// Signaux de gérant 
 			g.needDrawLine.connect (a.draw_line);
 			g.needDrawObjet.connect (a.draw_objet);
 			g.needDrawTerrain.connect (a.draw_terrain);
-			g.needPlayHit.connect (s.playHit);
-			g.needPlayBam.connect (s.playBam);
+			g.need_play_hit.connect (s.play_hit);
+			g.need_play_bam.connect (s.play_bam);
 			
 			// Signaux de menu 
 			m.needDrawBouton.connect (a.draw_bouton);
-			m.actionMenu.connect (this.gererActionMenu);
+			m.actionMenu.connect (this.gerer_action_menu);
 		}
 		
 		/**
@@ -157,7 +157,7 @@ namespace Jeu
 					s.music.pause ();
 					break;
 				default:
-					g.movePlayer (event.keysym.sym);
+					g.move_player (event.keysym.sym);
 					break;
 			}
 		}
@@ -165,7 +165,7 @@ namespace Jeu
 		/**
 		 * Gère les actionns retournées par le menu
 		 */
-		private void gererActionMenu (Menu.ActionMenu a)
+		private void gerer_action_menu (Menu.ActionMenu a)
 		{
 			switch (a)
 			{

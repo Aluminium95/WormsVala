@@ -62,7 +62,7 @@ namespace Jeu
 		 * 		Prendre en compte la « superposition d'objets » !!!!
 		 * 		Faire une gestion des collisions !
 		 */
-		public float getSol ( float x )
+		public float get_sol ( float x )
 		{
 			return (x - this.start) * ( hd - hg ) / largeur + hg;
 		}
@@ -70,7 +70,7 @@ namespace Jeu
 		/**
 		 * Retourne la hauteur dans le triangle du terrain
 		 */
-		public int getH ( int x )
+		public int get_h ( int x )
 		{
 			return (int) ( hd - hg ) * x / largeur; 
 		}
@@ -85,7 +85,7 @@ namespace Jeu
 		 * Retire un objet du terrain
 		 * !!! FAIRE UN THROW D'ERREUR !!!
 		 */
-		public void rmObjet (Objet o)
+		public void rm_objet (Objet o)
 		{
 			/**
 			 * Code de retirage sécurisé
@@ -96,7 +96,7 @@ namespace Jeu
 		/**
 		 * Ajoute un objet au terrain
 		 */
-		public void addObjet (Objet o)
+		public void add_objet (Objet o)
 		{
 			/**
 			 * Code d'ajout sécurisé 

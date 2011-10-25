@@ -27,18 +27,18 @@ namespace Jeu
 		 * pour gérer la modification du sprite du décor 
 		 * en fonction de ses dégats !
 		 */
-		public override void modifierVie (int v)
+		public override void modifier_vie (int v)
 		{
-			base.modifierVie (v);
+			base.modifier_vie (v);
 			if (this.sens == false )
 			{
 				if ( 0 < vie < 2 )
 				{
-					setSprite (baseURI + "sdegats.png");
+					set_sprite (baseURI + "sdegats.png");
 				} else if ( 0 < vie < 6 ) {
-					setSprite (baseURI + "mdegats.png");
+					set_sprite (baseURI + "mdegats.png");
 				} else {
-					setSprite (baseURI + "ndegats.png");
+					set_sprite (baseURI + "ndegats.png");
 				}
 			} else {
 				/**
@@ -50,7 +50,7 @@ namespace Jeu
 		/**
 		 * Quand une collision se produit
 		 */
-		public override void onCollision (ref Objet o)
+		public override void on_collision (ref Objet o)
 		{
 			// Code en fonction du type d'objet
 		}
@@ -58,7 +58,7 @@ namespace Jeu
 		/**
 		 * Quand on utilise la touche action sur cet objet
 		 */
-		public override void onAction (ref Objet o)
+		public override void on_action (ref Objet o)
 		{
 			// Code en fonction du type d'objet
 		}

@@ -45,7 +45,7 @@ namespace Jeu
 			music.volume (50);
 		}
 		
-		public void createSons ()
+		public void create_sons ()
 		{
 			var src = new SDL.RWops.from_file (hit, "r");
 			this.hitc = new Chunk.WAV (src);
@@ -54,12 +54,12 @@ namespace Jeu
 			bamc.volume (25);
 		}
 		
-		public void playHit ()
+		public void play_hit ()
 		{
 			this.chit.play (hitc, 0);
 		}
 		
-		public void playBam ()
+		public void play_bam ()
 		{
 			this.cbam.play (bamc, 0);
 		}

@@ -43,15 +43,15 @@ namespace Jeu
 		/**
 		 * Signaux pour demander le son
 		 */
-		public signal void needPlayHit (); // frapper/collision
-		public signal void needPlayBam (); // sort de l'écran ( bam contre le mur :D )
+		public signal void need_play_hit (); // frapper/collision
+		public signal void need_play_bam (); // sort de l'écran ( bam contre le mur :D )
 		
 		/**
 		 * Delegate pour qu'un joueur frappe !
 		 * Regarde dans tous les terrains autour de celui du
 		 * personnage
 		 */
-		private void joueurFrappe (Personnage p)
+		private void joueur_frappe (Personnage p)
 		{
 			int t = ( p.t.i != 0 ) ? p.t.i - 1 : p.t.i; // On regarde dans les terrains alentours
 			t = ( t == listeTerrains.size -1 ) ? t - 2 : t;
@@ -64,7 +64,7 @@ namespace Jeu
 					double d = pow(pers.pos.x - p.pos.x,2) + pow(pers.pos.y - p.pos.y, 2);
 					if ( d <= p.armeActuelle.r ) // Si c'est dedans
 					{
-						pers.modifierVie (10); // On enlève 10 pv
+						pers.modifier_vie (10); // On enlève 10 pv
 					}
 				}
 				t++; // Indice du prochain terrain
@@ -77,16 +77,16 @@ namespace Jeu
 		 * Il faut qu'il y ai un terrain après ou avant !
 		 * Si c'est pas possible renvoie false
 		 */
-		private bool changeTerrain (bool d, Objet o)
+		private bool change_terrain (bool d, Objet o)
 		{
 			if (  d & o.t.i < listeTerrains.size - 1  ) // Si c'est pas le dernier terrain
 			{
-				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
-				listeTerrains[o.t.i+1].addObjet (o);
+				o.t.rm_objet (o); // Supression de l'objet dans le premier terrain
+				listeTerrains[o.t.i+1].add_objet (o);
 				return true;
 			} else if ( !d && o.t.i > 0 )  {
-				o.t.rmObjet (o); // Supression de l'objet dans le premier terrain
-				listeTerrains[o.t.i-1].addObjet (o);
+				o.t.rm_objet (o); // Supression de l'objet dans le premier terrain
+				listeTerrains[o.t.i-1].add_objet (o);
 				return true;
 			} else { // Si on peut pas changer de terrain
 				return false; 
@@ -96,7 +96,7 @@ namespace Jeu
 		/**
 		 * Retourne le terrain auquel appartien cette position
 		 */
-		private Terrain getTerrainPos (float x)
+		private Terrain get_terrain_pos (float x)
 		{
 			Terrain ret = listeTerrains[0]; // Terrain par défaut
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
@@ -140,9 +140,9 @@ namespace Jeu
 			/*
 			 * Appel des fonctions créatrices 
 			 */
-			creerTerrain (10);
+			creer_terrain (10);
 			creerIA (2);
-			creerJoueur (2);
+			creer_joueur (2);
 		}
 		
 		/**
@@ -154,16 +154,16 @@ namespace Jeu
 			this.objets.clear ();
 			this.players.clear ();
 			
-			creerTerrain (10);
-			creerIA (2);
-			creerJoueur (2);
-			creerDecors (1);
+			creer_terrain (10);
+			creer_IA (2);
+			creer_joueur (2);
+			creer_decors (1);
 		}
 		
 		/**
 		 * Créer les IAs du jeu
 		 */
-		private void creerIA (int nbr)
+		private void creer_IA (int nbr)
 		{
 			#if DEBUG
 				print ("\t\t Gerant : Création des IAs \n", CouleurConsole.VERT);
@@ -179,9 +179,9 @@ namespace Jeu
 				 */
 				int x = GLib.Random.int_range (0, tailleTotaleTerrain); // Création d'un point de départ
 
-				var ia = new IA (x, getTerrainPos (x), 10, "Une IA");
+				var ia = new IA (x, get_terrain_pos (x), 10, "Une IA");
 				
-				addObjet (ia); // Ajoute l'objet au gérant
+				add_objet (ia); // Ajoute l'objet au gérant
 				
 				ia.i = idmax;
 				
@@ -201,7 +201,7 @@ namespace Jeu
 				 */
 				ia.dead.connect ( (o) =>
 				{
-					rmObjet (o); // Supprime l'objet du gérant
+					rm_objet (o); // Supprime l'objet du gérant
 				});
 				ia.moved.connect ( (o) => 
 				{
@@ -216,7 +216,7 @@ namespace Jeu
 		/**
 		 * Crée les terrains du jeu
 		 */
-		private void creerTerrain (int nbr)
+		private void creer_terrain (int nbr)
 		{
 			#if DEBUG 
 				print ("\t\t Gerant : Création des Terrains \n", CouleurConsole.VERT);
@@ -254,7 +254,7 @@ namespace Jeu
 			tailleTotaleTerrain = pos; // Définiton de la taille totale du jeu
 		}
 		
-		public void ajouterTerrain (int l, int hg, int hd)
+		public void ajouter_terrain (int l, int hg, int hd)
 		{
 			var t = new Terrain (l,hg,hd);
 			t.start = tailleTotaleTerrain;
@@ -266,7 +266,7 @@ namespace Jeu
 		/**
 		 * Crée les jouers du jeu
 		 */
-		private void creerJoueur (int nbr)
+		private void creer_joueur (int nbr)
 		{
 			nbr = (nbr > 2) ? 2 : nbr;
 			#if DEBUG
@@ -277,11 +277,11 @@ namespace Jeu
 			for ( int i = 0; i < nbr; i++ )
 			{
 				int x = i * 20;
-				var p = new Player (x, getTerrainPos(x), 50, "Joueur "+(i+1).to_string ());
+				var p = new Player (x, get_terrain_pos(x), 50, "Joueur "+(i+1).to_string ());
 				p.i = idmax;
 				
-				addPlayer (p);
-				addObjet (p);
+				add_player (p);
+				add_objet (p);
 				
 				p.w = this.w;
 				
@@ -293,7 +293,7 @@ namespace Jeu
 				}
 				
 				p.frapper.connect (joueurFrappe);
-				p.dead.connect (rmObjet);
+				p.dead.connect (rm_objet);
 				
 				idmax++;
 			}
@@ -302,15 +302,15 @@ namespace Jeu
 		/**
 		 * Crée les décors du jeu
 		 */
-		private void creerDecors (int nbr)
+		private void creer_decors (int nbr)
 		{
 			for (int i = 0; i < nbr; i++)
 			{
 				int x = 50;
 				
-				var d = new Decor (x, getTerrainPos(x));
-				addObjet (d);
-				getTerrainPos (x) .addObjet (d);
+				var d = new Decor (x, get_terrain_pos(x));
+				add_objet (d);
+				get_terrain_pos (x) .add_objet (d);
 			}
 		}
 		
@@ -333,11 +333,11 @@ namespace Jeu
 			{
 				needDrawObjet (o); // Affiche l'objet
 				
-				o.calcVel (); // Calcule la vélocité de l'objet
+				o.calc_vel (); // Calcule la vélocité de l'objet
 				
 				bool sortDuJeu;
 				
-				gererCollisions (o); // Gère les collisions
+				gerer_collisions (o); // Gère les collisions
 				
 				/*
 				 * Conditions de sortie du terrain
@@ -366,7 +366,7 @@ namespace Jeu
 					o.rebondirx ();
 					o.velx = o.velx/4;
 					
-					needPlayBam ();
+					need_play_bam ();
 				} else {
 					o.move (o.velx); // Pas de y !!!
 				}
@@ -389,18 +389,18 @@ namespace Jeu
 		 * Ajoute un objet !
 		 * Et l'ajoute à un terrain du jeu
 		 */
-		public void addObjet (Objet o)
+		public void add_objet (Objet o)
 		{
-			getTerrainPos (o.pos.x).addObjet (o);
+			get_terrain_pos (o.pos.x).add_objet (o);
 			objets.add (o);
 		}
 		
 		/**
 		 * Ajoute le joueur et l'ajoute à un terrain
 		 */
-		public void addPlayer (Player p)
+		public void add_player (Player p)
 		{
-			getTerrainPos (p.pos.x).addObjet (p);
+			get_terrain_pos (p.pos.x).add_objet (p);
 			players.add (p);
 		}
 		
@@ -408,7 +408,7 @@ namespace Jeu
 		 * Supprime un objet !
 		 * Et le supprime du terrain où il est
 		 */
-		public void rmObjet (Objet o)
+		public void rm_objet (Objet o)
 		{
 			// o.t.objets.remove (o);
 			objets.remove (o);
@@ -417,7 +417,7 @@ namespace Jeu
 		/**
 		 * Get les collisions de l'objet o 
 		 */
-		public void gererCollisions (Objet o)
+		public void gerer_collisions (Objet o)
 		{
 			int t;
 			if ( o.t.i == 0 ) // Si c'est le premier terrain
@@ -435,14 +435,14 @@ namespace Jeu
 		/**
 		 * Brute force pour faire bouger un joueur avec la touche enfoncée @k
 		 */
-		public void movePlayer (KeySymbol k)
+		public void move_player (KeySymbol k)
 		{
 			#if DEBUG
 				print ("\t\t Gérant : bouge Player \n", CouleurConsole.VERT);
 			#endif
 			foreach (var p in players)
 			{
-				bool b = p.computeKey (k);
+				bool b = p.compute_key (k);
 				if (b) { break; }
 			}
 		}
