@@ -157,6 +157,7 @@ namespace Jeu
 			creerTerrain (10);
 			creerIA (2);
 			creerJoueur (2);
+			creerDecors (1);
 		}
 		
 		/**
@@ -296,7 +297,11 @@ namespace Jeu
 		{
 			for (int i = 0; i < nbr; i++)
 			{
-				var dec = new Decor ();
+				int x = 50;
+				
+				var d = new Decor (x, getTerrainPos(x));
+				addObjet (d);
+				getTerrainPos (x) .addObjet (d);
 			}
 		}
 		

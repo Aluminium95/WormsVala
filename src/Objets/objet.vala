@@ -216,12 +216,12 @@ namespace Jeu
 		/**
 		 * Fonction quand on est en collision !
 		 */
-		public virtual void onCollision (ref Objet o);
+		public virtual void onCollision (ref Objet o) {}
 		
 		/**
 		 * Fonction quand on tente d'utiliser 
 		 * la touche action sur l'objet
 		 */
-		public virtual void onAction (ref Objet o);
+		public virtual void onAction (ref Objet o) {}
 	}
 }
