@@ -19,7 +19,7 @@ namespace Jeu
 			private HashSet<Bouton> boutons; // Boutons du menu
 			
 			public signal void needDrawBouton (Bouton b);
-			
+			public signal void need_add_info (ref Info i);
 			public signal void actionMenu (ActionMenu a); 
 			
 			/**

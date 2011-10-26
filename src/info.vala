@@ -9,11 +9,13 @@ namespace Jeu
 	 * affichées à l'écran !
 	 */
 	public class GestionInfo : Object
-	{	
+	{
 		/**
 		 * Tableau avec toutes les infos
 		 */
 		public ArrayList<Info> infos;
+		
+		public signal void need_draw_info (ref Info i);
 		
 		public delegate void d_add_info (Info i);
 		
@@ -40,6 +42,17 @@ namespace Jeu
 		{
 			infos.remove (i);
 		}
+		
+		/**
+		 * Demande l'affichage des infos
+		 */
+		public void aff_infos ()
+		{
+			foreach (var i in infos)
+			{
+				need_draw_info (ref i);
+			}	
+		}
 	}
 	
 	/**
@@ -47,15 +60,17 @@ namespace Jeu
 	 */
 	public class Info 
 	{
-		public int x {get; set;}
-		public int y {get; set;}
+		public int16 x {get; set;}
+		public int16 y {get; set;}
 		public string text {get; set;}
+		public int32 color {get; set;}
 
-		public Info (int x, int y, string text, int time = 0)
+		public Info (int16 x, int16 y, string text, int32 color = 0xF2C46ECD3)
 		{
 			this.x = x;
 			this.y = y;
 			this.text = text;
+			this.color = color;
 		}
 	}
 }

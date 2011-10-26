@@ -35,6 +35,7 @@ namespace Jeu
 		public delegate void drawObjet (Objet o);
 		public delegate void drawTerrain (Terrain t);
 		public delegate void drawBouton (Menu.Bouton b);
+		public delegate void drawInfo (ref Info i);
 		
 		/**
 		 * Constructeur 
@@ -130,7 +131,6 @@ namespace Jeu
 			} else {
 				Polygon.fill_rgba (screen, vx, vy, 4, 'F', 'F', 'F', 255);
 			}
-			// Line.color (screen, (int16) (t.start + t.largeur), 0, (int16) (t.start + t.largeur), (int16) SCREEN_HEIGHT, 0xFFFFFFF);
 		}
 		
 		/**
@@ -147,6 +147,14 @@ namespace Jeu
 		public void draw_bouton (Menu.Bouton b)
 		{
 			b.s.blit (null, screen, SDL.Rect () { x = b.x, y = b.y, w = 150, h = 80});
+		}
+		
+		/**
+		 * Dessine une info textuelle
+		 */
+		public void draw_info (ref Info i)
+		{
+			Text.color (screen, i.x, i.y, i.text, i.color);
 		}
 	}
 }

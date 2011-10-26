@@ -40,6 +40,7 @@ namespace Jeu
 		public signal void need_draw_line (int x1, int y1, int x2, int y2);
 		public signal void need_draw_objet (Objet o);
 		public signal void need_draw_terrain (Terrain t);
+		public signal void need_add_info (ref Info i);
 		
 		/**
 		 * Signaux pour demander le son
