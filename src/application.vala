@@ -46,8 +46,6 @@ namespace Jeu
 			m = new Menu.Menu ();
 			
 			scripts = new Scripts (ref g, ref m);
-			scripts.load_level (1);
-			// scripts.load_menu ();
 			
 			connect_signaux();
 			
@@ -188,6 +186,7 @@ namespace Jeu
 				case Menu.ActionMenu.COMMENCER:
 					this.menu = false;
 					g.restart ();
+					scripts.load_level (1);
 					if ( s.music.is_paused () == 1 )
 					{
 						s.music.resume ();

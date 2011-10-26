@@ -33,13 +33,15 @@ namespace Jeu
 			vm.register ("ia", ajoute_IA);
 			vm.register ("joueur", ajoute_joueur);
 			vm.register ("bouton", ajoute_bouton);
-			vm.register ("getWidth", get_width);
 			
 			vm.push_number (Jeu.Aff.SCREEN_WIDTH);
 			vm.set_global ("screen_w");
 			
 			vm.push_number (Jeu.Aff.SCREEN_HEIGHT);
 			vm.set_global ("screen_h");
+			
+			vm.push_string (Config.DATA);
+			vm.set_global ("data");
 		}
 		
 		/**
