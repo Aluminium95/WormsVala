@@ -8,6 +8,7 @@ SRC =	"src"/*.vala \
 		"src/Objets"/*.vala \
 			"src/Objets/IA"/*.vala \
 			"src/Armes"/*.vala \
+		"src/Menu"/*.vala \
 		"src/Scripts"/*.vala \
 		"vapi"/*.vapi
 
@@ -18,6 +19,7 @@ PKGS = 	--pkg gee-1.0 \
 		--pkg sdl-gfx \
 		--pkg sdl-mixer \
 		--pkg sdl-image \
+		--pkg gio-2.0 \
 		--pkg lua
 
 # Variables définies à la compilation
@@ -57,6 +59,7 @@ clean:
 	@rm -v -fr src/*~ src/*.c \
 		src/Objets/*.c src/Objets/*~ \
 		src/Objets/IA/*.c src/Objets/IA/*~ \
+		src/Menu/*.c src/Menu/*~ \
 		src/Armes/*.c Armes/*~ \
 		*~
 		

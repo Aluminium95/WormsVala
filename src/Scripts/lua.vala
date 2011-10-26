@@ -1,6 +1,5 @@
 using Lua;
 using GLib;
-// using Gio;
 
 namespace Jeu 
 {
