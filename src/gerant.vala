@@ -227,7 +227,7 @@ namespace Jeu
 				
 				bool sortDuJeu;
 				
-				// gerer_collisions (o); // Gère les collisions
+				gerer_collisions (o); // Gère les collisions
 				
 				/*
 				 * Conditions de sortie du terrain
