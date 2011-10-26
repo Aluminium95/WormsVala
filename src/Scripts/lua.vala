@@ -24,9 +24,9 @@ namespace Jeu
 			this.g = ger;
 			this.vm = new LuaVM ();
 			vm.open_libs ();
-			vm.register ("addTerrain", ajoute_terrain);
-			vm.register ("addIA", ajoute_IA);
-			vm.register ("addJoueur", ajoute_joueur);
+			vm.register ("terrain", ajoute_terrain);
+			vm.register ("ia", ajoute_IA);
+			vm.register ("joueur", ajoute_joueur);
 		}
 		
 		/**
