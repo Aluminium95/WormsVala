@@ -51,6 +51,8 @@ namespace Jeu
 			
 			connect_signaux();
 			
+			m.menu = Menu.MenuAffiche.START;
+			
 			done = false;
 			menu = true; // On affiche le menu au début
 			
@@ -107,11 +109,8 @@ namespace Jeu
 			// Signaux de menu 
 			m.needDrawBouton.connect (a.draw_bouton);
 			m.actionMenu.connect (gerer_action_menu);
-			stdout.printf ("Connecte les signaux !\n");
-			m.need_load_menu.connect ( () => {
-				stdout.printf ("tente de loader un menu !\n");
-			});
-			stdout.printf ("A conneté le signal\n");
+			m.need_load_menu.connect (scripts.load_menu);
+			
 			// Signaux infos
 			//g.need_add_info.connect (inf.add_info);
 			//m.need_add_info.connect (inf.add_info);

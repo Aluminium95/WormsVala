@@ -28,6 +28,12 @@ namespace Jeu
 			this.m = men;
 			this.vm = new LuaVM ();
 			vm.open_libs ();
+			
+			vm.register ("terrain", ajoute_terrain);
+			vm.register ("ia", ajoute_IA);
+			vm.register ("joueur", ajoute_joueur);
+			vm.register ("bouton", ajoute_bouton);
+			vm.register ("getWidth", get_width);
 		}
 		
 		/**
@@ -35,9 +41,6 @@ namespace Jeu
 		 */
 		public void load_level (int lvl)
 		{
-			vm.register ("terrain", ajoute_terrain);
-			vm.register ("ia", ajoute_IA);
-			vm.register ("joueur", ajoute_joueur);
 			vm.do_file (scripts_levels + "/" + lvl.to_string () + ".lua");
 		}
 		
@@ -46,7 +49,6 @@ namespace Jeu
 		 */
 		public void load_menu ()
 		{
-			vm.register ("bouton", ajoute_bouton);
 			vm.do_file (m.uri);
 		}
 		
@@ -127,6 +129,13 @@ namespace Jeu
 			#if DEBUG
 				stdout.printf ("Ajoute un bouton ! (%f,%f,%s,%s)\n", vmi.to_number (1), vmi.to_number (2), vmi.to_string (3), vmi.to_string (4));
 			#endif
+			return 1;
+		}
+		
+		[CCode (instance_pos = -1)]
+		public static int get_width (LuaVM vmi)
+		{
+			vmi.push_number (Jeu.Aff.SCREEN_WIDTH);
 			return 1;
 		}
 	}

@@ -53,9 +53,6 @@ namespace Jeu
 			public Menu ()
 			{
 				boutons = new HashSet<Bouton> ();
-				this.uri = Config.DATA + "/Menu/start.cfg";
-				menu = MenuAffiche.START; // Premier menu !
-				update_menu ();
 			}
 			
 			/**
@@ -89,16 +86,16 @@ namespace Jeu
 				this.boutons.clear ();
 				switch (menu) {
 					case MenuAffiche.START:
-						this.uri = Config.DATA + "/Menu/start.cfg";
+						this.uri = Config.DATA + "/Menu/start.lua";
 						break;
 					case MenuAffiche.RUNNING:
-						this.uri = Config.DATA + "/Menu/run.cfg";
+						this.uri = Config.DATA + "/Menu/run.lua";
 						break;
 					case MenuAffiche.LEVEL:
-						this.uri = Config.DATA + "/Menu/level.cfg";
+						this.uri = Config.DATA + "/Menu/level.lua";
 						break;
 					case MenuAffiche.END:
-						this.uri = Config.DATA + "/Menu/end.cfg";
+						this.uri = Config.DATA + "/Menu/end.lua";
 						break;
 				}
 				need_load_menu ();
