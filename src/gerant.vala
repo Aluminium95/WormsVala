@@ -24,6 +24,7 @@ namespace Jeu
 
 		// Taille de tous les terrains réunis
 		private int tailleTotaleTerrain = 0;
+		private int nbrTerrains = 0;
 
 		/** 
 		 * Délégates pour connecter aux signaux 
@@ -96,7 +97,7 @@ namespace Jeu
 		/**
 		 * Retourne le terrain auquel appartien cette position
 		 */
-		private Terrain get_terrain_pos (float x)
+		public Terrain get_terrain_pos (float x)
 		{
 			Terrain ret = listeTerrains[0]; // Terrain par défaut
 			foreach ( var t in listeTerrains ) // Pour chaque terrain
@@ -136,13 +137,6 @@ namespace Jeu
 			
 			// this.wind = 0.2f;
 			// this.friction = 0.03f;
-			
-			/*
-			 * Appel des fonctions créatrices 
-			 */
-			creer_terrain (10);
-			creer_IA (2);
-			creer_joueur (2);
 		}
 		
 		/**
@@ -153,150 +147,45 @@ namespace Jeu
 			this.listeTerrains.clear ();
 			this.objets.clear ();
 			this.players.clear ();
-			
-			creer_terrain (10);
-			creer_IA (2);
-			creer_joueur (2);
-			creer_decors (1);
 		}
 		
 		/**
-		 * Créer les IAs du jeu
+		 * Ajoute une IA dans le jeu
 		 */
-		private void creer_IA (int nbr)
+		public void ajouter_IA (IA ia)
 		{
-			#if DEBUG
-				print ("\t\t Gerant : Création des IAs \n", CouleurConsole.VERT);
-			#endif
-			
-			for(int i = 0; i < nbr; i++)
-			{
-				/*
-				 * Créer les positions, valeurs de l'ia, 
-				 * calculer le terrain
-				 * Créer l'ia et l'ajouter au terrain
-				 * Connecter les signaux de l'ia
-				 */
-				int x = GLib.Random.int_range (0, tailleTotaleTerrain); // Création d'un point de départ
-
-				var ia = new IA (x, get_terrain_pos (x), 10, "Une IA");
-				
-				add_objet (ia); // Ajoute l'objet au gérant
-				
-				ia.i = idmax;
-				
-				ia.w = this.w;
-				
-				#if DEBUG 
-					print ("\t\t Gerant : New IA : " + x.to_string () + " => " + ia.pos.x.to_string () + ";" + ia.pos.y.to_string () + "\n", CouleurConsole.VERT);
-				#endif 
-				
-				if ( i % 2 == 0 )
-				{
-					ia.rebondirx ();
-				}
-				
-				/*
-				 * Connection des signaux 
-				 */
-				ia.dead.connect ( (o) =>
+			ia.i = idmax;
+			ia.w = this.w;
+			ia.frapper.connect(joueur_frappe);
+			ia.dead.connect ( (o) =>
 				{
 					rm_objet (o); // Supprime l'objet du gérant
 				});
-				ia.moved.connect ( (o) => 
-				{
-					// stdout.printf (o.name + " à bougé : (" + o.pos.x.to_string () +";"+o.pos.y.to_string () +"); :: " + o.t.i.to_string () + "\n");
-				});
-				ia.frapper.connect(joueur_frappe);
-				
-				idmax++;
-			}
+			add_objet (ia); // Ajoute l'objet au gérant
+			idmax++;
 		}
 		
-		/**
-		 * Crée les terrains du jeu
-		 */
-		private void creer_terrain (int nbr)
+		public void ajouter_terrain (Terrain t)
 		{
-			#if DEBUG 
-				print ("\t\t Gerant : Création des Terrains \n", CouleurConsole.VERT);
-			#endif
-			int pos = 0;
-			int prevHeight = (int) Jeu.Aff.SCREEN_HEIGHT / 4;
-			int width = (int) Jeu.Aff.SCREEN_WIDTH / nbr;
-			
-			for (int i = 0; i < nbr; i++)
-			{
-				int largeurTerrain;
-				if ( i == nbr - 1 ) // Si c'est le dernier terrain
-				{
-					largeurTerrain = Jeu.Aff.SCREEN_WIDTH - pos; // Il prend la place restante
-				} else { // Sinon il prend une place aléatoire dans celle qui reste
-					largeurTerrain = width;
-				}
-				
-				int h = GLib.Random.int_range (prevHeight - 150, prevHeight + 150);
-				h = ( h < 0 ) ? 0 : h;
-				h = ( h > Jeu.Aff.SCREEN_HEIGHT ) ? Jeu.Aff.SCREEN_HEIGHT : h;
-				
-				var t = new Terrain (largeurTerrain, prevHeight, h);
-				t.start = pos; // Définition du début du terrain
-				t.i = i; // Définition de l'indice du terrain dans le tableau
-				listeTerrains.add (t); // Ajout du terrain
-				
-				/*
-				 * Ajout de la largeur du terrain à pos pour trouver
-				 * le début du prochain terrain
-				 */
-				pos += largeurTerrain;
-				prevHeight = h;
-			}
-			tailleTotaleTerrain = pos; // Définiton de la taille totale du jeu
-		}
-		
-		public void ajouter_terrain (int l, int hg, int hd)
-		{
-			var t = new Terrain (l,hg,hd);
 			t.start = tailleTotaleTerrain;
-			t.i = listeTerrains.size; // Définition de l'indice du terrain dans le tableau
+			t.i = nbrTerrains; // Définition de l'indice du terrain dans le tableau
 			listeTerrains.add (t); // Ajout du terrain
-			tailleTotaleTerrain += l;
+			tailleTotaleTerrain += t.largeur;
+			nbrTerrains++;
 		}
 		
 		/**
-		 * Crée les jouers du jeu
+		 * Ajoute un joueur au terrain
 		 */
-		private void creer_joueur (int nbr)
+		public void ajouter_joueur (Player j)
 		{
-			nbr = (nbr > 2) ? 2 : nbr;
-			#if DEBUG
-				print ("\t\t Gerant : Création des Players \n", CouleurConsole.VERT);
-			#endif
+			j.i = idmax;
+			add_player (j);
+			j.w = this.w;
+			j.frapper.connect (joueur_frappe);
+			j.dead.connect (rm_objet);
 			
-			
-			for ( int i = 0; i < nbr; i++ )
-			{
-				int x = i * 20;
-				var p = new Player (x, get_terrain_pos(x), 50, "Joueur "+(i+1).to_string ());
-				p.i = idmax;
-				
-				add_player (p);
-				add_objet (p);
-				
-				p.w = this.w;
-				
-				if (i==1)
-				{
-					p.left = KeySymbol.l;
-					p.right = KeySymbol.z;
-					p.up = KeySymbol.j;
-				}
-				
-				p.frapper.connect (joueur_frappe);
-				p.dead.connect (rm_objet);
-				
-				idmax++;
-			}
+			idmax++;
 		}
 		
 		/**
@@ -322,7 +211,7 @@ namespace Jeu
 		 * 			+ Les fait changer de terrain | zone si nécessaire
 		 */
 		public void execute ()
-		{			
+		{
 			foreach ( Terrain t in listeTerrains )
 			{
 				need_draw_terrain (t);
@@ -337,7 +226,7 @@ namespace Jeu
 				
 				bool sortDuJeu;
 				
-				gerer_collisions (o); // Gère les collisions
+				// gerer_collisions (o); // Gère les collisions
 				
 				/*
 				 * Conditions de sortie du terrain
@@ -400,7 +289,7 @@ namespace Jeu
 		 */
 		public void add_player (Player p)
 		{
-			get_terrain_pos (p.pos.x).add_objet (p);
+			add_objet (p);
 			players.add (p);
 		}
 		

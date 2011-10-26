@@ -12,6 +12,7 @@ namespace Jeu
 		private Menu.Menu m; // Menu du jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
+		private Scripts scripts; // Moteur des scripts lua
 		
 		// Délai entre chaque tour de boucle
 		public const int DELAY = 10;
@@ -40,7 +41,8 @@ namespace Jeu
 			s.create_sons ();
 			
 			g = new Gerant ();
-			Scripts.init (g);
+			scripts = new Scripts (ref g);
+			scripts.load_level (1);
 			
 			m = new Menu.Menu ();
 			
