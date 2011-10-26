@@ -34,6 +34,12 @@ namespace Jeu
 			vm.register ("joueur", ajoute_joueur);
 			vm.register ("bouton", ajoute_bouton);
 			vm.register ("getWidth", get_width);
+			
+			vm.push_number (Jeu.Aff.SCREEN_WIDTH);
+			vm.set_global ("screen_w");
+			
+			vm.push_number (Jeu.Aff.SCREEN_HEIGHT);
+			vm.set_global ("screen_h");
 		}
 		
 		/**
@@ -63,13 +69,19 @@ namespace Jeu
 		/**
 		 * Callback pour la fonction lua `addTerrain`
 		 */
-		[CCode (instance_pos = -1)]
 		public static int ajoute_terrain (LuaVM vmi)
 		{
-			var t = new Terrain ((int)vmi.to_number (1), (int)vmi.to_number (2), (int)vmi.to_number (3));
+			var t = new Terrain (
+				(int)vmi.to_number (1),
+				(int)vmi.to_number (2),
+				(int)vmi.to_number (3));
+				
 			g.ajouter_terrain (t);
 			#if DEBUG
-				stdout.printf ("Ajoute un terrain ! (%f,%f,%f)\n", vmi.to_number (1), vmi.to_number (2), vmi.to_number (3));
+				stdout.printf ("Ajoute un terrain ! (%f,%f,%f)\n", 
+					vmi.to_number (1),
+					vmi.to_number (2),
+					vmi.to_number (3));
 			#endif
 			return 1;
 		}
@@ -111,7 +123,6 @@ namespace Jeu
 		/**
 		 * Callback pour la fonction ajouter au menu
 		 */
-		[CCode (instance_pos = -1)]
 		public static int ajoute_bouton (LuaVM vmi)
 		{
 			Menu.ActionMenu a = Menu.ActionMenu.COMMENCER;
@@ -124,18 +135,19 @@ namespace Jeu
 					a = Menu.ActionMenu.CONTINUER;
 					break;							
 			}
-			var b = new Menu.Bouton ((int16) vmi.to_number (1), (int16) vmi.to_number (2), vmi.to_string (3), a);
+			var b = new Menu.Bouton (
+				(int16) vmi.to_number (1), 
+				(int16) vmi.to_number (2), 
+				vmi.to_string (3), a);
+				
 			m.add_bouton (b);
 			#if DEBUG
-				stdout.printf ("Ajoute un bouton ! (%f,%f,%s,%s)\n", vmi.to_number (1), vmi.to_number (2), vmi.to_string (3), vmi.to_string (4));
+				stdout.printf ("Ajoute un bouton ! (%f,%f,%s,%s)\n", 
+					vmi.to_number (1),
+					vmi.to_number (2),
+					vmi.to_string (3),
+					vmi.to_string (4));
 			#endif
-			return 1;
-		}
-		
-		[CCode (instance_pos = -1)]
-		public static int get_width (LuaVM vmi)
-		{
-			vmi.push_number (Jeu.Aff.SCREEN_WIDTH);
 			return 1;
 		}
 	}
