@@ -60,7 +60,8 @@ clean:
 		src/Objets/*.c src/Objets/*~ \
 		src/Objets/IA/*.c src/Objets/IA/*~ \
 		src/Menu/*.c src/Menu/*~ \
-		src/Armes/*.c Armes/*~ \
+		src/Armes/*.c src/Armes/*~ \ \
+		src/Scripts/*.c src/Scripts/*~ \
 		*~
 		
 # Installe le jeu sur le système !

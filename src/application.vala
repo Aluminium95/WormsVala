@@ -42,10 +42,12 @@ namespace Jeu
 			s.create_sons ();
 			
 			g = new Gerant ();
-			scripts = new Scripts (ref g);
-			scripts.load_level (1);
 			
 			m = new Menu.Menu ();
+			
+			scripts = new Scripts (ref g, ref m);
+			scripts.load_level (1);
+			// scripts.load_menu ();
 			
 			connect_signaux();
 			
@@ -104,12 +106,16 @@ namespace Jeu
 			
 			// Signaux de menu 
 			m.needDrawBouton.connect (a.draw_bouton);
-			m.actionMenu.connect (this.gerer_action_menu);
-			
+			m.actionMenu.connect (gerer_action_menu);
+			stdout.printf ("Connecte les signaux !\n");
+			m.need_load_menu.connect ( () => {
+				stdout.printf ("tente de loader un menu !\n");
+			});
+			stdout.printf ("A conneté le signal\n");
 			// Signaux infos
-			g.need_add_info.connect (inf.add_info);
-			m.need_add_info.connect (inf.add_info);
-			inf.need_draw_info.connect (a.draw_info);
+			//g.need_add_info.connect (inf.add_info);
+			//m.need_add_info.connect (inf.add_info);
+			//inf.need_draw_info.connect (a.draw_info);
 		}
 		
 		/**
