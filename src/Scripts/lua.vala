@@ -29,6 +29,9 @@ namespace Jeu
 			this.vm = new LuaVM ();
 			vm.open_libs ();
 			
+			// Gère le scan des dossiers !
+			vm.do_file (Config.DATA + "/LuaLibs/scan.lua");
+			
 			vm.register ("terrain", ajoute_terrain);
 			vm.register ("ia", ajoute_IA);
 			vm.register ("joueur", ajoute_joueur);
