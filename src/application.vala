@@ -13,7 +13,7 @@ namespace Jeu
 		private Aff a; // Gestionnaire d'affichage
 		private Son s; // Moteur de son
 		private Scripts scripts; // Moteur des scripts lua
-		private GestionInfo inf; // Moteur des infos textuelles
+		// private GestionInfo inf; // Moteur des infos textuelles
 		
 		// Délai entre chaque tour de boucle
 		public const int DELAY = 10;
@@ -107,7 +107,7 @@ namespace Jeu
 			// Signaux de menu 
 			m.needDrawBouton.connect (a.draw_bouton);
 			m.actionMenu.connect (gerer_action_menu);
-			m.need_load_menu.connect (scripts.load_menu);
+			m.need_load_menu.connect (scripts.load);
 			
 			// Signaux infos
 			//g.need_add_info.connect (inf.add_info);

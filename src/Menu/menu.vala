@@ -45,7 +45,7 @@ namespace Jeu
 			// public signal void need_add_info (ref Info i);
 			public signal void actionMenu (ActionMenu a);
 			// public signal void need_play_clic (); // Pas encore connecté
-			public signal void need_load_menu ();
+			public signal void need_load_menu (string uri);
 			
 			/**
 			 * Constructeur
@@ -98,7 +98,7 @@ namespace Jeu
 						this.uri = Config.DATA + "/Menu/end.lua";
 						break;
 				}
-				need_load_menu ();
+				need_load_menu (this.uri);
 			}
 			
 			public void add_bouton (Bouton b)
