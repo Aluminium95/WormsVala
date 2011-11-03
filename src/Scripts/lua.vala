@@ -9,7 +9,10 @@ namespace Jeu
 	public class Scripts : Object
 	{
 		
-		public LuaVM vm;
+		public static LuaVM vm;
+		
+		public static unowned Gerant g;
+		public static unowned Menu.Menu m;
 		
 		private const string scripts_levels = Config.DATA + "/Levels";
 		
@@ -23,11 +26,10 @@ namespace Jeu
 		
 		public Scripts (ref Gerant ger, ref Menu.Menu men)
 		{
-			unowned Gerant g = ger;
-			unowned Menu.Menu m = men;
+			this.g = ger;
+			this.m = men;
 			
 			this.vm = new LuaVM ();
-			unowned LuaVM vmi = this.vm;
 			vm.open_libs ();
 			
 			// Gère le scan des dossiers !
@@ -37,81 +39,22 @@ namespace Jeu
 			/** 
 		 	 * Crée un terrain
 		 	 */
-			vm.register ("terrain", () => {
-				var t = new Terrain (
-					(int) vmi.to_number (1),
-					(int) vmi.to_number (2),
-					(int) vmi.to_number (3));
-				
-				g.ajouter_terrain (t);
-				#if DEBUG
-					stdout.printf ("Ajoute un terrain ! (%f,%f,%f)\n", 
-						vmi.to_number (1),
-						vmi.to_number (2),
-						vmi.to_number (3));
-				#endif
-				return 1;
-			});
+			vm.register ("terrain", ajoute_terrain);
 			
 			/**
 			 * Crée une IA
 			 */
-			vm.register ("ia", () => {
-				int x = (int) vmi.to_number (1);
-				int vie = (int) vmi.to_number (2);
-				string nom = vmi.to_string (3);
-				var ia = new IA (x, g.get_terrain_pos (x), vie, nom);
-				g.ajouter_IA (ia);
-				#if DEBUG
-					stdout.printf ("Ajoute une IA ! (%d, %d, %s)\n", x, vie, nom);
-				#endif
-				return 1;
-			});
+			vm.register ("ia", ajoute_ia);
 			
 			/**
 			 * Crée un joueur
 			 */
-			vm.register ("joueur", () => {
-				int x = (int) vmi.to_number (1);
-				int vie = (int) vmi.to_number (2);
-				string nom = vmi.to_string (3);
-				var j = new Player (x, g.get_terrain_pos (x), vie, nom);
-				g.ajouter_joueur (j);
-				#if DEBUG
-					stdout.printf ("Ajoute un joueur !(%d,%d,%s)\n",x,vie,nom);
-				#endif
-				return 1;
-			});
+			vm.register ("joueur", ajoute_joueur);
 			
 			/**
 			 * Crée un bouton
 			 */
-			vm.register ("bouton", () => {
-				Menu.ActionMenu a = Menu.ActionMenu.COMMENCER;
-				switch (vmi.to_string (4))
-				{
-					case "QUITTER":
-						a = Menu.ActionMenu.QUITTER;
-						break;
-					case "CONTINUER":
-						a = Menu.ActionMenu.CONTINUER;
-						break;							
-				}
-				var b = new Menu.Bouton (
-					(int16) vmi.to_number (1), 
-					(int16) vmi.to_number (2), 
-					vmi.to_string (3), a);
-				
-				m.add_bouton (b);
-				#if DEBUG
-					stdout.printf ("Ajoute un bouton ! (%f,%f,%s,%s)\n", 
-						vmi.to_number (1),
-						vmi.to_number (2),
-						vmi.to_string (3),
-						vmi.to_string (4));
-				#endif
-				return 1;
-			});
+			vm.register ("bouton", ajoute_bouton);
 			
 			vm.push_number (Jeu.Aff.SCREEN_WIDTH);
 			vm.set_global ("screen_w");
@@ -145,6 +88,77 @@ namespace Jeu
 		public void exec (string code)
 		{
 			vm.do_string (code);
+		}
+		
+		public static int ajoute_terrain (LuaVM vmi)
+		{
+			var t = new Terrain (
+				(int) vmi.to_number (1),
+				(int) vmi.to_number (2),
+				(int) vmi.to_number (3));
+			
+			g.ajouter_terrain (t);
+			#if DEBUG
+				stdout.printf ("Ajoute un terrain ! (%f,%f,%f)\n", 
+					vmi.to_number (1),
+					vmi.to_number (2),
+					vmi.to_number (3));
+			#endif
+			return 1;
+		}
+		
+		public static int ajoute_joueur (LuaVM vmi)
+		{
+			int x = (int) vmi.to_number (1);
+			int vie = (int) vmi.to_number (2);
+			string nom = vmi.to_string (3);
+			var j = new Player (x, g.get_terrain_pos (x), vie, nom);
+			g.ajouter_joueur (j);
+			#if DEBUG
+				stdout.printf ("Ajoute un joueur !(%d,%d,%s)\n",x,vie,nom);
+			#endif
+			return 1;
+		}
+		
+		public static int ajoute_bouton (LuaVM vmi)
+		{
+			Menu.ActionMenu a = Menu.ActionMenu.COMMENCER;
+			switch (vmi.to_string (4))
+			{
+				case "QUITTER":
+					a = Menu.ActionMenu.QUITTER;
+					break;
+				case "CONTINUER":
+					a = Menu.ActionMenu.CONTINUER;
+					break;							
+			}
+			var b = new Menu.Bouton (
+				(int16) vmi.to_number (1), 
+				(int16) vmi.to_number (2), 
+				vmi.to_string (3), a);
+			
+			m.add_bouton (b);
+			#if DEBUG
+				stdout.printf ("Ajoute un bouton ! (%f,%f,%s,%s)\n", 
+					vmi.to_number (1),
+					vmi.to_number (2),
+					vmi.to_string (3),
+					vmi.to_string (4));
+			#endif
+			return 1;
+		}
+		
+		public static int ajoute_ia (LuaVM vmi)
+		{
+			int x = (int) vmi.to_number (1);
+			int vie = (int) vmi.to_number (2);
+			string nom = vmi.to_string (3);
+			var ia = new IA (x, g.get_terrain_pos (x), vie, nom);
+			g.ajouter_IA (ia);
+			#if DEBUG
+				stdout.printf ("Ajoute une IA ! (%d, %d, %s)\n", x, vie, nom);
+			#endif
+			return 1;
 		}
 	}
 }
