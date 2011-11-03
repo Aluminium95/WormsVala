@@ -23,23 +23,25 @@ namespace Jeu
 		
 		public Scripts (ref Gerant ger, ref Menu.Menu men)
 		{
-			var g = ger;
-			var m = men;
+			unowned Gerant g = ger;
+			unowned Menu.Menu m = men;
 			
 			this.vm = new LuaVM ();
+			unowned LuaVM vmi = this.vm;
 			vm.open_libs ();
 			
 			// Gère le scan des dossiers !
 			vm.do_file (Config.DATA + "/LuaLibs/scan.lua");
 			
+			
 			/** 
 		 	 * Crée un terrain
 		 	 */
-			vm.register ("terrain", (vmi) => {
+			vm.register ("terrain", () => {
 				var t = new Terrain (
-				(int)vmi.to_number (1),
-				(int)vmi.to_number (2),
-				(int)vmi.to_number (3));
+					(int) vmi.to_number (1),
+					(int) vmi.to_number (2),
+					(int) vmi.to_number (3));
 				
 				g.ajouter_terrain (t);
 				#if DEBUG
@@ -54,7 +56,7 @@ namespace Jeu
 			/**
 			 * Crée une IA
 			 */
-			vm.register ("ia", (vmi) => {
+			vm.register ("ia", () => {
 				int x = (int) vmi.to_number (1);
 				int vie = (int) vmi.to_number (2);
 				string nom = vmi.to_string (3);
@@ -69,7 +71,7 @@ namespace Jeu
 			/**
 			 * Crée un joueur
 			 */
-			vm.register ("joueur", (vmi) => {
+			vm.register ("joueur", () => {
 				int x = (int) vmi.to_number (1);
 				int vie = (int) vmi.to_number (2);
 				string nom = vmi.to_string (3);
@@ -84,7 +86,7 @@ namespace Jeu
 			/**
 			 * Crée un bouton
 			 */
-			vm.register ("bouton", (vmi) => {
+			vm.register ("bouton", () => {
 				Menu.ActionMenu a = Menu.ActionMenu.COMMENCER;
 				switch (vmi.to_string (4))
 				{
